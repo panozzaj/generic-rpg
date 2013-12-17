@@ -1,9 +1,12 @@
 Things that we can work on:
 
  - a dude moving around on a landscape
+  - some sort of bounds checking on landscape (or other screens)
+  - center map around dude?
  - eventing system on map
   - conversations
  - battles
+ - status screen
 
 
  Technical debt
