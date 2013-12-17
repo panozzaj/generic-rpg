@@ -1,6 +1,7 @@
 Things that we can work on:
 
  - a dude moving around on a landscape
+  - sprite dude
   - some sort of bounds checking on landscape (or other screens)
   - center map around dude?
  - eventing system on map
