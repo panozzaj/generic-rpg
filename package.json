@@ -5,7 +5,8 @@
   "main": "main.js",
   "dependencies": {
     "grunt": "~0.4.2",
-    "grunt-contrib-coffee": "*"
+    "grunt-contrib-coffee": "*",
+    "grunt-contrib-watch": "*"
   },
   "devDependencies": {},
   "scripts": {
