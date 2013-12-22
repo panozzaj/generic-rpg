@@ -1,6 +1,8 @@
 Things that we can work on:
 
  - a dude moving around on a landscape
+  - render background tiles
+  - render a map
   - sprite dude
   - some sort of bounds checking on landscape (or other screens)
   - center map around dude?

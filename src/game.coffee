@@ -7,7 +7,7 @@ class Game
     @tileSize = 64
 
     @avatar = new Avatar @
-    @mapMode = new MapMode @
+    @mapMode = new MapScreen @
 
   run: =>
     requestAnimFrame @run

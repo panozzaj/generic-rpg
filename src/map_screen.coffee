@@ -1,4 +1,4 @@
-class MapMode
+class MapScreen
   constructor: (game) ->
     @tileSize = game.tileSize
     @width = game.canvas.width
