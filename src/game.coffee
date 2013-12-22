@@ -10,9 +10,9 @@ class Game
     @mapMode = new MapMode @
 
   run: =>
+    requestAnimFrame @run
     @update()
     @draw()
-    requestAnimFrame @run
 
   update: ->
     @avatar.update()
@@ -26,6 +26,7 @@ class Game
     @context.clearRect 0, 0, @canvas.width, @canvas.height
 
   onkeydown: (event) =>
+    return if @avatar.velocity.x || @avatar.velocity.y
     switch event.which
       when 37
         @avatar.velocity.x = -@avatar.speed
