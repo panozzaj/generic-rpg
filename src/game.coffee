@@ -6,7 +6,8 @@ class Game
 
     @tileSize = 64
 
-    @avatar = new Avatar
+    @avatar = new Avatar @
+    @mapMode = new MapMode @
 
   run: =>
     @update()
@@ -18,19 +19,11 @@ class Game
 
   draw: ->
     @clearCanvas()
-    @drawGrid()
+    @mapMode.draw @context
     @avatar.draw @context
 
   clearCanvas: ->
     @context.clearRect 0, 0, @canvas.width, @canvas.height
-
-  drawGrid: ->
-    for x in [0..@canvas.width/@tileSize]
-      for y in [0..@canvas.height/@tileSize]
-        @context.save()
-        @context.strokeStyle = "#333"
-        @context.strokeRect x * @tileSize, y * @tileSize, @tileSize, @tileSize
-        @context.restore()
 
   onkeydown: (event) =>
     switch event.which

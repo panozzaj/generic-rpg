@@ -1,10 +1,11 @@
-class Avatar
+class Player
 
-  constructor: (game) ->
+  constructor: ->
+
     @position = { x: 64, y: 64 }
     @velocity = { x: 0, y: 0 }
     @speed = 8
-    @tileSize = game.tileSize
+    @tileSize = 64
 
   update: ->
     @position.x += @velocity.x

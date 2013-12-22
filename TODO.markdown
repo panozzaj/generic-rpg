@@ -9,6 +9,8 @@ Things that we can work on:
  - battles
  - status screen
 
+ Nice-to-haves:
+  - parallax scrolling of map backgrounds
 
  Technical debt
   - figure out a way to get both people with a valid git repository in floobits
