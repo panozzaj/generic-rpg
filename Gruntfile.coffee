@@ -5,6 +5,7 @@ module.exports = (grunt) ->
     coffee:
       options:
         join: true
+        bare: true
       compile:
         files:
           'build/main.js': ['src/*.coffee']
@@ -25,4 +26,4 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-watch'
   grunt.loadNpmTasks 'grunt-contrib-connect'
 
-  grunt.registerTask 'default', ['connect', 'watch']
+  grunt.registerTask 'default', ['coffee', 'connect', 'watch']
