@@ -2,14 +2,18 @@ Things that we can work on:
 
  - a dude moving around on a landscape
   - render background tiles
+  - put avatar under map screen
   - render a map
   - sprite dude
   - some sort of bounds checking on landscape (or other screens)
   - center map around dude?
  - eventing system on map
   - conversations
- - battles
- - status screen
+ - screen modes
+   - map
+   - battle
+   - menu
+   - cutscene
 
  Nice-to-haves:
   - parallax scrolling of map backgrounds
@@ -25,3 +29,4 @@ Things that we can work on:
    - basically it looks like we are pulling in files from the workspace instead of using what is on disk (Vim)
    - or changes are not synced over to the workspace
    - especially when we build files?
+
