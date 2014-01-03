@@ -5,6 +5,8 @@ class Avatar
     @velocity = { x: 0, y: 0 }
     @speed = 8
     @tileSize = game.tileSize
+    @sprite = new Image()
+    @setDirection('down')
 
   update: ->
     @position.x += @velocity.x
@@ -14,19 +16,24 @@ class Avatar
     @velocity.y = 0 if @position.y % @tileSize == 0
 
   draw: (context) ->
-    context.save()
-    context.fillStyle = "#f00"
-    context.fillRect @position.x, @position.y, @tileSize, @tileSize
-    context.restore()
+    context.drawImage @sprite, @position.x, @position.y, @tileSize, @tileSize
 
   onkeydown: (event) =>
     return if @velocity.x || @velocity.y
     switch event.which
       when 37
         @velocity.x = -@speed
+        @setDirection('left')
       when 38
         @velocity.y = -@speed
+        @setDirection('up')
       when 39
         @velocity.x = @speed
+        @setDirection('right')
       when 40
         @velocity.y = @speed
+        @setDirection('down')
+
+  setDirection: (direction) ->
+    @direction = direction
+    @sprite.src = "images/cecil-#{@direction}.png"

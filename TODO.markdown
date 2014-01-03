@@ -1,8 +1,8 @@
 Things that we can work on:
 
  - a dude moving around on a landscape
-  - render background tiles
   - put avatar under map screen
+  - render background tiles with sprites
   - render a map
   - sprite dude
   - some sort of bounds checking on landscape (or other screens)
