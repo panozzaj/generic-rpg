@@ -14,6 +14,8 @@ Things that we can work on:
    - battle
    - menu
    - cutscene
+  - party switch mechanism
+  - deploy somewhere and see what things break
 
  Nice-to-haves:
   - parallax scrolling of map backgrounds

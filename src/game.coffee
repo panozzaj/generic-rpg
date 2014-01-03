@@ -10,9 +10,9 @@ class Game
     @mapMode = new MapScreen @
 
   run: =>
-    requestAnimFrame @run
     @update()
     @draw()
+    requestAnimFrame @run
 
   update: ->
     @avatar.update()
