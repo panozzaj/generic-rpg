@@ -18,3 +18,15 @@ class Avatar
     context.fillStyle = "#f00"
     context.fillRect @position.x, @position.y, @tileSize, @tileSize
     context.restore()
+
+  onkeydown: (event) =>
+    return if @velocity.x || @velocity.y
+    switch event.which
+      when 37
+        @velocity.x = -@speed
+      when 38
+        @velocity.y = -@speed
+      when 39
+        @velocity.x = @speed
+      when 40
+        @velocity.y = @speed

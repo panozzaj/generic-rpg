@@ -26,14 +26,4 @@ class Game
     @context.clearRect 0, 0, @canvas.width, @canvas.height
 
   onkeydown: (event) =>
-    return if @avatar.velocity.x || @avatar.velocity.y
-    switch event.which
-      when 37
-        @avatar.velocity.x = -@avatar.speed
-      when 38
-        @avatar.velocity.y = -@avatar.speed
-      when 39
-        @avatar.velocity.x = @avatar.speed
-      when 40
-        @avatar.velocity.y = @avatar.speed
-
+    @avatar.onkeydown(event)
