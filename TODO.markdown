@@ -1,10 +1,9 @@
 Things that we can work on:
 
  - a dude moving around on a landscape
-  - put avatar under map screen
+  - generalize animation?
   - render background tiles with sprites
-  - render a map
-  - sprite dude
+  - put avatar under map screen?
   - some sort of bounds checking on landscape (or other screens)
   - center map around dude?
  - eventing system on map
