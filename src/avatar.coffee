@@ -1,10 +1,10 @@
 class Avatar
 
   constructor: (game) ->
-    @position = { x: 64, y: 64 }
+    @tileSize = game.tileSize
+    @setMapPosition(1, 1)
     @velocity = { x: 0, y: 0 }
     @speed = 8
-    @tileSize = game.tileSize
     @spriteSheet = new Image()
     @spriteSheet.src = "images/cecil-sheet.png"
     @setDirection('down')
@@ -17,12 +17,17 @@ class Avatar
     @frame = 1
 
   update: ->
-    @position.x += @velocity.x
-    @position.y += @velocity.y
+    if @velocity.x != 0
+      @screenPosition.x += @velocity.x
+      if @screenPosition.x % @tileSize == 0
+        @velocity.x = 0
 
-    @velocity.x = 0 if @position.x % @tileSize == 0
-    @velocity.y = 0 if @position.y % @tileSize == 0
+    if @velocity.y != 0
+      @screenPosition.y += @velocity.y
+      if @screenPosition.y % @tileSize == 0
+        @velocity.y = 0
 
+    # animation frame counter
     if @frameCounter > 8
       @frameCounter = 0
     if @frameCounter > 4
@@ -32,29 +37,64 @@ class Avatar
     @frameCounter += 1
 
   draw: (context) ->
-    context.drawImage(@spriteSheet, @spriteOffset(), 0, 32, 32, @position.x, @position.y, @tileSize, @tileSize)
+    context.drawImage(@spriteSheet, @spriteOffset(), 0, 32, 32, @screenPosition.x, @screenPosition.y, @tileSize, @tileSize)
 
   spriteOffset: ->
     @directionMappings[@direction] * 64 + @frame * 32
 
-  onkeydown: (event) =>
-    return if @velocity.x || @velocity.y
-    switch event.which
-      when 37
-        @velocity.x = -@speed
-        @setDirection('left')
-      when 38
-        @velocity.y = -@speed
-        @setDirection('up')
-      when 39
-        @velocity.x = @speed
-        @setDirection('right')
-      when 40
-        @velocity.y = @speed
-        @setDirection('down')
+  setMapPosition: (x, y) ->
+    @mapPosition = { x: x, y: y }
+    @screenPosition = { x: x * @tileSize, y: y * @tileSize }
+
+  moveInDirection: (direction) ->
+    @setDirection(direction)
+    if direction == 'left'
+      @velocity.x = -@speed
+      @mapPosition.x -= 1
+    else if direction == 'right'
+      @velocity.x = @speed
+      @mapPosition.x += 1
+    else if direction == 'up'
+      @velocity.y = -@speed
+      @mapPosition.y -= 1
+    else if direction == 'down'
+      @velocity.y = @speed
+      @mapPosition.y += 1
 
   setDirection: (direction) ->
     @direction = direction
+
+  isMoving: ->
+    @velocity.x != 0 || @velocity.y != 0
+
+  onkeydown: (event) =>
+    return if @velocity.x || @velocity.y
+    switch event.which
+      when 37 # left
+        @moveInDirection('left')
+      when 38 # up
+        @moveInDirection('up')
+      when 39 # right
+        @moveInDirection('right')
+      when 40 # down
+        @moveInDirection('down')
+      when 90 # z
+        if @isFacing(5, 4)
+          console.log('in here')
+          alert('Hello Simba!')
+
+  isFacing: (x, y) ->
+    facing = @facing()
+    facing.x == x && facing.y == y
+
+  facing: ->
+    { x, y } = @mapPosition
+    switch @direction
+      when 'left' then x -= 1
+      when 'right' then x += 1
+      when 'up' then y -= 1
+      when 'down' then y += 1
+    { x: x, y: y }
 
   animate: ->
     milliseconds = new Date().getMilliseconds()
