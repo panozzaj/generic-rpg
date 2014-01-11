@@ -3,8 +3,8 @@ Things that we can work on:
  - NPC box that when you walk up to it, it opens a quick chat dialog
 # - hardcode a dialog to open when 'z' is pressed next to a square on the map
 # - 'z' starts an event in the square in front of the character if an event is possible
-  - basic chat event tied to a set square
-  - chat dialog is an alert
+# - basic chat event tied to a set square
+# - chat dialog is an alert
   - event tied to NPC that moves around
   - some sort of EventManager that runs through the event and keeps track of state
 
