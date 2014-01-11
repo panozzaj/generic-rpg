@@ -15,14 +15,15 @@ class Dialog
       context.save()
       context.fillStyle = 'white'
       context.font = '30px manaspaceregular'
-      context.fillText 'Hello Simba!', 80, 110
-      context.fillText 'This is your destiny...', 80, 150
+      lines = @text.split("\n")
+      _.each lines, (line, i) ->
+        context.fillText line, 80, 110 + 40 * i
       context.restore()
 
   show: (e) =>
     @alive = true
-    GameEvent.trigger 'pushResponder', responder: @
     @text = e.attributes.text
+    GameEvent.trigger 'pushResponder', responder: @
 
   onkeydown: (event) ->
     switch event.which

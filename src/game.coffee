@@ -15,11 +15,8 @@ class Game
     @dialog = new Dialog @
     @objects.push(@dialog)
 
-    GameEvent.on 'pushResponder', @pushResponder
-    GameEvent.on 'popResponder', @popResponder
-
-    @responderStack = []
-    GameEvent.trigger 'pushResponder', responder: @avatar
+    @responderManager = new ResponderManager
+    @responderManager.pushResponder(@avatar)
 
   run: =>
     @update()
@@ -40,12 +37,5 @@ class Game
     @context.clearRect 0, 0, @canvas.width, @canvas.height
 
   onkeydown: (event) =>
-    _.last(@responderStack).onkeydown(event)
-
-  pushResponder: (e) =>
-    @responderStack.push(e.attributes.responder)
-
-  popResponder: (e) =>
-    if e.attributes.responder != @responderStack.pop()
-      alert('popped responder but it did not match')
+    @responderManager.onkeydown(event)
 
