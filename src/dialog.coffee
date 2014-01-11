@@ -8,17 +8,23 @@ class Dialog
 
   draw: (context) ->
     if @alive
-      context.save()
-      context.fillStyle = "#33c"
-      context.fillRect 50, 50, 500, 250
-      context.restore()
-      context.save()
-      context.fillStyle = 'white'
-      context.font = '30px manaspaceregular'
-      lines = @text.split("\n")
-      _.each lines, (line, i) ->
-        context.fillText line, 80, 110 + 40 * i
-      context.restore()
+      @drawBackground(context)
+      @drawText(context)
+
+  drawBackground: (context) ->
+    context.save()
+    context.fillStyle = "#33c"
+    context.fillRect 50, 50, 500, 250
+    context.restore()
+
+  drawText: (context) ->
+    context.save()
+    context.fillStyle = 'white'
+    context.font = '30px manaspaceregular'
+    lines = @text.split("\n")
+    _.each lines, (line, i) ->
+      context.fillText line, 80, 110 + 40 * i
+    context.restore()
 
   show: (e) =>
     @alive = true

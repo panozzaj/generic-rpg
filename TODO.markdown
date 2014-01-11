@@ -2,8 +2,9 @@ Things that we can work on:
 
  - NPC box that when you walk up to it, it opens a quick chat dialog
   - Move NPC around
-  - multiple dialog boxes in a row ("conversation")
   - passing text and splitting on words intelligently
+  - multiple dialog boxes in a row ("conversation")
+  - data driven from map file or something to generate NPCs
 
  - a dude moving around on a landscape
   - render background tiles with sprites
