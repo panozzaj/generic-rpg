@@ -8,4 +8,3 @@ class MapScreen
 
   draw: (context) ->
     @map.draw context
-

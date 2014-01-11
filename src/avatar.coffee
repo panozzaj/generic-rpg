@@ -79,13 +79,8 @@ class Avatar
       when 40 # down
         @moveInDirection('down')
       when 90 # z
-        if @isFacing(5, 4)
-          console.log('in here')
-          alert('Hello Simba!')
-
-  isFacing: (x, y) ->
-    facing = @facing()
-    facing.x == x && facing.y == y
+        if !@isMoving()
+          GameEvent.trigger 'talk', facing: @facing()
 
   facing: ->
     { x, y } = @mapPosition
@@ -105,4 +100,3 @@ class Avatar
       @sprite1.src = "images/cecil-#{@direction}.png"
 
     @millisecondsWas = milliseconds
-

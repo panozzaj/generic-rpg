@@ -5,7 +5,7 @@ class Map
       SSSSGSSSSS
       WWWWGWWWWW
       GGGGGGGGGG
-      GWWWGNGGGW
+      GWWWGGGGGW
       SSSSGGSSSW
       WWSGGGGSSW
     """
@@ -32,6 +32,3 @@ class Map
       when 'G' then '#0f0'
       when 'S' then '#888'
       when 'W' then '#00f'
-      when 'N' then '#ccc'
-
-

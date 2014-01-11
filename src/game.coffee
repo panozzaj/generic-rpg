@@ -8,6 +8,7 @@ class Game
 
     @avatar = new Avatar @
     @mapMode = new MapScreen @
+    @npc = new NPC @
 
   run: =>
     @update()
@@ -21,6 +22,7 @@ class Game
     @clearCanvas()
     @mapMode.draw @context
     @avatar.draw @context
+    @npc.draw @context
 
   clearCanvas: ->
     @context.clearRect 0, 0, @canvas.width, @canvas.height

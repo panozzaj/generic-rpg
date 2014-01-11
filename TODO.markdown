@@ -42,3 +42,6 @@ Things that we can work on:
    - or changes are not synced over to the workspace
    - especially when we build files?
 
+
+ Would be really sweet list
+  - NPCs talk to each other with little speech bubbles, which you can see
