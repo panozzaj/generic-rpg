@@ -21,4 +21,12 @@ class Dialog
 
   show: (e) =>
     @alive = true
+    GameEvent.trigger 'pushResponder', responder: @
     @text = e.attributes.text
+
+  onkeydown: (event) ->
+    switch event.which
+      when 90 # z
+        @alive = false
+        GameEvent.trigger 'popResponder', responder: @
+
