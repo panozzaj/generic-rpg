@@ -21,4 +21,7 @@ class NPC
 
   talk: (e) =>
     if _.isEqual(e.attributes.facing, @mapPosition)
-      alert 'talk'
+      GameEvent.trigger 'dialog', text: """
+        Hello Simba!
+        This is your destiny...
+      """
