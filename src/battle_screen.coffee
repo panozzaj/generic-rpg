@@ -4,10 +4,12 @@ class BattleScreen
     @height = game.canvas.height
 
     @avatar = new BattleAvatar
+    @enemy = new BattleEnemy
 
   draw: (context) ->
     @drawBackground context
     @drawParty context
+    @drawEnemies context
 
   drawBackground: (context) ->
     context.save()
@@ -17,6 +19,9 @@ class BattleScreen
 
   drawParty: (context) ->
     @avatar.draw context
+
+  drawEnemies: (context) ->
+    @enemy.draw context
 
   update: ->
     # TODO
