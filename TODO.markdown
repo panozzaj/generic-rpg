@@ -21,7 +21,7 @@ Things that we can work on:
   - collision
   - restrict to map boundaries
  - screen modes
-   - map
+#  - map
    - battle
    - menu
    - cutscene

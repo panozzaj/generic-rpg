@@ -6,5 +6,22 @@ class MapScreen
 
     @map = new Map @
 
+    @objects = []
+    @avatar = new Avatar @
+    @objects.push(@avatar)
+    @npc = new NPC @
+    @objects.push(@npc)
+    @dialog = new Dialog @
+    @objects.push(@dialog)
+
+    GameEvent.trigger 'pushResponder', responder: @avatar
+
+  update: ->
+    for object in @objects
+      object.update()
+
   draw: (context) ->
     @map.draw context
+    for object in @objects
+      object.draw context
+

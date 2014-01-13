@@ -8,3 +8,6 @@ class BattleScreen
     context.fillStyle = "#afa"
     context.fillRect 0, 0, @width, @height
     context.restore()
+
+  update: ->
+    # TODO
