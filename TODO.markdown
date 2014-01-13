@@ -1,5 +1,13 @@
 Things that we can work on:
 
+ - battle mode
+  - some sort of generic battle mode with no functionality
+   - tests switching game modes and having key handler properly working
+  - boxes attacking other boxes
+  - enter battle animation
+  - general info on the battle (HP display, etc.)
+  - spritifying at some point
+
  - NPC box that when you walk up to it, it opens a quick chat dialog
   - Move NPC around
   - passing text and splitting on words intelligently
