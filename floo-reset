@@ -1,0 +1,5 @@
+#!/bin/sh
+
+git clean -df
+git reset --hard
+git pull --rebase
