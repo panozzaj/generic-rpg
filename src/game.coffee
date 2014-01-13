@@ -9,7 +9,9 @@ class Game
 
     @avatar = new Avatar @
     @objects.push(@avatar)
-    @mapMode = new MapScreen @
+    @mapScreen = new MapScreen @
+    @screen = @mapScreen
+
     @npc = new NPC @
     @objects.push(@npc)
     @dialog = new Dialog @
@@ -17,6 +19,8 @@ class Game
 
     @responderManager = new ResponderManager
     @responderManager.pushResponder(@avatar)
+
+    GameEvent.on 'battle', @handleBattle
 
   run: =>
     @update()
@@ -29,7 +33,7 @@ class Game
 
   draw: ->
     @clearCanvas()
-    @mapMode.draw @context
+    @screen.draw @context
     for object in @objects
       object.draw @context
 
@@ -39,3 +43,5 @@ class Game
   onkeydown: (event) =>
     @responderManager.onkeydown(event)
 
+  handleBattle: (e) =>
+    @screen = new BattleScreen @
