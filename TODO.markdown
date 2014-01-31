@@ -1,11 +1,20 @@
 Things that we can work on:
 
  - battle mode
-  - some sort of generic battle mode with no functionality
-   - tests switching game modes and having key handler properly working
-  - boxes attacking other boxes
-  - enter battle animation
+  - one player vs one enemy battle
+   - require us to have some basic stats
+    - hp, strength / damage
+   - basic turn management
+   - picking next person to act based on speed
+   - sophisticated AI that just attacks every turn
+   - showing who is next in a list
   - general info on the battle (HP display, etc.)
+
+  - more people in the battle
+   - boxes attacking other boxes
+
+  - enter battle animation
+
   - spritifying at some point
 
  - NPC box that when you walk up to it, it opens a quick chat dialog
@@ -47,3 +56,4 @@ Things that we can work on:
 
  Would be really sweet list
   - NPCs talk to each other with little speech bubbles, which you can see
+
