@@ -14,7 +14,7 @@ module.exports = (grunt) ->
       options:
         livereload: true
       scripts:
-        files: ['src/*.coffee']
+        files: ['src/**/*.coffee']
         tasks: ['coffee']
 
     connect:
