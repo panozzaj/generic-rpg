@@ -32,5 +32,6 @@ class Game
     @responderManager.onkeydown(event)
 
   handleBattle: (e) =>
-    @screen = new BattleScreen @
+    @screen = new Battle.Screen @
 
+Battle = {}

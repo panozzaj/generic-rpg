@@ -1,4 +1,4 @@
-class BattleEnemy
+class Battle.Enemy
   constructor: ->
     @sprite = new Image()
     @sprite.src = "images/goblin.png"

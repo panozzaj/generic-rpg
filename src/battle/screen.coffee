@@ -1,10 +1,10 @@
-class BattleScreen
+class Battle.Screen
   constructor: (game) ->
     @width = game.canvas.width
     @height = game.canvas.height
 
-    @avatar = new BattleAvatar
-    @enemy = new BattleEnemy
+    @avatar = new Battle.Avatar
+    @enemy = new Battle.Enemy
 
   draw: (context) ->
     @drawBackground context

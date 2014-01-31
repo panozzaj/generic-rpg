@@ -1,4 +1,4 @@
-class BattleAvatar
+class Battle.Avatar
   constructor: ->
     @sprite = new Image()
     @sprite.src = "images/cecil-left.png"
