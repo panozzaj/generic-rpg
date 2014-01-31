@@ -7,8 +7,9 @@ class ScreenManager
     GameEvent.trigger 'pushResponder', responder: screen
 
   pop: ->
+    screen = @screens.pop()
     GameEvent.trigger 'popResponder', responder: screen
-    screen = @screens.pop
 
   activeScreen: ->
     _.last @screens
+
