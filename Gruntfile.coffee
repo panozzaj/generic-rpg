@@ -21,6 +21,7 @@ module.exports = (grunt) ->
       server:
         options:
           port: 5000
+          open: true
 
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-watch'
