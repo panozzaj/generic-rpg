@@ -8,11 +8,10 @@ class Battle.Screen
     @menu = new Battle.Menu
 
   draw: (context) ->
-    if @alive
-      @drawBackground context
-      @drawParty context
-      @drawEnemies context
-      @drawMenu context
+    @drawBackground context
+    @drawParty context
+    @drawEnemies context
+    @drawMenu context
 
   drawBackground: (context) ->
     context.save()
@@ -32,13 +31,7 @@ class Battle.Screen
   update: ->
     # TODO
 
-  show: (e) =>
-    @alive = true
-    GameEvent.trigger 'pushResponder', responder: @
-
   onkeydown: (event) ->
     switch event.which
       when 90 # z
-        @alive = false
-        GameEvent.trigger 'popResponder', responder: @
-
+        GameEvent.trigger 'popScreen'

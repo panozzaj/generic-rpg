@@ -16,6 +16,9 @@ class MapScreen
 
     GameEvent.trigger 'pushResponder', responder: @avatar
 
+  onkeydown: (event) =>
+    @avatar.onkeydown(event)
+
   update: ->
     for object in @objects
       object.update()
@@ -24,4 +27,3 @@ class MapScreen
     @map.draw context
     for object in @objects
       object.draw context
-

@@ -2,6 +2,7 @@ class Game
 
   constructor: ->
     @responderManager = new ResponderManager
+    @screenManager = new ScreenManager
 
     @canvas = document.getElementById 'game'
     @context = @canvas.getContext '2d'
@@ -9,9 +10,11 @@ class Game
     @tileSize = 64
 
     @mapScreen = new MapScreen @
-    @screen = @mapScreen
+    @screenManager.push @mapScreen
 
     GameEvent.on 'battle', @handleBattle
+    GameEvent.on 'popScreen', =>
+      @screenManager.pop()
 
   run: =>
     @update()
@@ -19,11 +22,11 @@ class Game
     requestAnimFrame @run
 
   update: ->
-    @screen.update()
+    @screenManager.activeScreen().update()
 
   draw: ->
     @clearCanvas()
-    @screen.draw @context
+    @screenManager.activeScreen().draw @context
 
   clearCanvas: ->
     @context.clearRect 0, 0, @canvas.width, @canvas.height
@@ -32,8 +35,8 @@ class Game
     @responderManager.onkeydown(event)
 
   handleBattle: (e) =>
-    @screen = new Battle.Screen @
-    @screen.show()
+    @screenManager.push(new Battle.Screen @)
 
+# Namespace creation / setup
 Battle = {}
 
