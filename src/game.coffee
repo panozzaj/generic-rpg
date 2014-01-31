@@ -33,5 +33,7 @@ class Game
 
   handleBattle: (e) =>
     @screen = new Battle.Screen @
+    @screen.show()
 
 Battle = {}
+

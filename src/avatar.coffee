@@ -82,7 +82,6 @@ class Avatar
         if !@isMoving()
           GameEvent.trigger 'talk', facing: @facing()
       when 66 # b
-        console.log('pressed b?')
         if !@isMoving()
           GameEvent.trigger 'battle', random: true
 

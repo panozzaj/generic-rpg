@@ -36,6 +36,7 @@ Things that we can work on:
   - pairing gem so it doesn't look like one person only worked on it (shipstars-ego.gem)
   - Need to have files / folders open in floobits for them to show up?
    - basically generated files are also not working correctly?
+   - add "events" declaration to easily add event handlers to objects
 
  Floobits-specific
   - having a tough time syncing things flawlessly
