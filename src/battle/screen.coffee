@@ -5,11 +5,13 @@ class Battle.Screen
 
     @avatar = new Battle.Avatar
     @enemy = new Battle.Enemy
+    @menu = new Battle.Menu
 
   draw: (context) ->
     @drawBackground context
     @drawParty context
     @drawEnemies context
+    @drawMenu context
 
   drawBackground: (context) ->
     context.save()
@@ -22,6 +24,9 @@ class Battle.Screen
 
   drawEnemies: (context) ->
     @enemy.draw context
+
+  drawMenu: (context) ->
+    @menu.draw context
 
   update: ->
     # TODO
