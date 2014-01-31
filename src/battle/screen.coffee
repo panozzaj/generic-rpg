@@ -35,3 +35,7 @@ class Battle.Screen
     switch event.which
       when 90 # z
         GameEvent.trigger 'popScreen'
+      else
+        @menu.onkeydown(event)
+
+

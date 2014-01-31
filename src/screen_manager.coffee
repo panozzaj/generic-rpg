@@ -12,4 +12,3 @@ class ScreenManager
 
   activeScreen: ->
     _.last @screens
-
