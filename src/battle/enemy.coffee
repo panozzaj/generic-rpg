@@ -3,11 +3,10 @@ class Battle.Enemy
     @sprite = new Image()
     @sprite.src = "images/goblin.png"
     @stats = {
-      hp: {
+      hp:
         max: 30,
         current: 30
-      }
-      damage: 10,
+      damage: 10
     }
 
   update: ->

@@ -8,6 +8,8 @@ class Battle.Screen
     @menu = new Battle.Menu
     @statusDisplay = new Battle.StatusDisplay @avatar
 
+    GameEvent.on 'fight', @handleFight
+
   draw: (context) ->
     @drawBackground context
     @drawParty context
@@ -37,10 +39,9 @@ class Battle.Screen
     # TODO
 
   onkeydown: (event) ->
-    switch event.which
-      when 90 # z
-        GameEvent.trigger 'popScreen'
-      else
-        @menu.onkeydown(event)
+    @menu.onkeydown(event)
 
-
+  handleFight: =>
+    effectiveDamage = Math.round(@avatar.stats.damage * (Math.random() / 2 + 0.75))
+    @enemy.stats.hp.current -= effectiveDamage
+    console.log effectiveDamage, @enemy.stats.hp

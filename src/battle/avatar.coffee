@@ -3,14 +3,10 @@ class Battle.Avatar
     @sprite = new Image()
     @sprite.src = "images/cecil-left.png"
     @stats = {
-      hp: {
+      hp:
         max: 150,
         current: 150
-      }
-      strength: 7,
-      weapon: {
-        damage: 10
-      }
+      damage: 10
     }
 
   update: ->

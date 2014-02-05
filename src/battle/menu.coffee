@@ -38,6 +38,15 @@ class Battle.Menu
         @moveCursor -1
       when 40 # down
         @moveCursor 1
+      when 90 # z
+        @performCurrentAction()
 
   moveCursor: (offset) ->
     @currentAction = (@currentAction + @actions.length + offset) % @actions.length
+
+  performCurrentAction: ->
+    switch @currentAction
+      when 0
+        GameEvent.trigger 'fight'
+      when 3
+        GameEvent.trigger 'popScreen'
