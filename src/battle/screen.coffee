@@ -36,12 +36,12 @@ class Battle.Screen
     @statusDisplay.draw context
 
   update: ->
-    # TODO
+    @enemy.update()
 
   onkeydown: (event) ->
     @menu.onkeydown(event)
 
   handleFight: =>
     effectiveDamage = Math.round(@avatar.stats.damage * (Math.random() / 2 + 0.75))
-    @enemy.stats.hp.current -= effectiveDamage
-    console.log effectiveDamage, @enemy.stats.hp
+    @enemy.takeDamage(effectiveDamage)
+
