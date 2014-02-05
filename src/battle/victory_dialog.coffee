@@ -1,15 +1,13 @@
-class Dialog
-  constructor: (game) ->
-    @alive = false
-    GameEvent.on 'dialog', @show
+class Battle.VictoryDialog
+  constructor: (@battleScreen) ->
+    GameEvent.trigger 'pushResponder', responder: @
 
   update: ->
     # something
 
   draw: (context) ->
-    if @alive
-      @drawBackground(context)
-      @drawText(context)
+    @drawBackground(context)
+    @drawText(context)
 
   drawBackground: (context) ->
     context.save()
@@ -21,18 +19,11 @@ class Dialog
     context.save()
     context.fillStyle = 'white'
     context.font = '30px manaspaceregular'
-    lines = @text.split("\n")
-    _.each lines, (line, i) ->
-      context.fillText line, 80, 110 + 40 * i
+    context.fillText "Victory!", 80, 110
     context.restore()
-
-  show: (e) =>
-    @alive = true
-    @text = e.attributes.text
-    GameEvent.trigger 'pushResponder', responder: @
 
   onkeydown: (event) ->
     switch event.which
       when 90 # z
-        @alive = false
         GameEvent.trigger 'popResponder', responder: @
+        GameEvent.trigger 'popScreen'

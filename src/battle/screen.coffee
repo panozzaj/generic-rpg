@@ -9,6 +9,7 @@ class Battle.Screen
     @statusDisplay = new Battle.StatusDisplay @avatar
 
     GameEvent.on 'fight', @handleFight
+    GameEvent.on 'die', @handleDeath
 
   draw: (context) ->
     @drawBackground context
@@ -16,6 +17,8 @@ class Battle.Screen
     @drawEnemies context
     @drawMenu context
     @drawStatusDisplay context
+
+    @drawVictoryDialog context if @victoryDialog
 
   drawBackground: (context) ->
     context.save()
@@ -35,6 +38,9 @@ class Battle.Screen
   drawStatusDisplay: (context) ->
     @statusDisplay.draw context
 
+  drawVictoryDialog: (context) ->
+    @victoryDialog.draw context
+
   update: ->
     @enemy.update()
 
@@ -45,3 +51,5 @@ class Battle.Screen
     effectiveDamage = Math.round(@avatar.stats.damage * (Math.random() / 2 + 0.75))
     @enemy.takeDamage(effectiveDamage)
 
+  handleDeath: (event) =>
+    @victoryDialog = new Battle.VictoryDialog @

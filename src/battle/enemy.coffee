@@ -18,7 +18,8 @@ class Battle.Enemy
         @damageDisplayTTL = 0
 
   draw: (context) ->
-    context.drawImage @sprite, 256, 256, 64, 64
+    if @alive()
+      context.drawImage @sprite, 256, 256, 64, 64
     if @damageDisplayTTL
       context.save()
       context.fillStyle = 'white'
@@ -31,5 +32,8 @@ class Battle.Enemy
     @stats.hp.current -= damage
     @lastDamage = damage
     @damageDisplayTTL = 60
-    console.log damage, @stats.hp.current
+    if @stats.hp.current <= 0
+      GameEvent.trigger 'die', enemy: @
 
+  alive: ->
+    @stats.hp.current > 0
