@@ -2,13 +2,15 @@ Things that we can work on:
 
  - battle mode
   - one player vs one enemy battle
-   - exiting battle is kind of broken
    - enemy attacks back
    - basic turn management
    - picking next person to act based on speed
    - sophisticated AI that just attacks every turn
    - showing who is next in a list
   - general info on the battle (HP display, etc.)
+
+  - separate the concept of a particular battle from battle.screen
+   - put variuos things on battle instead of screen (which is mostly a container)
 
   - more people in the battle
    - boxes attacking other boxes
