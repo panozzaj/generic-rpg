@@ -1,4 +1,8 @@
 class Battle.Screen
+  events: ->
+    fight: @handleFight
+    die: @handleDeath
+
   constructor: (game) ->
     @width = game.canvas.width
     @height = game.canvas.height
@@ -8,8 +12,12 @@ class Battle.Screen
     @menu = new Battle.Menu
     @statusDisplay = new Battle.StatusDisplay @avatar
 
-    GameEvent.on 'fight', @handleFight
-    GameEvent.on 'die', @handleDeath
+    _.each @events(), (handler, eventName) ->
+      GameEvent.on eventName, handler
+
+  destroy: ->
+    _.each @events(), (handler, eventName) ->
+      GameEvent.off eventName, handler
 
   draw: (context) ->
     @drawBackground context
@@ -53,3 +61,4 @@ class Battle.Screen
 
   handleDeath: (event) =>
     @victoryDialog = new Battle.VictoryDialog @
+

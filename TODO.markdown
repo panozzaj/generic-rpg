@@ -2,8 +2,8 @@ Things that we can work on:
 
  - battle mode
   - one player vs one enemy battle
-   - require us to have some basic stats
-    - hp, strength / damage
+   - exiting battle is kind of broken
+   - enemy attacks back
    - basic turn management
    - picking next person to act based on speed
    - sophisticated AI that just attacks every turn

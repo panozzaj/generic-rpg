@@ -16,6 +16,9 @@ class Game
     GameEvent.on 'popScreen', =>
       @screenManager.pop()
 
+  destructor: =>
+    console.log 'destructed Game'
+
   run: =>
     @update()
     @draw()

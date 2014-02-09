@@ -8,6 +8,7 @@ class ScreenManager
 
   pop: ->
     screen = @screens.pop()
+    screen.destroy()
     GameEvent.trigger 'popResponder', responder: screen
 
   activeScreen: ->
