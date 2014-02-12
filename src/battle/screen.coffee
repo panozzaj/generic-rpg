@@ -3,6 +3,7 @@ class Battle.Screen
     fight: @handleFight
     die: @handleDeath
     finishedAction: @finishedAction
+    enqueue: @enqueue
 
   constructor: (game) ->
     @width = game.canvas.width
@@ -14,15 +15,14 @@ class Battle.Screen
 
     @time = 0
     @actionList = []
-    @actionList.push {
-      type: 'menu'
-      source: @avatar
-      executeAt: @time + 10
-    }
-    console.log(@actionList)
 
     _.each @events(), (handler, eventName) ->
       GameEvent.on eventName, handler
+
+    GameEvent.trigger 'enqueue', action:
+      type: Battle.Action.Menu
+      source: @avatar
+      executeAt: @time + 10
 
   destroy: ->
     _.each @events(), (handler, eventName) ->
@@ -63,7 +63,7 @@ class Battle.Screen
         action.executeAt == @time
 
       if action
-        @currentAction = new Battle.Action(action)
+        @currentAction = new action.type(action)
         @currentAction.execute()
 
       @time += 1 unless @currentAction
@@ -74,13 +74,12 @@ class Battle.Screen
     @actionList.splice @actionList.indexOf(@currentAction), 1
     @currentAction = null
 
-    nextAction = event.attributes.nextAction
-    if nextAction
-      @actionList.push
-        type: nextAction.type
-        source: @avatar
-        target: @enemy
-        executeAt: @time + nextAction.executeIn
+  enqueue: (event) =>
+    console.log event
+    action = event.attributes.action
+    action.executeAt ||= @time + action.executeIn
+
+    @actionList.push action
 
   onkeydown: (event) ->
 

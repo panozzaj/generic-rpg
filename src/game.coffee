@@ -41,4 +41,6 @@ class Game
     @screenManager.push(new Battle.Screen @)
 
 # Namespace creation / setup
+# TODO: Move this somewhere more intelligent
 Battle = {}
+Battle.Action = {}
