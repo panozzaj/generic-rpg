@@ -20,10 +20,10 @@ class Battle.Screen
       GameEvent.on eventName, handler
 
     GameEvent.trigger 'enqueue', action:
-      type: Battle.Action.Menu
+      type: Battle.Action.ScheduleTurn
       source: @avatar
       enemies: [@enemy]
-      executeAt: @time + 10
+      executeIn: 0
 
   destroy: ->
     _.each @events(), (handler, eventName) ->
@@ -76,9 +76,8 @@ class Battle.Screen
     @currentAction = null
 
   enqueue: (event) =>
-    console.log event
     action = event.attributes.action
-    action.executeAt ||= @time + action.executeIn
+    action.executeAt = @time + action.executeIn
 
     @actionList.push action
 

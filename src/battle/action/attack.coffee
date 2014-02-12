@@ -1,6 +1,6 @@
 class Battle.Action.Attack
   constructor: ({ @source, @target }) ->
-    console.log @source, @target
+    console.log @
 
   execute: ->
     @effectiveDamage = Math.round(@source.stats.damage * (Math.random() / 2 + 0.75))

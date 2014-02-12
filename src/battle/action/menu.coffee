@@ -1,6 +1,6 @@
 class Battle.Action.Menu
   constructor: ({ @source, @target, @enemies }) ->
-    console.log @source, @target, @enemies
+    console.log @
 
   execute: ->
     @menu = new Battle.Menu callback: @pick
