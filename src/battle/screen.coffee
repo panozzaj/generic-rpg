@@ -83,9 +83,5 @@ class Battle.Screen
 
   onkeydown: (event) ->
 
-  handleFight: =>
-    effectiveDamage = Math.round(@avatar.stats.damage * (Math.random() / 2 + 0.75))
-    @enemy.takeDamage(effectiveDamage)
-
   handleDeath: (event) =>
     @victoryDialog = new Battle.VictoryDialog @

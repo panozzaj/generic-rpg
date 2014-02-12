@@ -10,7 +10,7 @@ class Battle.Action.Menu
   pick: (selectedAction) =>
     GameEvent.trigger 'finishedAction'
     GameEvent.trigger 'enqueue', action:
-      type: Battle.Action.Attack
+      type: selectedAction
       source: @source
       target: @enemies[0]
       executeIn: 10
