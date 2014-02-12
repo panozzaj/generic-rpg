@@ -1,5 +1,13 @@
 class Battle.Avatar
   constructor: ->
+    @position =
+      x: 512
+      y: 256
+
+    @size =
+      width: 64
+      height: 64
+
     @sprite = new Image()
     @sprite.src = "images/cecil-left.png"
     @stats = {
@@ -13,4 +21,7 @@ class Battle.Avatar
     # TODO
 
   draw: (context) ->
-    context.drawImage @sprite, 512, 256, 64, 64
+    context.drawImage @sprite, @position.x, @position.y, @size.width, @size.height
+
+  takeDamage: (damage) ->
+    @stats.hp.current -= damage

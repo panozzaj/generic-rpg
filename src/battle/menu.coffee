@@ -11,7 +11,12 @@ class Battle.Menu
 
   destroy: ->
     GameEvent.trigger 'popResponder', responder: @
-    @callback @currentAction
+    @callback @actionType()
+
+  actionType: ->
+    switch @currentAction
+      when 0 then Battle.Action.Attack
+      when 3 then Battle.Action.Run
 
   draw: (context) ->
     @drawBackground context
