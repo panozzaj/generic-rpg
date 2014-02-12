@@ -2,6 +2,11 @@ Things that we can work on:
 
  - battle mode
   - one player vs one enemy battle
+   - refactor Battle.Action
+    - Battle.Action.Menu
+    - Battle.Action.Attack
+    - Battle.Action.Spell
+    - etc
    - enemy attacks back
    - basic turn management
    - picking next person to act based on speed
@@ -10,7 +15,7 @@ Things that we can work on:
   - general info on the battle (HP display, etc.)
 
   - separate the concept of a particular battle from battle.screen
-   - put variuos things on battle instead of screen (which is mostly a container)
+   - put various things on battle instead of screen (which is mostly a container)
 
   - more people in the battle
    - boxes attacking other boxes
