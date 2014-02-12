@@ -11,10 +11,10 @@ class Battle.Action.Attack extends Battle.Action
       if @damageDisplayTTL <= 0
         GameEvent.trigger 'finishedAction'
         GameEvent.trigger 'enqueue', action:
-          type: Battle.Action.Menu
+          type: Battle.Action.ScheduleTurn
           source: @source
           enemies: [@target]
-          executeIn: 10
+          executeIn: 0
 
   draw: (context) ->
     if @damageDisplayTTL

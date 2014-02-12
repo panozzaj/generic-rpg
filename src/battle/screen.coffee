@@ -19,17 +19,17 @@ class Battle.Screen
     _.each @events(), (handler, eventName) ->
       GameEvent.on eventName, handler
 
-    # GameEvent.trigger 'enqueue', action:
-    #   type: Battle.Action.ScheduleTurn
-    #   source: @avatar
-    #   enemies: [@enemy]
-    #   executeIn: 0
+    GameEvent.trigger 'enqueue', action:
+      type: Battle.Action.ScheduleTurn
+      source: @avatar
+      enemies: [@enemy]
+      executeIn: 0
 
     GameEvent.trigger 'enqueue', action:
-      type: Battle.Action.Attack
+      type: Battle.Action.ScheduleTurn
       source: @enemy
-      target: @avatar
-      executeIn: 15
+      enemies: [@avatar]
+      executeIn: 0
 
   destroy: ->
     _.each @events(), (handler, eventName) ->
@@ -41,7 +41,7 @@ class Battle.Screen
     @drawEnemies context
     @drawStatusDisplay context
 
-    @currentAction?.draw context
+    @currentAction?.draw? context
 
     @drawVictoryDialog context if @victoryDialog
 
@@ -65,17 +65,18 @@ class Battle.Screen
 
   update: ->
     if @currentAction
-      @currentAction.update()
+      @currentAction.update?()
     else
       console.log "@time: #{@time}" if @time < 50
       action = _.find @actionList, (action) =>
         action.executeAt == @time
 
       if action
-        @currentAction = new action.type(action)
+        @currentAction = action
+        console.log "Executing ", @currentAction
         @currentAction.execute()
-
-      @time += 1 unless @currentAction
+      else
+        @time += 1
 
   finishedAction: (event) =>
     @actionList.splice @actionList.indexOf(@currentAction), 1
@@ -85,7 +86,7 @@ class Battle.Screen
     action = event.attributes.action
     action.executeAt = @time + action.executeIn
 
-    @actionList.push action
+    @actionList.push new action.type(action)
 
   onkeydown: (event) ->
 
