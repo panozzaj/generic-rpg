@@ -70,9 +70,17 @@ class Battle.Screen
 
     @enemy.update()
 
-  finishedAction: =>
+  finishedAction: (event) =>
     @actionList.splice @actionList.indexOf(@currentAction), 1
     @currentAction = null
+
+    nextAction = event.attributes.nextAction
+    if nextAction
+      @actionList.push
+        type: nextAction.type
+        source: @avatar
+        target: @enemy
+        executeAt: @time + nextAction.executeIn
 
   onkeydown: (event) ->
 
@@ -82,4 +90,3 @@ class Battle.Screen
 
   handleDeath: (event) =>
     @victoryDialog = new Battle.VictoryDialog @
-

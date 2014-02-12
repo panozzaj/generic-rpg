@@ -1,6 +1,6 @@
 class Battle.Menu
 
-  constructor: ->
+  constructor: ({ @callback }) ->
     @width = 200
     @height = 200
     @actions = ['Fight', 'Magic', 'Defend', 'Run']
@@ -10,10 +10,8 @@ class Battle.Menu
     GameEvent.trigger 'pushResponder', responder: @
 
   destroy: ->
-    console.log 'destroying menu'
     GameEvent.trigger 'popResponder', responder: @
-    GameEvent.trigger 'finishedAction'
-    GameEvent.trigger 'scheduleAction', entity: @
+    @callback @currentAction
 
   draw: (context) ->
     @drawBackground context
@@ -52,10 +50,4 @@ class Battle.Menu
     @currentAction = (@currentAction + @actions.length + offset) % @actions.length
 
   performCurrentAction: ->
-    switch @currentAction
-      when 0
-        GameEvent.trigger 'fight'
-        @destroy()
-      when 3
-        GameEvent.trigger 'popScreen'
-        @destroy()
+    @destroy()

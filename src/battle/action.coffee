@@ -3,7 +3,12 @@ class Battle.Action
     console.log @source, @target
 
   execute: ->
-    @menu = new Battle.Menu
+    @menu = new Battle.Menu callback: @pick
+
+  pick: (selectedAction) ->
+    GameEvent.trigger 'finishedAction', nextAction:
+      type: 'attack'
+      executeIn: 10
 
   draw: (context) ->
     @menu.draw context
