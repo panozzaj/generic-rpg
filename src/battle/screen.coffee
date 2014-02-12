@@ -22,6 +22,7 @@ class Battle.Screen
     GameEvent.trigger 'enqueue', action:
       type: Battle.Action.Menu
       source: @avatar
+      enemies: [@enemy]
       executeAt: @time + 10
 
   destroy: ->
@@ -57,7 +58,9 @@ class Battle.Screen
     @victoryDialog.draw context
 
   update: ->
-    unless @currentAction
+    if @currentAction
+      @currentAction.update()
+    else
       console.log "@time: #{@time}" if @time < 50
       action = _.find @actionList, (action) =>
         action.executeAt == @time
@@ -67,8 +70,6 @@ class Battle.Screen
         @currentAction.execute()
 
       @time += 1 unless @currentAction
-
-    @enemy.update()
 
   finishedAction: (event) =>
     @actionList.splice @actionList.indexOf(@currentAction), 1
