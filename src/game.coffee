@@ -43,4 +43,3 @@ class Game
 # Namespace creation / setup
 # TODO: Move this somewhere more intelligent
 Battle = {}
-Battle.Action = {}

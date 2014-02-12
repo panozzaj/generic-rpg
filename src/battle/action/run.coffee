@@ -1,7 +1,4 @@
-class Battle.Action.Run
-  constructor: ({ @source, @target }) ->
-    console.log @
-
+class Battle.Action.Run extends Battle.Action
   execute: ->
     GameEvent.trigger 'finishedAction'
     GameEvent.trigger 'popScreen'

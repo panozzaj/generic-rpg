@@ -1,7 +1,4 @@
-class Battle.Action.Attack
-  constructor: ({ @source, @target }) ->
-    console.log @
-
+class Battle.Action.Attack extends Battle.Action
   execute: ->
     @effectiveDamage = Math.round(@source.stats.damage * (Math.random() / 2 + 0.75))
     @target.takeDamage @effectiveDamage

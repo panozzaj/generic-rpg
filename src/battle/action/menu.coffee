@@ -1,7 +1,4 @@
-class Battle.Action.Menu
-  constructor: ({ @source, @target, @enemies }) ->
-    console.log @
-
+class Battle.Action.Menu extends Battle.Action
   execute: ->
     @menu = new Battle.Menu callback: @pick
 

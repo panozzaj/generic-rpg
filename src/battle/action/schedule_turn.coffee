@@ -1,7 +1,4 @@
-class Battle.Action.ScheduleTurn
-  constructor: ({ @source, @target, @enemies }) ->
-    console.log @
-
+class Battle.Action.ScheduleTurn extends Battle.Action
   execute: ->
     GameEvent.trigger 'finishedAction'
     GameEvent.trigger 'enqueue', action:
