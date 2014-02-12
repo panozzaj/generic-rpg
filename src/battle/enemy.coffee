@@ -1,5 +1,13 @@
 class Battle.Enemy
   constructor: ->
+    @position =
+      x: 256
+      y: 256
+
+    @size =
+      width: 64
+      height: 64
+
     @sprite = new Image()
     @sprite.src = "images/goblin.png"
     @stats = {
@@ -11,7 +19,7 @@ class Battle.Enemy
 
   draw: (context) ->
     if @alive()
-      context.drawImage @sprite, 256, 256, 64, 64
+      context.drawImage @sprite, @position.x, @position.y, @size.width, @size.height
 
   takeDamage: (damage) ->
     @stats.hp.current -= damage
