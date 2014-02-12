@@ -22,3 +22,6 @@ class Battle.Avatar
 
   draw: (context) ->
     context.drawImage @sprite, @position.x, @position.y, @size.width, @size.height
+
+  takeDamage: (damage) ->
+    @stats.hp.current -= damage

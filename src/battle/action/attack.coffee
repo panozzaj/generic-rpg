@@ -25,5 +25,7 @@ class Battle.Action.Attack
       context.fillStyle = 'white'
       context.font = '30px manaspaceregular'
       context.globalAlpha = 0.75 * (@damageDisplayTTL / 60) + 0.25
-      context.fillText @effectiveDamage, 320, 225 + @damageDisplayTTL
+      context.fillText @effectiveDamage,
+        @target.position.x + 64,
+        @target.position.y - 95 + @damageDisplayTTL
       context.restore()

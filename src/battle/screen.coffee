@@ -19,11 +19,17 @@ class Battle.Screen
     _.each @events(), (handler, eventName) ->
       GameEvent.on eventName, handler
 
+    # GameEvent.trigger 'enqueue', action:
+    #   type: Battle.Action.ScheduleTurn
+    #   source: @avatar
+    #   enemies: [@enemy]
+    #   executeIn: 0
+
     GameEvent.trigger 'enqueue', action:
-      type: Battle.Action.ScheduleTurn
-      source: @avatar
-      enemies: [@enemy]
-      executeIn: 0
+      type: Battle.Action.Attack
+      source: @enemy
+      target: @avatar
+      executeIn: 15
 
   destroy: ->
     _.each @events(), (handler, eventName) ->
