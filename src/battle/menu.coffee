@@ -7,6 +7,13 @@ class Battle.Menu
     @currentAction = 0
     @cursor = new Image()
     @cursor.src = "images/cursor.png"
+    GameEvent.trigger 'pushResponder', responder: @
+
+  destroy: ->
+    console.log 'destroying menu'
+    GameEvent.trigger 'popResponder', responder: @
+    GameEvent.trigger 'finishedAction'
+    GameEvent.trigger 'scheduleAction', entity: @
 
   draw: (context) ->
     @drawBackground context
@@ -48,5 +55,7 @@ class Battle.Menu
     switch @currentAction
       when 0
         GameEvent.trigger 'fight'
+        @destroy()
       when 3
         GameEvent.trigger 'popScreen'
+        @destroy()

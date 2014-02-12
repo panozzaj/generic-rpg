@@ -42,4 +42,3 @@ class Game
 
 # Namespace creation / setup
 Battle = {}
-

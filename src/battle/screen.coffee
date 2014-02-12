@@ -2,6 +2,7 @@ class Battle.Screen
   events: ->
     fight: @handleFight
     die: @handleDeath
+    finishedAction: @finishedAction
 
   constructor: (game) ->
     @width = game.canvas.width
@@ -9,8 +10,16 @@ class Battle.Screen
 
     @avatar = new Battle.Avatar
     @enemy = new Battle.Enemy
-    @menu = new Battle.Menu
     @statusDisplay = new Battle.StatusDisplay @avatar
+
+    @time = 0
+    @actionList = []
+    @actionList.push {
+      type: 'menu'
+      source: @avatar
+      executeAt: @time + 10
+    }
+    console.log(@actionList)
 
     _.each @events(), (handler, eventName) ->
       GameEvent.on eventName, handler
@@ -23,8 +32,9 @@ class Battle.Screen
     @drawBackground context
     @drawParty context
     @drawEnemies context
-    @drawMenu context
     @drawStatusDisplay context
+
+    @currentAction?.draw context
 
     @drawVictoryDialog context if @victoryDialog
 
@@ -40,9 +50,6 @@ class Battle.Screen
   drawEnemies: (context) ->
     @enemy.draw context
 
-  drawMenu: (context) ->
-    @menu.draw context
-
   drawStatusDisplay: (context) ->
     @statusDisplay.draw context
 
@@ -50,10 +57,24 @@ class Battle.Screen
     @victoryDialog.draw context
 
   update: ->
+    unless @currentAction
+      console.log "@time: #{@time}" if @time < 50
+      action = _.find @actionList, (action) =>
+        action.executeAt == @time
+
+      if action
+        @currentAction = new Battle.Action(action)
+        @currentAction.execute()
+
+      @time += 1 unless @currentAction
+
     @enemy.update()
 
+  finishedAction: =>
+    @actionList.splice @actionList.indexOf(@currentAction), 1
+    @currentAction = null
+
   onkeydown: (event) ->
-    @menu.onkeydown(event)
 
   handleFight: =>
     effectiveDamage = Math.round(@avatar.stats.damage * (Math.random() / 2 + 0.75))
