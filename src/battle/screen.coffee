@@ -9,9 +9,20 @@ class Battle.Screen
     @width = game.canvas.width
     @height = game.canvas.height
 
-    @avatars = [new Battle.Avatar]
+    @avatars = [
+      new Battle.Avatar
+        name: "Simba"
+        position:
+          x: 512
+          y: 256
+      new Battle.Avatar
+        name: "Rafiki"
+        position:
+          x: 512
+          y: 128
+    ]
     @enemies = [
-      new Battle.Enemy(position: { x: 128, y: 128 }),
+      new Battle.Enemy(position: { x: 128, y: 128 })
       new Battle.Enemy(position: { x: 128, y: 256 })
     ]
     @statusDisplay = new Battle.StatusDisplay @avatars

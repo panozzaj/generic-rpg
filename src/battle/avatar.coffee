@@ -1,16 +1,11 @@
 class Battle.Avatar
-  constructor: ->
-    @position =
-      x: 512
-      y: 256
-
+  constructor: ({ @name, @position }) ->
     @size =
       width: 64
       height: 64
 
     @sprite = new Image()
     @sprite.src = "images/cecil-left.png"
-    @name = 'Simba'
     @stats = {
       hp:
         max: 150,
