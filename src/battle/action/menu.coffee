@@ -9,7 +9,7 @@ class Battle.Action.Menu extends Battle.Action
     GameEvent.trigger 'enqueue', action:
       type: selectedAction
       source: @source
-      target: @enemies[0]
+      target: _.sample @enemies
       enemies: @enemies
       executeIn: 3
 
