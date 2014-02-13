@@ -67,20 +67,26 @@ class Battle.Screen
     if @currentAction
       @currentAction.update?()
     else
-      console.log "@time: #{@time}" if @time < 50
+      console.log "@time: #{@time}" if @time < 100
       action = _.find @actionList, (action) =>
         action.executeAt == @time
 
       if action
-        @currentAction = action
-        console.log "Executing ", @currentAction
-        @currentAction.execute()
+        if action.source.alive()
+          @currentAction = action
+          console.log "Executing ", @currentAction
+          @currentAction.execute()
+        else
+          @dequeue(action)
       else
         @time += 1
 
   finishedAction: (event) =>
-    @actionList.splice @actionList.indexOf(@currentAction), 1
+    @dequeue(@currentAction)
     @currentAction = null
+
+  dequeue: (action) =>
+    @actionList.splice @actionList.indexOf(action), 1
 
   enqueue: (event) =>
     action = event.attributes.action

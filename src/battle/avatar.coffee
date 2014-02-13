@@ -25,3 +25,6 @@ class Battle.Avatar
 
   takeDamage: (damage) ->
     @stats.hp.current -= damage
+
+  alive: ->
+    @stats.hp.current > 0
