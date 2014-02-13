@@ -13,7 +13,7 @@ class Battle.Action.Attack extends Battle.Action
         GameEvent.trigger 'enqueue', action:
           type: Battle.Action.ScheduleTurn
           source: @source
-          enemies: [@target]
+          enemies: @enemies
           executeIn: 0
 
   draw: (context) ->

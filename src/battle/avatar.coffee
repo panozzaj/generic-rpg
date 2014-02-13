@@ -10,6 +10,7 @@ class Battle.Avatar
 
     @sprite = new Image()
     @sprite.src = "images/cecil-left.png"
+    @name = 'Simba'
     @stats = {
       hp:
         max: 150,
@@ -27,6 +28,7 @@ class Battle.Avatar
   takeDamage: (damage) ->
     @stats.hp.current -= damage
     if @stats.hp.current <= 0
+      @stats.hp.current = 0
       GameEvent.trigger 'die', enemy: @
 
   alive: ->

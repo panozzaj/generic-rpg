@@ -6,30 +6,32 @@ class Battle.Screen
     enqueue: @enqueue
 
   constructor: (game) ->
+    _.each @events(), (handler, eventName) ->
+      GameEvent.on eventName, handler
+
     @width = game.canvas.width
     @height = game.canvas.height
 
-    @avatar = new Battle.Avatar
-    @enemy = new Battle.Enemy
-    @statusDisplay = new Battle.StatusDisplay @avatar
+    @avatars = [new Battle.Avatar]
+    @enemies = [new Battle.Enemy]
+    @statusDisplay = new Battle.StatusDisplay @avatars
 
     @time = 0
     @actionList = []
 
-    _.each @events(), (handler, eventName) ->
-      GameEvent.on eventName, handler
+    _.each @avatars, (avatar) =>
+      GameEvent.trigger 'enqueue', action:
+        type: Battle.Action.ScheduleTurn
+        source: avatar
+        enemies: @enemies
+        executeIn: 0
 
-    GameEvent.trigger 'enqueue', action:
-      type: Battle.Action.ScheduleTurn
-      source: @avatar
-      enemies: [@enemy]
-      executeIn: 0
-
-    GameEvent.trigger 'enqueue', action:
-      type: Battle.Action.ScheduleTurn
-      source: @enemy
-      enemies: [@avatar]
-      executeIn: 0
+    _.each @enemies, (enemy) =>
+      GameEvent.trigger 'enqueue', action:
+        type: Battle.Action.ScheduleTurn
+        source: enemy
+        enemies: @avatars
+        executeIn: 0
 
   destroy: ->
     _.each @events(), (handler, eventName) ->
@@ -47,15 +49,15 @@ class Battle.Screen
 
   drawBackground: (context) ->
     context.save()
-    context.fillStyle = "#afa"
+    context.fillStyle = "#9c9"
     context.fillRect 0, 0, @width, @height
     context.restore()
 
   drawParty: (context) ->
-    @avatar.draw context
+    _.each @avatars, (avatar) -> avatar.draw(context)
 
   drawEnemies: (context) ->
-    @enemy.draw context
+    _.each @enemies, (enemy) -> enemy.draw(context)
 
   drawStatusDisplay: (context) ->
     @statusDisplay.draw context
@@ -92,7 +94,6 @@ class Battle.Screen
   enqueue: (event) =>
     action = event.attributes.action
     action.executeAt = @time + action.executeIn
-
     @actionList.push new action.type(action)
 
   onkeydown: (event) ->

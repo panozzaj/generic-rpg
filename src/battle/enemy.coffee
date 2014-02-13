@@ -24,6 +24,7 @@ class Battle.Enemy
   takeDamage: (damage) ->
     @stats.hp.current -= damage
     if @stats.hp.current <= 0
+      @stats.hp.current = 0
       GameEvent.trigger 'die', enemy: @
 
   alive: ->

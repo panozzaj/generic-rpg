@@ -10,6 +10,7 @@ class Battle.Action.Menu extends Battle.Action
       type: selectedAction
       source: @source
       target: @enemies[0]
+      enemies: @enemies
       executeIn: 3
 
   draw: (context) ->

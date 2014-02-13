@@ -1,7 +1,5 @@
 class Battle.Action.ScheduleTurn extends Battle.Action
   execute: ->
-    GameEvent.trigger 'finishedAction'
-
     switch @source.constructor.name
       when "Avatar"
         GameEvent.trigger 'enqueue', action:
@@ -15,4 +13,7 @@ class Battle.Action.ScheduleTurn extends Battle.Action
           type: Battle.Action.Attack
           source: @source
           target: @enemies[0]
+          enemies: @enemies
           executeIn: 10
+
+    GameEvent.trigger 'finishedAction'
