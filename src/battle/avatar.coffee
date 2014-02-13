@@ -21,10 +21,13 @@ class Battle.Avatar
     # TODO
 
   draw: (context) ->
-    context.drawImage @sprite, @position.x, @position.y, @size.width, @size.height
+    if @alive()
+      context.drawImage @sprite, @position.x, @position.y, @size.width, @size.height
 
   takeDamage: (damage) ->
     @stats.hp.current -= damage
+    if @stats.hp.current <= 0
+      GameEvent.trigger 'die', enemy: @
 
   alive: ->
     @stats.hp.current > 0

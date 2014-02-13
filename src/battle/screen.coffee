@@ -67,19 +67,20 @@ class Battle.Screen
     if @currentAction
       @currentAction.update?()
     else
-      console.log "@time: #{@time}" if @time < 100
+      #console.log "@time: #{@time}" if @time < 100
       action = _.find @actionList, (action) =>
         action.executeAt == @time
 
-      if action
-        if action.source.alive()
-          @currentAction = action
-          console.log "Executing ", @currentAction
-          @currentAction.execute()
+      unless @victoryDialog        # don't do actions if battle is over
+        if action                  # an action this time tick?
+          if action.source.alive() # only do if person is alive
+            @currentAction = action
+            #console.log "Executing ", @currentAction
+            @currentAction.execute()
+          else
+            @dequeue(action)
         else
-          @dequeue(action)
-      else
-        @time += 1
+          @time += 1
 
   finishedAction: (event) =>
     @dequeue(@currentAction)
@@ -97,4 +98,8 @@ class Battle.Screen
   onkeydown: (event) ->
 
   handleDeath: (event) =>
-    @victoryDialog = new Battle.VictoryDialog @
+    switch event.attributes.enemy.constructor.name
+      when 'Avatar'
+        @victoryDialog = new Battle.VictoryDialog text: "Failure!"
+      when 'Enemy'
+        @victoryDialog = new Battle.VictoryDialog text: "Victory!"
