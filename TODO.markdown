@@ -1,27 +1,19 @@
 Things that we can work on:
 
  - battle mode
-  - one player vs one enemy battle
-   - refactor Battle.Action
-    - Battle.Action.Menu
-    - Battle.Action.Attack
-    - Battle.Action.Spell
-    - etc
-   - enemy attacks back
-   - basic turn management
-   - picking next person to act based on speed
-   - sophisticated AI that just attacks every turn
-   - showing who is next in a list
-  - general info on the battle (HP display, etc.)
+   - Battle.Action.Spell
 
   - separate the concept of a particular battle from battle.screen
    - put various things on battle instead of screen (which is mostly a container)
+   - store results of the battle on an outside object
+     so that battle results persist (HP loss, exp., etc.)
 
   - more people in the battle
    - boxes attacking other boxes
 
   - enter battle animation
 
+  - showing who is next in a list?
   - spritifying at some point
 
  - NPC box that when you walk up to it, it opens a quick chat dialog
@@ -63,4 +55,3 @@ Things that we can work on:
 
  Would be really sweet list
   - NPCs talk to each other with little speech bubbles, which you can see
-
