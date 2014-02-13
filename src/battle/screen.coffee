@@ -13,7 +13,10 @@ class Battle.Screen
     @height = game.canvas.height
 
     @avatars = [new Battle.Avatar]
-    @enemies = [new Battle.Enemy]
+    @enemies = [
+      new Battle.Enemy(position: { x: 128, y: 128 }),
+      new Battle.Enemy(position: { x: 128, y: 256 })
+    ]
     @statusDisplay = new Battle.StatusDisplay @avatars
 
     @time = 0
@@ -101,6 +104,8 @@ class Battle.Screen
   handleDeath: (event) =>
     switch event.attributes.enemy.constructor.name
       when 'Avatar'
-        @victoryDialog = new Battle.VictoryDialog text: "Failure!"
+        if _.every(@avatars, (avatar) -> (!avatar.alive()))
+          @victoryDialog = new Battle.VictoryDialog text: "Failure!"
       when 'Enemy'
-        @victoryDialog = new Battle.VictoryDialog text: "Victory!"
+        if _.every(@enemies, (enemy) -> (!enemy.alive()))
+          @victoryDialog = new Battle.VictoryDialog text: "Victory!"

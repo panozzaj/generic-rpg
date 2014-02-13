@@ -1,9 +1,5 @@
 class Battle.Enemy
-  constructor: ->
-    @position =
-      x: 256
-      y: 256
-
+  constructor: ({ @position }) ->
     @size =
       width: 64
       height: 64
