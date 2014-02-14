@@ -1,9 +1,12 @@
 class Battle.Menu
 
-  constructor: ({ @callback }) ->
+  constructor: ({ @callback, @avatar }) ->
     @width = 200
     @height = 200
-    @actions = ['Fight', 'Magic', 'Defend', 'Run']
+    @actionDescriptions = [
+      { name: 'Fight', type: Battle.Action.Attack },
+      { name: 'Run',   type: Battle.Action.Run    },
+    ]
     @currentAction = 0
     @cursor = new Image()
     @cursor.src = "images/cursor.png"
@@ -14,9 +17,7 @@ class Battle.Menu
     @callback @actionType()
 
   actionType: ->
-    switch @currentAction
-      when 0 then Battle.Action.Attack
-      when 3 then Battle.Action.Run
+    @actionDescriptions[@currentAction].type
 
   draw: (context) ->
     @drawBackground context
@@ -33,8 +34,8 @@ class Battle.Menu
     context.save()
     context.fillStyle = 'white'
     context.font = '30px manaspaceregular'
-    _.each @actions, (action, i) ->
-      context.fillText action, 80, 400 + 40 * i
+    _.each @actionDescriptions, (actionDescription, i) ->
+      context.fillText actionDescription.name, 80, 400 + 40 * i
     context.restore()
 
   drawCursor: (context) ->
@@ -52,7 +53,8 @@ class Battle.Menu
         @performCurrentAction()
 
   moveCursor: (offset) ->
-    @currentAction = (@currentAction + @actions.length + offset) % @actions.length
+    @currentAction = (@currentAction + @actionDescriptions.length + offset) % @actionDescriptions.length
 
   performCurrentAction: ->
     @destroy()
+

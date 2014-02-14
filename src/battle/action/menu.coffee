@@ -1,10 +1,12 @@
 class Battle.Action.Menu extends Battle.Action
   execute: ->
-    @menu = new Battle.Menu callback: @pick
+    @menu = new Battle.Menu
+      callback: @pick
+      avatar: @source
 
   update: ->
 
-  pick: (selectedAction) =>
+  pick: (selectedAction, target) =>
     GameEvent.trigger 'finishedAction'
     GameEvent.trigger 'enqueue', action:
       type: selectedAction
@@ -15,3 +17,4 @@ class Battle.Action.Menu extends Battle.Action
 
   draw: (context) ->
     @menu.draw context
+

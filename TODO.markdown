@@ -1,7 +1,16 @@
 Things that we can work on:
 
  - battle mode
-   - Battle.Action.Spell
+
+  - ability to pick enemy to target with attacks, magic, etc.
+   - can select own avatar for attacking
+   - probably shouldn't be able to select a person that has been KO'ed
+    - unless we are casting revive?
+   - Ability to go back when you select something
+
+  - autoselect a different person to attack when the person you were going to attack is swooned
+
+  - Battle.Action.Spell (has submenu)
 
   - separate the concept of a particular battle from battle.screen
    - put various things on battle instead of screen (which is mostly a container)
@@ -55,3 +64,4 @@ Things that we can work on:
 
  Would be really sweet list
   - NPCs talk to each other with little speech bubbles, which you can see
+

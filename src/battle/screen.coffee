@@ -14,12 +14,12 @@ class Battle.Screen
         name: "Simba"
         position:
           x: 512
-          y: 256
+          y: 128
       new Battle.Avatar
         name: "Rafiki"
         position:
           x: 512
-          y: 128
+          y: 256
     ]
     @enemies = [
       new Battle.Enemy(position: { x: 128, y: 128 })
