@@ -55,6 +55,5 @@ class Battle.Menu
     @currentAction = (@currentAction + @actionDescriptions.length + offset) % @actionDescriptions.length
 
   performCurrentAction: ->
-    @callback @actionType()
     @destroy()
-
+    @callback @actionType()

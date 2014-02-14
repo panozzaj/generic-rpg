@@ -1,4 +1,6 @@
 class Battle.Action.Attack extends Battle.Action
+  @needsTarget: true
+
   execute: ->
     @effectiveDamage = Math.round(@source.stats.damage * (Math.random() / 2 + 0.75))
     @target.takeDamage @effectiveDamage

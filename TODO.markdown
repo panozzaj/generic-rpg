@@ -1,19 +1,21 @@
+
 Things that we can work on:
 
  - battle mode
 
-  - enemies are passed in various places that they don't necessarily need to be
-   - consider passing in the battle to the action and querying on the battle as needed?
+  - Battle.Action.Spell (has submenu)
+  - basic magic menu
+   - has submenu
+    - can go back to the previous thing
 
-  - ability to pick enemy to target with attacks, magic, etc.
-   - can select own avatar for attacking
+# - ability to pick enemy to target with attacks, magic, etc.
+#  - can select own avatar for attacking
+   - back on picking enemy ('x')
    - probably shouldn't be able to select a person that has been KO'ed
     - unless we are casting revive?
    - Ability to go back when you select something
 
   - autoselect a different person to attack when the person you were going to attack is swooned
-
-  - Battle.Action.Spell (has submenu)
 
   - separate the concept of a particular battle from battle.screen
    - put various things on battle instead of screen (which is mostly a container)
@@ -27,6 +29,8 @@ Things that we can work on:
 
   - showing who is next in a list?
   - spritifying at some point
+
+  - run is probabilistic
 
  - NPC box that when you walk up to it, it opens a quick chat dialog
   - Move NPC around
@@ -68,3 +72,4 @@ Things that we can work on:
  Would be really sweet list
   - NPCs talk to each other with little speech bubbles, which you can see
   - bull monster that only attacks players with red clothes
+
