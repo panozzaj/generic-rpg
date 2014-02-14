@@ -3,7 +3,7 @@ class Battle.Action.Manager
     enqueue: @enqueue
     finishedAction: @finishedAction
 
-  constructor: ->
+  constructor: (@battle) ->
     _.each @events(), (handler, eventName) ->
       GameEvent.on eventName, handler
 
@@ -36,6 +36,7 @@ class Battle.Action.Manager
   enqueue: (event) =>
     action = event.attributes.action
     action.executeAt = @time + action.executeIn
+    action.battle = @battle
     @actionList.push new action.type(action)
 
   finishedAction: (event) =>

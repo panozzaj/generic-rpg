@@ -9,41 +9,13 @@ class Battle.Screen
     @width = game.canvas.width
     @height = game.canvas.height
 
-    @avatars = [
-      new Battle.Avatar
-        name: "Simba"
-        position:
-          x: 512
-          y: 128
-      new Battle.Avatar
-        name: "Rafiki"
-        position:
-          x: 512
-          y: 256
-    ]
-    @monsters = [
-      new Battle.Enemy(position: { x: 128, y: 128 })
-      new Battle.Enemy(position: { x: 128, y: 256 })
-    ]
-    @statusDisplay = new Battle.StatusDisplay @avatars
+    @battle = new Battle.Data
 
-    @actionManager = new Battle.Action.Manager
+    @actionManager = new Battle.Action.Manager @battle
 
-    _.each @avatars, (avatar) =>
-      GameEvent.trigger 'enqueue', action:
-        type: Battle.Action.ScheduleTurn
-        source: avatar
-        allies: @avatars
-        enemies: @monsters
-        executeIn: 0
+    @statusDisplay = new Battle.StatusDisplay @battle.avatars
 
-    _.each @monsters, (enemy) =>
-      GameEvent.trigger 'enqueue', action:
-        type: Battle.Action.ScheduleTurn
-        source: enemy
-        allies: @monsters
-        enemies: @avatars
-        executeIn: 0
+    @battle.start()
 
   destroy: ->
     _.each @events(), (handler, eventName) ->
@@ -66,10 +38,10 @@ class Battle.Screen
     context.restore()
 
   drawParty: (context) ->
-    _.each @avatars, (avatar) -> avatar.draw(context)
+    _.each @battle.avatars, (avatar) -> avatar.draw(context)
 
   drawEnemies: (context) ->
-    _.each @monsters, (enemy) -> enemy.draw(context)
+    _.each @battle.monsters, (enemy) -> enemy.draw(context)
 
   drawStatusDisplay: (context) ->
     @statusDisplay.draw context
@@ -85,12 +57,12 @@ class Battle.Screen
   handleDeath: (event) =>
     switch event.attributes.enemy.constructor.name
       when 'Avatar'
-        if _.every(@avatars, (avatar) -> (!avatar.alive()))
+        if _.every(@battle.avatars, (avatar) -> (!avatar.alive()))
           @victoryDialog = new Battle.VictoryDialog text: "Failure!"
           @actionManager.destroy()
           @actionManager = null
       when 'Enemy'
-        if _.every(@monsters, (monster) -> (!monster.alive()))
+        if _.every(@battle.monsters, (monster) -> (!monster.alive()))
           @victoryDialog = new Battle.VictoryDialog text: "Victory!"
           @actionManager.destroy()
           @actionManager = null

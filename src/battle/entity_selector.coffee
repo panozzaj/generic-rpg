@@ -49,4 +49,3 @@ class Battle.EntitySelector
   selectEntity: ->
     @callback target: @selectedSide[@selectedIndex]
     @destroy()
-

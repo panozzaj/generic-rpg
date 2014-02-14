@@ -5,17 +5,13 @@ class Battle.Action.ScheduleTurn extends Battle.Action
         GameEvent.trigger 'enqueue', action:
           type: Battle.Action.Menu
           source: @source
-          allies: @allies
-          enemies: @enemies
           executeIn: 10
 
       when "Enemy"
         GameEvent.trigger 'enqueue', action:
           type: Battle.Action.Attack
           source: @source
-          target: _.sample @enemies
-          allies: @allies
-          enemies: @enemies
+          target: _.sample @battle.avatars
           executeIn: 10
 
     GameEvent.trigger 'finishedAction'

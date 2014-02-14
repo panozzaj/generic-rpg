@@ -67,4 +67,4 @@ Things that we can work on:
 
  Would be really sweet list
   - NPCs talk to each other with little speech bubbles, which you can see
-
+  - bull monster that only attacks players with red clothes

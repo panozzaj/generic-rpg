@@ -5,8 +5,8 @@ class Battle.Action.Menu extends Battle.Action
     #   avatar: @source
 
     @entitySelector = new Battle.EntitySelector
-      enemies: @enemies
-      allies: @allies
+      enemies: @battle.monsters
+      allies: @battle.avatars
       callback: @targetChosen
 
   update: ->
@@ -16,9 +16,7 @@ class Battle.Action.Menu extends Battle.Action
     GameEvent.trigger 'enqueue', action:
       type: selectedAction
       source: @source
-      target: _.sample @enemies
-      allies: @allies
-      enemies: @enemies
+      target: _.sample @battle.monsters
       executeIn: 3
 
   targetChosen: ({ target }) =>
@@ -27,11 +25,8 @@ class Battle.Action.Menu extends Battle.Action
       type: Battle.Action.Attack
       source: @source
       target: target
-      allies: @allies
-      enemies: @enemies
       executeIn: 3
 
   draw: (context) ->
     # @menu.draw context
     @entitySelector.draw context
-
