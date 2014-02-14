@@ -14,7 +14,6 @@ class Battle.Menu
 
   destroy: ->
     GameEvent.trigger 'popResponder', responder: @
-    @callback @actionType()
 
   actionType: ->
     @actionDescriptions[@currentAction].type
@@ -56,5 +55,6 @@ class Battle.Menu
     @currentAction = (@currentAction + @actionDescriptions.length + offset) % @actionDescriptions.length
 
   performCurrentAction: ->
+    @callback @actionType()
     @destroy()
 

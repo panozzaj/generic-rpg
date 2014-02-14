@@ -1,11 +1,10 @@
 class Battle.EntitySelector
-  constructor: ({ @enemyPositions, @allyPositions }) ->
+  constructor: ({ @enemies, @allies, @callback }) ->
     @cursor = new Image()
     @cursor.src = "images/cursor.png"
 
-    @pointingAt = 'enemies'
-
     @selectedIndex = 0
+    @selectedSide = @enemies
 
     GameEvent.trigger 'pushResponder', responder: @
 
@@ -17,11 +16,11 @@ class Battle.EntitySelector
     # picked all enemies
 
   draw: (context) ->
-    position = @selectedSide()[@selectedIndex]
-    context.drawImage @cursor, position.x - 40, position.y + 20, 30, 30
+    entity = @selectedSide[@selectedIndex]
+    context.drawImage @cursor, entity.position.x - 40, entity.position.y + 20, 30, 30
 
   selectedSide: ->
-    if @pointingAt == 'enemies' then @enemyPositions else @allyPositions
+    if @pointingAt == 'enemies' then @enemies else @allies
 
   onkeydown: (event) ->
     switch event.which
@@ -34,16 +33,20 @@ class Battle.EntitySelector
       when 37 # left
         @moveLeft()
       when 90 # z
-        @performCurrentAction()
+        @selectEntity()
 
   moveCursor: (offset) ->
-    @selectedIndex = (@selectedIndex + @selectedSide().length + offset) % @selectedSide().length
+    @selectedIndex = (@selectedIndex + @selectedSide.length + offset) % @selectedSide.length
 
   moveRight: ->
-    @pointingAt = 'allies'
+    @selectedSide = @allies
     @selectedIndex = 0
 
   moveLeft: ->
-    @pointingAt = 'enemies'
+    @selectedSide = @enemies
     @selectedIndex = 0
+
+  selectEntity: ->
+    @callback target: @selectedSide[@selectedIndex]
+    @destroy()
 

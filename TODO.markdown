@@ -2,6 +2,9 @@ Things that we can work on:
 
  - battle mode
 
+  - enemies are passed in various places that they don't necessarily need to be
+   - consider passing in the battle to the action and querying on the battle as needed?
+
   - ability to pick enemy to target with attacks, magic, etc.
    - can select own avatar for attacking
    - probably shouldn't be able to select a person that has been KO'ed
