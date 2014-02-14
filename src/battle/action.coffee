@@ -1,2 +1,3 @@
 class Battle.Action
-  constructor: ({ @executeAt, @source, @target, @enemies }) ->
+  constructor: ({ @executeAt, @source, @target, @allies, @enemies }) ->
+

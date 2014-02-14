@@ -21,7 +21,7 @@ class Battle.Screen
           x: 512
           y: 256
     ]
-    @enemies = [
+    @monsters = [
       new Battle.Enemy(position: { x: 128, y: 128 })
       new Battle.Enemy(position: { x: 128, y: 256 })
     ]
@@ -33,13 +33,15 @@ class Battle.Screen
       GameEvent.trigger 'enqueue', action:
         type: Battle.Action.ScheduleTurn
         source: avatar
-        enemies: @enemies
+        allies: @avatars
+        enemies: @monsters
         executeIn: 0
 
-    _.each @enemies, (enemy) =>
+    _.each @monsters, (enemy) =>
       GameEvent.trigger 'enqueue', action:
         type: Battle.Action.ScheduleTurn
         source: enemy
+        allies: @monsters
         enemies: @avatars
         executeIn: 0
 
@@ -67,7 +69,7 @@ class Battle.Screen
     _.each @avatars, (avatar) -> avatar.draw(context)
 
   drawEnemies: (context) ->
-    _.each @enemies, (enemy) -> enemy.draw(context)
+    _.each @monsters, (enemy) -> enemy.draw(context)
 
   drawStatusDisplay: (context) ->
     @statusDisplay.draw context
@@ -88,7 +90,7 @@ class Battle.Screen
           @actionManager.destroy()
           @actionManager = null
       when 'Enemy'
-        if _.every(@enemies, (enemy) -> (!enemy.alive()))
+        if _.every(@monsters, (monster) -> (!monster.alive()))
           @victoryDialog = new Battle.VictoryDialog text: "Victory!"
           @actionManager.destroy()
           @actionManager = null

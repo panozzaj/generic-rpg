@@ -1,8 +1,12 @@
 class Battle.Action.Menu extends Battle.Action
   execute: ->
-    @menu = new Battle.Menu
-      callback: @pick
-      avatar: @source
+    # @menu = new Battle.Menu
+    #   callback: @pick
+    #   avatar: @source
+
+    @entitySelector = new Battle.EntitySelector
+      enemyPositions: _.map @enemies, (enemy) -> enemy.position
+      allyPositions: _.map @allies, (ally) -> ally.position
 
   update: ->
 
@@ -16,5 +20,5 @@ class Battle.Action.Menu extends Battle.Action
       executeIn: 3
 
   draw: (context) ->
-    @menu.draw context
-
+    # @menu.draw context
+    @entitySelector.draw context
