@@ -1,14 +1,12 @@
-class Battle.Menu
-
-  constructor: ({ @callback, @avatar }) ->
-    @width = 200
-    @height = 200
-    @actionDescriptions = [
-      { name: 'Fight', type: Battle.Action.Attack }
-      { name: 'Spell', type: Battle.Action.Spell  }
-      { name: 'Run',   type: Battle.Action.Run    }
-    ]
-    @currentAction = 0
+class Battle.Submenu
+  constructor: ({ @callback, @spells }) ->
+    @pos =
+      x: 250
+      y: 350
+    @size =
+      width: 500
+      height: 200
+    @currentSpell = 0
     @cursor = new Image()
     @cursor.src = "images/cursor.png"
     GameEvent.trigger 'pushResponder', responder: @
@@ -17,7 +15,7 @@ class Battle.Menu
     GameEvent.trigger 'popResponder', responder: @
 
   actionType: ->
-    @actionDescriptions[@currentAction].type
+    @spells[@currentSpell].type
 
   draw: (context) ->
     @drawBackground context
@@ -27,19 +25,19 @@ class Battle.Menu
   drawBackground: (context) ->
     context.save()
     context.fillStyle = "#00f"
-    context.fillRect 50, 350, @width, @height
+    context.fillRect @pos.x, @pos.y, @size.width, @size.height
     context.restore()
 
   drawActions: (context) ->
     context.save()
     context.fillStyle = 'white'
     context.font = '30px manaspaceregular'
-    _.each @actionDescriptions, (actionDescription, i) ->
-      context.fillText actionDescription.name, 80, 400 + 40 * i
+    _.each @spells, (spell, i) =>
+      context.fillText spell, @pos.x + 30, @pos.y + 50 + 40 * i
     context.restore()
 
   drawCursor: (context) ->
-    context.drawImage @cursor, 45, 380 + 40 * @currentAction, 30, 30
+    context.drawImage @cursor, @pos.x - 10, @pos.y + 30 + 40 * @currentSpell, 30, 30
 
   update: ->
 
@@ -49,12 +47,17 @@ class Battle.Menu
         @moveCursor -1
       when 40 # down
         @moveCursor 1
+      #when 37 # left
+      #  @moveCursor 1
       when 90 # z
-        @performCurrentAction()
+        @performcurrentSpell()
+      when 88 # x
+        console.log 'go back to parent menu'
 
   moveCursor: (offset) ->
-    @currentAction = (@currentAction + @actionDescriptions.length + offset) % @actionDescriptions.length
+    @currentSpell = (@currentSpell + @spells.length + offset) % @spells.length
 
-  performCurrentAction: ->
+  performcurrentSpell: ->
     @destroy()
     @callback @actionType()
+

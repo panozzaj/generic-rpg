@@ -7,7 +7,12 @@ class Battle.Action.Menu extends Battle.Action
   update: ->
 
   pickedMainMenuOption: (@selectedAction) =>
-    if @selectedAction.needsTarget
+    if @selectedAction.needsSubtype
+      spells = @source.knownSpells()
+      @submenu = new Battle.Submenu
+        spells: spells
+        callback: @subActionChosen
+    else if @selectedAction.needsTarget
       @entitySelector = new Battle.EntitySelector
         enemies: @battle.monsters
         allies: @battle.avatars
@@ -27,23 +32,27 @@ class Battle.Action.Menu extends Battle.Action
       target: target
       executeIn: 3
 
-    # Attack
-    #   needsSubtype: false
-    #   needsTarget: true
-    # Magic
-    #   needsSubtype: true
-    #   needsTarget: true
-    # Item
-    #   needsSubtype: true
-    #   needsTarget: true
-    # Defend
-    #   needsSubtype: false
-    #   needsTarget: false
-    # Run
-    #   needsSubtype: false
-    #   needsTarget: false
+  subActionChosen: ({ subaction }) ->
+    console.log "subaction: #{subaction}"
 
   draw: (context) ->
     @menu?.draw context
+    @submenu?.draw context
     @entitySelector?.draw context
+
+  # Attack
+  #   needsSubtype: false
+  #   needsTarget: true
+  # Magic
+  #   needsSubtype: true
+  #   needsTarget: true
+  # Item
+  #   needsSubtype: true
+  #   needsTarget: true
+  # Defend
+  #   needsSubtype: false
+  #   needsTarget: false
+  # Run
+  #   needsSubtype: false
+  #   needsTarget: false
 

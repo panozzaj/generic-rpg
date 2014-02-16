@@ -11,6 +11,7 @@ class Battle.Avatar
         max: 150,
         current: 150
       damage: 10
+      magic: 20
     }
 
   update: ->
@@ -28,3 +29,11 @@ class Battle.Avatar
 
   alive: ->
     @stats.hp.current > 0
+
+  knownSpells: ->
+    [
+      'Fire'
+      'Fire 2'
+      'Meteo'
+    ]
+
