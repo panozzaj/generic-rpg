@@ -14,9 +14,6 @@ class Battle.Submenu
   destroy: ->
     GameEvent.trigger 'popResponder', responder: @
 
-  actionType: ->
-    @spells[@currentSpell].type
-
   draw: (context) ->
     @drawBackground context
     @drawActions context
@@ -50,14 +47,13 @@ class Battle.Submenu
       #when 37 # left
       #  @moveCursor 1
       when 90 # z
-        @performcurrentSpell()
+        @performCurrentSpell()
       when 88 # x
         console.log 'go back to parent menu'
 
   moveCursor: (offset) ->
     @currentSpell = (@currentSpell + @spells.length + offset) % @spells.length
 
-  performcurrentSpell: ->
+  performCurrentSpell: ->
     @destroy()
-    @callback @actionType()
-
+    @callback subaction: @spells[@currentSpell]

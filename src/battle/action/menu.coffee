@@ -11,7 +11,7 @@ class Battle.Action.Menu extends Battle.Action
       spells = @source.knownSpells()
       @submenu = new Battle.Submenu
         spells: spells
-        callback: @subActionChosen
+        callback: @subactionChosen
     else if @selectedAction.needsTarget
       @entitySelector = new Battle.EntitySelector
         enemies: @battle.monsters
@@ -28,12 +28,16 @@ class Battle.Action.Menu extends Battle.Action
     GameEvent.trigger 'finishedAction'
     GameEvent.trigger 'enqueue', action:
       type: @selectedAction
+      subaction: @subaction
       source: @source
       target: target
       executeIn: 3
 
-  subActionChosen: ({ subaction }) ->
-    console.log "subaction: #{subaction}"
+  subactionChosen: ({ @subaction }) =>
+    @entitySelector = new Battle.EntitySelector
+      enemies: @battle.monsters
+      allies: @battle.avatars
+      callback: @targetChosen
 
   draw: (context) ->
     @menu?.draw context
@@ -55,4 +59,3 @@ class Battle.Action.Menu extends Battle.Action
   # Run
   #   needsSubtype: false
   #   needsTarget: false
-

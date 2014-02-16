@@ -26,7 +26,7 @@ class Battle.Action.Manager
       if action                  # an action this time tick?
         if action.source.alive() # only do if person is alive
           @currentAction = action
-          #console.log "Executing ", @currentAction
+          console.log "Executing ", @currentAction
           @currentAction.execute()
         else
           @dequeue action

@@ -36,4 +36,3 @@ class Battle.Avatar
       'Fire 2'
       'Meteo'
     ]
-
