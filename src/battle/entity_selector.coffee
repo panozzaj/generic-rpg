@@ -1,5 +1,5 @@
 class Battle.EntitySelector
-  constructor: ({ @enemies, @allies, @callback }) ->
+  constructor: ({ @enemies, @allies, @select, @cancel }) ->
     @cursor = new Image()
     @cursor.src = "images/cursor.png"
 
@@ -32,8 +32,10 @@ class Battle.EntitySelector
         @moveRight()
       when 37 # left
         @moveLeft()
+      when 88 # x
+        @cancel @
       when 90 # z
-        @selectEntity()
+        @select target: @selectedSide[@selectedIndex]
 
   moveCursor: (offset) ->
     @selectedIndex = (@selectedIndex + @selectedSide.length + offset) % @selectedSide.length
@@ -45,7 +47,3 @@ class Battle.EntitySelector
   moveLeft: ->
     @selectedSide = @enemies
     @selectedIndex = 0
-
-  selectEntity: ->
-    @callback target: @selectedSide[@selectedIndex]
-    @destroy()

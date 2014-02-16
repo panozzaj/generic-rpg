@@ -1,5 +1,5 @@
 class Battle.Submenu
-  constructor: ({ @callback, @spells }) ->
+  constructor: ({ @spells, @select, @cancel }) ->
     @pos =
       x: 250
       y: 350
@@ -47,13 +47,9 @@ class Battle.Submenu
       #when 37 # left
       #  @moveCursor 1
       when 90 # z
-        @performCurrentSpell()
+        @select subaction: @spells[@currentSpell]
       when 88 # x
-        console.log 'go back to parent menu'
+        @cancel @
 
   moveCursor: (offset) ->
     @currentSpell = (@currentSpell + @spells.length + offset) % @spells.length
-
-  performCurrentSpell: ->
-    @destroy()
-    @callback subaction: @spells[@currentSpell]

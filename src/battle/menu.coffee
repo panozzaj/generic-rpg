@@ -1,6 +1,6 @@
 class Battle.Menu
 
-  constructor: ({ @callback, @avatar }) ->
+  constructor: ({ @avatar, @select, @cancel }) ->
     @width = 200
     @height = 200
     @actionDescriptions = [
@@ -50,11 +50,7 @@ class Battle.Menu
       when 40 # down
         @moveCursor 1
       when 90 # z
-        @performCurrentAction()
+        @select selectedAction: @actionType()
 
   moveCursor: (offset) ->
     @currentAction = (@currentAction + @actionDescriptions.length + offset) % @actionDescriptions.length
-
-  performCurrentAction: ->
-    @destroy()
-    @callback @actionType()
