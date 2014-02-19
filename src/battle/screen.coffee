@@ -2,14 +2,14 @@ class Battle.Screen
   events: ->
     die: @handleDeath
 
-  constructor: (game) ->
+  constructor: ({ game, party }) ->
     _.each @events(), (handler, eventName) ->
       GameEvent.on eventName, handler
 
     @width = game.canvas.width
     @height = game.canvas.height
 
-    @battle = new Battle.Data
+    @battle = new Battle.Data party: party
 
     @actionManager = new Battle.Action.Manager @battle
 
@@ -66,3 +66,4 @@ class Battle.Screen
           @victoryDialog = new Battle.VictoryDialog text: "Victory!"
           @actionManager.destroy()
           @actionManager = null
+

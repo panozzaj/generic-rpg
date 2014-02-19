@@ -1,17 +1,11 @@
 class Battle.Data
-  constructor: ->
-    @avatars = [
+  constructor: ({ @party }) ->
+    @avatars = _.map @party, (hero, index) ->
       new Battle.Avatar
-        name: "Simba"
+        hero: hero
         position:
           x: 512
-          y: 128
-      new Battle.Avatar
-        name: "Rafiki"
-        position:
-          x: 512
-          y: 256
-    ]
+          y: 128 + 128 * index
     @monsters = [
       new Battle.Enemy(position: { x: 128, y: 128 })
       new Battle.Enemy(position: { x: 128, y: 256 })

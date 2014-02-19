@@ -12,6 +12,11 @@ class Game
     @mapScreen = new Map.Screen @
     @screenManager.push @mapScreen
 
+    @party = [
+      new Model.Hero(name: 'Simba'),
+      new Model.Hero(name: 'Rafiki')
+    ]
+
     GameEvent.on 'battle', @handleBattle
     GameEvent.on 'popScreen', =>
       @screenManager.pop()
@@ -38,9 +43,11 @@ class Game
     @responderManager.onkeydown(event)
 
   handleBattle: (e) =>
-    @screenManager.push(new Battle.Screen @)
+    @screenManager.push(new Battle.Screen game: @, party: @party)
 
 # Namespace creation / setup
 # TODO: Move this somewhere more intelligent
 Battle = {}
 Map = {}
+Model = {}
+

@@ -3,6 +3,11 @@ Things that we can work on:
 
  - battle mode
 
+  - separate the concept of a particular battle from battle.screen
+   - put various things on battle instead of screen (which is mostly a container)
+   - store results of the battle on an outside object
+     so that battle results persist (HP loss, exp., etc.)
+
   - Battle.Action.Spell
     - make spells have different base damage
     - announce what spell is being cast
@@ -23,11 +28,6 @@ Things that we can work on:
    - abstract dialog/menu out a little
    - moving subaction off of the action superclass
    - add a border to dialogs/menus
-
-  - separate the concept of a particular battle from battle.screen
-   - put various things on battle instead of screen (which is mostly a container)
-   - store results of the battle on an outside object
-     so that battle results persist (HP loss, exp., etc.)
 
   - enter battle animation
 
@@ -78,3 +78,4 @@ Things that we can work on:
  Would be really sweet list
   - NPCs talk to each other with little speech bubbles, which you can see
   - bull monster that only attacks players with red clothes
+

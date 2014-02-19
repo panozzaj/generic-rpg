@@ -1,18 +1,12 @@
 class Battle.Avatar
-  constructor: ({ @name, @position }) ->
+  constructor: ({ @position, @hero }) ->
     @size =
       width: 64
       height: 64
+    { @name, @stats } = @hero
 
     @sprite = new Image()
     @sprite.src = "images/cecil-left.png"
-    @stats = {
-      hp:
-        max: 150,
-        current: 150
-      damage: 10
-      magic: 20
-    }
 
   update: ->
     # TODO
@@ -36,3 +30,4 @@ class Battle.Avatar
       'Fire 2'
       'Meteo'
     ]
+
