@@ -3,20 +3,13 @@ Things that we can work on:
 
  - battle mode
 
-# - ability to pick enemy to target with attacks, magic, etc.
-#  - can select own avatar for attacking
-
-   - probably shouldn't be able to select a person that has been KO'ed
-    - unless we are casting revive?
-
-  - autoselect a different person to attack when the person you were going to attack is swooned
-
   - Battle.Action.Spell
     - make spells have different base damage
     - announce what spell is being cast
     - show MP cost next to name
     - subtract from MP pool
     - grey out spells that we don't have MP for
+
   - Battle.Action.Attack
     - make weapons have different base damage?
 
@@ -83,5 +76,4 @@ Things that we can work on:
  Would be really sweet list
   - NPCs talk to each other with little speech bubbles, which you can see
   - bull monster that only attacks players with red clothes
-
 

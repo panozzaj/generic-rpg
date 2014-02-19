@@ -2,8 +2,9 @@ class Battle.Action.Attack extends Battle.Action
   @needsTarget: true
 
   execute: ->
+    @retarget() unless @target.alive()
+
     @effectiveDamage = Math.round(@source.stats.damage * (Math.random() / 2 + 0.75))
-    @target.takeDamage @effectiveDamage
 
     @damageDisplayTTL = 60
 
@@ -11,6 +12,7 @@ class Battle.Action.Attack extends Battle.Action
     if @damageDisplayTTL
       @damageDisplayTTL -= 1
       if @damageDisplayTTL <= 0
+        @target.takeDamage @effectiveDamage
         GameEvent.trigger 'finishedAction'
         GameEvent.trigger 'enqueue', action:
           type: Battle.Action.ScheduleTurn
@@ -27,3 +29,7 @@ class Battle.Action.Attack extends Battle.Action
         @target.position.x + 64,
         @target.position.y - 95 + @damageDisplayTTL
       context.restore()
+
+  retarget: ->
+    @target = _.sample \
+      _.filter @battle.monsters, (monster) -> monster.alive()
