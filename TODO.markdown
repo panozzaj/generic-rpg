@@ -34,7 +34,9 @@ Things that we can work on:
   - showing who is next in a list?
   - spritifying at some point
 
-  - run is probabilistic
+  - make run probabilistically succeed
+
+ - refactor drawing dialogs, menus, etc. to extend from a common class
 
  - NPC box that when you walk up to it, it opens a quick chat dialog
   - Move NPC around
@@ -76,4 +78,3 @@ Things that we can work on:
  Would be really sweet list
   - NPCs talk to each other with little speech bubbles, which you can see
   - bull monster that only attacks players with red clothes
-

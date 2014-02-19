@@ -1,4 +1,4 @@
-class Map
+class Map.Map
   constructor: (mapScreen) ->
     @tileString = """
       GGGGGGGGGG

@@ -1,17 +1,17 @@
-class MapScreen
+class Map.Screen
   constructor: (game) ->
     @tileSize = game.tileSize
     @width = game.canvas.width
     @height = game.canvas.height
 
-    @map = new Map @
+    @map = new Map.Map @
 
     @objects = []
-    @avatar = new Avatar @
+    @avatar = new Map.Avatar @
     @objects.push(@avatar)
-    @npc = new NPC @
+    @npc = new Map.NPC @
     @objects.push(@npc)
-    @dialog = new Dialog @
+    @dialog = new Map.Dialog @
     @objects.push(@dialog)
 
     GameEvent.trigger 'pushResponder', responder: @avatar

@@ -1,4 +1,4 @@
-class NPC
+class Map.NPC
 
   constructor: (game) ->
     @tileSize = game.tileSize

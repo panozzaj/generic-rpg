@@ -1,4 +1,4 @@
-class Avatar
+class Map.Avatar
 
   constructor: (game) ->
     @tileSize = game.tileSize

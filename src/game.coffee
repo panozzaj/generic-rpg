@@ -9,7 +9,7 @@ class Game
 
     @tileSize = 64
 
-    @mapScreen = new MapScreen @
+    @mapScreen = new Map.Screen @
     @screenManager.push @mapScreen
 
     GameEvent.on 'battle', @handleBattle
@@ -43,3 +43,4 @@ class Game
 # Namespace creation / setup
 # TODO: Move this somewhere more intelligent
 Battle = {}
+Map = {}

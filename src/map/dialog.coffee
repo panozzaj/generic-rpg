@@ -1,4 +1,4 @@
-class Dialog
+class Map.Dialog
   constructor: (game) ->
     @alive = false
     GameEvent.on 'dialog', @show
