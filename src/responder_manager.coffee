@@ -21,4 +21,3 @@ class ResponderManager
   handlePopResponder: (e) =>
     if e.attributes.responder != @popResponder()
       alert('popped responder but it did not match')
-

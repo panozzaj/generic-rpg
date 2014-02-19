@@ -6,6 +6,11 @@ class Battle.Action.Menu extends Battle.Action
 
   update: ->
 
+  destroy: ->
+    @entitySelector?.destroy()
+    @submenu?.destroy()
+    @menu?.destroy()
+
   pickedMainMenuOption: ({ @selectedAction }) =>
     if @selectedAction.needsSubtype
       spells = @source.knownSpells()
@@ -20,6 +25,7 @@ class Battle.Action.Menu extends Battle.Action
         select: @targetChosen
         cancel: @cancel
     else
+      @destroy()
       GameEvent.trigger 'finishedAction'
       GameEvent.trigger 'enqueue', action:
         type: @selectedAction
@@ -27,9 +33,7 @@ class Battle.Action.Menu extends Battle.Action
         executeIn: 3
 
   targetChosen: ({ target }) =>
-    @entitySelector?.destroy()
-    @submenu?.destroy()
-    @menu?.destroy()
+    @destroy()
 
     GameEvent.trigger 'finishedAction'
     GameEvent.trigger 'enqueue', action:
