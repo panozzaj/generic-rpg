@@ -3,8 +3,7 @@ class Battle.EntitySelector
     @cursor = new Image()
     @cursor.src = "images/cursor.png"
 
-    @selectedIndex = 0
-    @selectedSide = @enemies
+    @moveLeft()
 
     GameEvent.trigger 'pushResponder', responder: @
 
@@ -39,11 +38,16 @@ class Battle.EntitySelector
 
   moveCursor: (offset) ->
     @selectedIndex = (@selectedIndex + @selectedSide.length + offset) % @selectedSide.length
+    unless @selectedSide[@selectedIndex].alive()
+      @moveCursor(offset)
 
   moveRight: ->
     @selectedSide = @allies
-    @selectedIndex = 0
+    @selectedIndex = @firstEntity()
 
   moveLeft: ->
     @selectedSide = @enemies
-    @selectedIndex = 0
+    @selectedIndex = @firstEntity()
+
+  firstEntity: ->
+    @selectedIndex = _.findIndex @selectedSide, (entity) -> entity.alive()

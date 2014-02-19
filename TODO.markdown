@@ -5,14 +5,11 @@ Things that we can work on:
 
 # - ability to pick enemy to target with attacks, magic, etc.
 #  - can select own avatar for attacking
-   - refactor Menu > Submenu > Entity Selector
-    - make them into a stack
-    - abstract dialog/menu out a little
-    - moving subaction off of the action superclass
-    - add a border to dialogs/menus
 
    - probably shouldn't be able to select a person that has been KO'ed
     - unless we are casting revive?
+
+  - autoselect a different person to attack when the person you were going to attack is swooned
 
   - Battle.Action.Spell
     - make spells have different base damage
@@ -26,9 +23,13 @@ Things that we can work on:
   - when someone is attacking or whatever, they glow or otherwise show that they are the ones initiating the attack
     - maybe actually animate?
 
-  - missing attack probability
+  - add probability of missing an attack
 
-  - autoselect a different person to attack when the person you were going to attack is swooned
+  - refactor Menu > Submenu > Entity Selector
+   - make them into a stack
+   - abstract dialog/menu out a little
+   - moving subaction off of the action superclass
+   - add a border to dialogs/menus
 
   - separate the concept of a particular battle from battle.screen
    - put various things on battle instead of screen (which is mostly a container)
@@ -82,4 +83,5 @@ Things that we can work on:
  Would be really sweet list
   - NPCs talk to each other with little speech bubbles, which you can see
   - bull monster that only attacks players with red clothes
+
 
