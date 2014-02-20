@@ -1,5 +1,7 @@
-class Battle.Submenu
+class Battle.Menu.Subaction extends Battle.Menu
   constructor: ({ @spells, @select, @cancel }) ->
+    super
+
     @pos =
       x: 250
       y: 350
@@ -7,8 +9,6 @@ class Battle.Submenu
       width: 500
       height: 200
     @currentSpell = 0
-    @cursor = new Image()
-    @cursor.src = "images/cursor.png"
 
   draw: (context) ->
     @drawBackground context

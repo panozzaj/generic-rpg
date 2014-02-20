@@ -1,7 +1,6 @@
-class Battle.TargetSelector
+class Battle.Menu.Target extends Battle.Menu
   constructor: ({ @enemies, @allies, @select, @cancel }) ->
-    @cursor = new Image()
-    @cursor.src = "images/cursor.png"
+    super
 
     @moveLeft()
 
@@ -12,9 +11,6 @@ class Battle.TargetSelector
   draw: (context) ->
     entity = @selectedSide[@selectedIndex]
     context.drawImage @cursor, entity.position.x - 40, entity.position.y + 20, 30, 30
-
-  selectedSide: ->
-    if @pointingAt == 'enemies' then @enemies else @allies
 
   onkeydown: (event) ->
     switch event.which

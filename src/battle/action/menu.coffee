@@ -18,7 +18,7 @@ class Battle.Action.Menu extends Battle.Action
     @activeMenu().onkeydown event
 
   getAction: ->
-    @menuStack.push new Battle.Menu
+    @menuStack.push new Battle.Menu.Action
       avatar: @source
       select: @setAction
 
@@ -31,7 +31,7 @@ class Battle.Action.Menu extends Battle.Action
       @complete()
 
   getSubaction: ->
-    @menuStack.push new Battle.Submenu
+    @menuStack.push new Battle.Menu.Subaction
       spells: @source.knownSpells()
       select: @setSubaction
       cancel: @popMenu
@@ -40,7 +40,7 @@ class Battle.Action.Menu extends Battle.Action
     @getTarget()
 
   getTarget: ->
-    @menuStack.push new Battle.TargetSelector
+    @menuStack.push new Battle.Menu.Target
       allies: @battle.avatars
       enemies: @battle.monsters
       select: @setTarget
