@@ -11,8 +11,6 @@ module.exports = (grunt) ->
           'build/main.js': ['src/game.coffee', 'src/**/*.coffee']
 
     watch:
-      options:
-        livereload: true
       scripts:
         files: ['src/**/*.coffee']
         tasks: ['coffee']
