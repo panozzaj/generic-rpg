@@ -1,80 +1,82 @@
 class Battle.Action.Menu extends Battle.Action
   execute: ->
-    @menu = new Battle.Menu
-      avatar: @source
-      select: @pickedMainMenuOption
+    @menuStack = []
+    @getAction()
+
+    GameEvent.trigger 'pushResponder', responder: @
+
+  destroy: ->
+    GameEvent.trigger 'popResponder', responder: @
 
   update: ->
 
-  destroy: ->
-    @entitySelector?.destroy()
-    @submenu?.destroy()
-    @menu?.destroy()
+  draw: (context) ->
+    _.each @menuStack, (menu) ->
+      menu.draw context
 
-  pickedMainMenuOption: ({ @selectedAction }) =>
-    if @selectedAction.needsSubtype
-      spells = @source.knownSpells()
-      @submenu = new Battle.Submenu
-        spells: spells
-        select: @subactionChosen
-        cancel: @cancel
-    else if @selectedAction.needsTarget
-      @entitySelector = new Battle.EntitySelector
-        enemies: @battle.monsters
-        allies: @battle.avatars
-        select: @targetChosen
-        cancel: @cancel
+  onkeydown: (event) ->
+    @activeMenu().onkeydown event
+
+  getAction: ->
+    @menuStack.push new Battle.Menu
+      avatar: @source
+      select: @setAction
+
+  setAction: ({ @action }) =>
+    if @action.needsSubaction
+      @getSubaction()
+    else if @action.needsTarget
+      @getTarget()
     else
-      @destroy()
-      GameEvent.trigger 'finishedAction'
-      GameEvent.trigger 'enqueue', action:
-        type: @selectedAction
-        source: @source
-        executeIn: 3
+      @complete()
 
-  targetChosen: ({ target }) =>
+  getSubaction: ->
+    @menuStack.push new Battle.Submenu
+      spells: @source.knownSpells()
+      select: @setSubaction
+      cancel: @popMenu
+
+  setSubaction: ({ @subaction }) =>
+    @getTarget()
+
+  getTarget: ->
+    @menuStack.push new Battle.TargetSelector
+      allies: @battle.avatars
+      enemies: @battle.monsters
+      select: @setTarget
+      cancel: @popMenu
+
+  setTarget: ({ @target }) =>
+    @complete()
+
+  complete: ->
     @destroy()
-
     GameEvent.trigger 'finishedAction'
     GameEvent.trigger 'enqueue', action:
-      type: @selectedAction
+      type: @action
       subaction: @subaction
       source: @source
-      target: target
+      target: @target
       executeIn: 3
 
-  subactionChosen: ({ @subaction }) =>
-    @entitySelector = new Battle.EntitySelector
-      enemies: @battle.monsters
-      allies: @battle.avatars
-      select: @targetChosen
-      cancel: @cancel
+  popMenu: =>
+    @menuStack.pop()
 
-  draw: (context) ->
-    @menu?.draw context
-    @submenu?.draw context
-    @entitySelector?.draw context
-
-  cancel: (submenu) =>
-    if submenu == @submenu
-      @submenu.destroy()
-      @submenu = null
-    else if submenu = @entitySelector
-      @entitySelector.destroy()
-      @entitySelector = null
+  activeMenu: ->
+    _.last(@menuStack)
 
   # Attack
-  #   needsSubtype: false
+  #   needsSubaction: false
   #   needsTarget: true
   # Magic
-  #   needsSubtype: true
+  #   needsSubaction: true
   #   needsTarget: true
   # Item
-  #   needsSubtype: true
+  #   needsSubaction: true
   #   needsTarget: true
   # Defend
-  #   needsSubtype: false
+  #   needsSubaction: false
   #   needsTarget: false
   # Run
-  #   needsSubtype: false
+  #   needsSubaction: false
   #   needsTarget: false

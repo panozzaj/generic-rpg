@@ -1,6 +1,6 @@
 class Battle.Menu
 
-  constructor: ({ @avatar, @select, @cancel }) ->
+  constructor: ({ @select, @cancel }) ->
     @width = 200
     @height = 200
     @actionDescriptions = [
@@ -11,10 +11,6 @@ class Battle.Menu
     @currentAction = 0
     @cursor = new Image()
     @cursor.src = "images/cursor.png"
-    GameEvent.trigger 'pushResponder', responder: @
-
-  destroy: ->
-    GameEvent.trigger 'popResponder', responder: @
 
   actionType: ->
     @actionDescriptions[@currentAction].type
@@ -50,7 +46,7 @@ class Battle.Menu
       when 40 # down
         @moveCursor 1
       when 90 # z
-        @select selectedAction: @actionType()
+        @select action: @actionType()
 
   moveCursor: (offset) ->
     @currentAction = (@currentAction + @actionDescriptions.length + offset) % @actionDescriptions.length

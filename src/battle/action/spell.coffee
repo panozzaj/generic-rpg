@@ -1,5 +1,5 @@
 class Battle.Action.Spell extends Battle.Action
-  @needsSubtype: true
+  @needsSubaction: true
   @needsTarget:  true
 
   execute: ->

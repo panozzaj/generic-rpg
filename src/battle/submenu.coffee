@@ -9,10 +9,6 @@ class Battle.Submenu
     @currentSpell = 0
     @cursor = new Image()
     @cursor.src = "images/cursor.png"
-    GameEvent.trigger 'pushResponder', responder: @
-
-  destroy: ->
-    GameEvent.trigger 'popResponder', responder: @
 
   draw: (context) ->
     @drawBackground context

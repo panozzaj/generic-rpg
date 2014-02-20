@@ -1,14 +1,9 @@
-class Battle.EntitySelector
+class Battle.TargetSelector
   constructor: ({ @enemies, @allies, @select, @cancel }) ->
     @cursor = new Image()
     @cursor.src = "images/cursor.png"
 
     @moveLeft()
-
-    GameEvent.trigger 'pushResponder', responder: @
-
-  destroy: ->
-    GameEvent.trigger 'popResponder', responder: @
 
     # picked enemy 0
     # picked avatar 3
