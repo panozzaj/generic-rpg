@@ -21,7 +21,6 @@ Things that we can work on:
   - refactor Menu > Submenu > Entity Selector
    - abstract dialog/menu out a little
    - moving subaction off of the action superclass
-   - add a border to dialogs/menus
 
   - enter battle animation
 

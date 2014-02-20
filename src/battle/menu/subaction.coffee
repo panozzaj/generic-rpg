@@ -15,12 +15,6 @@ class Battle.Menu.Subaction extends Battle.Menu
     @drawActions context
     @drawCursor context
 
-  drawBackground: (context) ->
-    context.save()
-    context.fillStyle = "#00f"
-    context.fillRect @pos.x, @pos.y, @size.width, @size.height
-    context.restore()
-
   drawActions: (context) ->
     context.save()
     context.fillStyle = 'white'
