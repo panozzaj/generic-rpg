@@ -1,7 +1,7 @@
 class Map.Avatar
 
-  constructor: (game) ->
-    @tileSize = game.tileSize
+  constructor: (map) ->
+    @tileSize = map.tileSize
     @setMapPosition(1, 1)
     @velocity = { x: 0, y: 0 }
     @speed = 8

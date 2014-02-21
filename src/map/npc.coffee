@@ -1,7 +1,7 @@
 class Map.NPC
 
-  constructor: (game) ->
-    @tileSize = game.tileSize
+  constructor: (map) ->
+    @tileSize = map.tileSize
     @setMapPosition(4, 5)
 
     GameEvent.on 'talk', @talk

@@ -1,8 +1,9 @@
 class Map.Screen
   constructor: (game) ->
-    @tileSize = game.tileSize
     @width = game.canvas.width
     @height = game.canvas.height
+
+    @tileSize = 64
 
     @map = new Map.Map @
 

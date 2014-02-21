@@ -7,8 +7,6 @@ class Game
     @canvas = document.getElementById 'game'
     @context = @canvas.getContext '2d'
 
-    @tileSize = 64
-
     @mapScreen = new Map.Screen @
     @screenManager.push @mapScreen
 
