@@ -5,11 +5,12 @@ class Battle.Action.Spell extends Battle.Action
   execute: ->
     @effectiveDamage = Math.round(@source.stats.magic * (Math.random() / 2 + 0.75))
     @target.takeDamage @effectiveDamage
-
-    @damageDisplayTTL = 60
+    @damageDisplayTTL = 80
+    @source.flash(0)
+    @target.flash(10)
 
   update: ->
-    if @damageDisplayTTL
+    if @damageDisplayTTL > 0
       @damageDisplayTTL -= 1
       if @damageDisplayTTL <= 0
         GameEvent.trigger 'finishedAction'
@@ -19,7 +20,7 @@ class Battle.Action.Spell extends Battle.Action
           executeIn: 0
 
   draw: (context) ->
-    if @damageDisplayTTL
+    if @damageDisplayTTL < 60 && @damageDisplayTTL > 0
       context.save()
       context.fillStyle = 'red'
       context.font = '30px manaspaceregular'

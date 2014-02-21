@@ -6,10 +6,13 @@ class Battle.Action.Attack extends Battle.Action
 
     @effectiveDamage = Math.round(@source.stats.damage * (Math.random() / 2 + 0.75))
 
-    @damageDisplayTTL = 60
+    @damageDisplayTTL = 80
+
+    @source.flash(0)
+    @target.flash(10)
 
   update: ->
-    if @damageDisplayTTL
+    if @damageDisplayTTL > 0
       @damageDisplayTTL -= 1
       if @damageDisplayTTL <= 0
         @target.takeDamage @effectiveDamage
@@ -20,7 +23,7 @@ class Battle.Action.Attack extends Battle.Action
           executeIn: 0
 
   draw: (context) ->
-    if @damageDisplayTTL
+    if @damageDisplayTTL < 60 && @damageDisplayTTL > 0
       context.save()
       context.fillStyle = 'white'
       context.font = '30px manaspaceregular'

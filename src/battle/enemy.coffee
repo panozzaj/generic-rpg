@@ -12,10 +12,16 @@ class Battle.Enemy
         current: 30
       damage: 10
     }
+    @flashTtl = 0
 
   draw: (context) ->
     if @alive()
-      context.drawImage @sprite, @position.x, @position.y, @size.width, @size.height
+      if @flashTtl > 0
+        @flashTtl--
+      if @flashTtl > 0 && @flashTtl < 10
+        context.drawImage @sprite, @position.x - 2, @position.y - 2, @size.width + 4, @size.height + 4
+      else
+        context.drawImage @sprite, @position.x, @position.y, @size.width, @size.height
 
   takeDamage: (damage) ->
     @stats.hp.current -= damage
@@ -25,3 +31,6 @@ class Battle.Enemy
 
   alive: ->
     @stats.hp.current > 0
+
+  flash: (delay) ->
+    @flashTtl = 10 + delay
