@@ -1,6 +1,28 @@
 
 Things that we can work on:
 
+ - map mode
+  - NPC box that when you walk up to it, it opens a quick chat dialog
+   - Move NPC around
+   - passing text and splitting on words intelligently
+   - multiple dialog boxes in a row ("conversation")
+   - data driven from map file or something to generate NPCs
+
+  - a dude moving around on a landscape
+   - render background tiles with sprites
+   - some sort of bounds checking on landscape (or other screens)
+   - center map around dude?
+   - collision
+   - restrict to map boundaries
+
+
+ - screen modes
+   - menu
+   - cutscene
+  - party switch mechanism
+  - deploy somewhere and see what things break
+
+
  - battle mode
 
   - Battle.Action.Spell
@@ -31,32 +53,12 @@ Things that we can work on:
 
  - refactor drawing dialogs, menus, etc. to extend from a common class
 
- - NPC box that when you walk up to it, it opens a quick chat dialog
-  - Move NPC around
-  - passing text and splitting on words intelligently
-  - multiple dialog boxes in a row ("conversation")
-  - data driven from map file or something to generate NPCs
-
- - a dude moving around on a landscape
-  - render background tiles with sprites
-  - some sort of bounds checking on landscape (or other screens)
-  - center map around dude?
-  - collision
-  - restrict to map boundaries
- - screen modes
-#  - map
-   - battle
-   - menu
-   - cutscene
-  - party switch mechanism
-  - deploy somewhere and see what things break
 
  Nice-to-haves:
   - parallax scrolling of map backgrounds
 
  Technical debt
   - figure out a way to get both people with a valid git repository in floobits
-  - pairing gem so it doesn't look like one person only worked on it (shipstars-ego.gem)
   - Need to have files / folders open in floobits for them to show up?
    - basically generated files are also not working correctly?
    - add "events" declaration to easily add event handlers to objects
