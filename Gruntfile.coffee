@@ -22,7 +22,7 @@ module.exports = (grunt) ->
           open: true
 
   grunt.loadNpmTasks 'grunt-contrib-coffee'
-  grunt.loadNpmTasks 'grunt-contrib-watch'
   grunt.loadNpmTasks 'grunt-contrib-connect'
+  grunt.loadNpmTasks 'grunt-contrib-watch'
 
   grunt.registerTask 'default', ['coffee', 'connect', 'watch']

@@ -1,34 +1,17 @@
 class Map.Map
   constructor: (mapScreen) ->
-    @tileString = """
-      GGGGGGGGGG
-      SSSSGSSSSS
-      WWWWGWWWWW
-      GGGGGGGGGG
-      GWWWGGGGGW
-      SSSSGGSSSW
-      WWSGGGGSSW
-    """
+    tmxloader.load('src/map/data/map2.tmx')
 
-    @tiles = @tileString.split('\n').map (str) -> str.split('')
-    @tileSize = mapScreen.tileSize
+    @tileset = tmxloader.map.tilesets[0]
+    @image = new Image
+    @image.src = "src/map/data/#{@tileset.src}"
+    @layer = tmxloader.map.layers[0].data
 
   draw: (context) ->
-    for y in [0...@height()]
-      for x in [0...@width()]
+    for y in [0...@layer.length]
+      for x in [0...@layer.length]
         context.save()
-        context.fillStyle = @tileColor(@tiles[y][x])
-        context.fillRect x * @tileSize, y * @tileSize, @tileSize, @tileSize
+        context.fillStyle = 'black'
+        context.font = '30px manaspaceregular'
+        context.fillText @layer[x][y], x * 64, y * 64
         context.restore()
-
-  height: ->
-    @tiles.length
-
-  width: ->
-    @tiles[0].length
-
-  tileColor: (char) ->
-    switch char
-      when 'G' then '#0f0'
-      when 'S' then '#888'
-      when 'W' then '#00f'
