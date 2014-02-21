@@ -5,13 +5,24 @@ class Map.Map
     @tileset = tmxloader.map.tilesets[0]
     @image = new Image
     @image.src = "src/map/data/#{@tileset.src}"
-    @layer = tmxloader.map.layers[0].data
+    @layers = tmxloader.map.layers
+    @tileSize = mapScreen.tileSize
 
-  draw: (context) ->
-    for y in [0...@layer.length]
-      for x in [0...@layer.length]
-        context.save()
-        context.fillStyle = 'black'
-        context.font = '30px manaspaceregular'
-        context.fillText @layer[x][y], x * 64, y * 64
-        context.restore()
+  draw: (context) =>
+    _.each @layers, (layer) =>
+      data = layer.data
+      for y in [0...data.length]
+        for x in [0...data.length]
+          tileId = data[x][y] - 1
+          tilesWide = @tileset.width / 16
+
+          tileRow = Math.floor(tileId / tilesWide)
+          tileColumn = tileId % tilesWide
+
+          console.log tileRow, tileColumn if @print
+
+          context.save()
+          context.drawImage @image,
+            tileColumn * 16, tileRow * 16, 16, 16,
+            y * @tileSize, x * @tileSize, @tileSize, @tileSize
+          context.restore()
