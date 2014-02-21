@@ -9,10 +9,13 @@ Things that we can work on:
    - data driven from map file or something to generate NPCs
 
   - a dude moving around on a landscape
-   - render background tiles with sprites
+   - collision
+   - scrolling
+   - change maps
+    - enter / exit town
+    - enter building
    - some sort of bounds checking on landscape (or other screens)
    - center map around dude?
-   - collision
    - restrict to map boundaries
 
 
@@ -73,4 +76,3 @@ Things that we can work on:
  Would be really sweet list
   - NPCs talk to each other with little speech bubbles, which you can see
   - bull monster that only attacks players with red clothes
-
