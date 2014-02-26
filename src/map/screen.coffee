@@ -4,8 +4,6 @@ class Map.Screen
     @height = game.canvas.height
 
     @tileSize = 64
-    @tilesWide = @width / @tileSize
-    @tilesTall = @height / @tileSize
 
     @map = new Map.Map @
     @camera = new Map.Camera @
@@ -35,8 +33,8 @@ class Map.Screen
     { position } = @camera
 
     translate =
-      x: _.min([_.max([-position.x + @width / 2, -2048 + @width]), 0])
-      y: _.min([_.max([-position.y + @height / 2, -2048 + @height]), 0])
+      x: _.min([_.max([-position.x + @width / 2, -(@map.tilesWide*@tileSize) + @width]), 0])
+      y: _.min([_.max([-position.y + @height / 2, -(@map.tilesTall*@tileSize) + @height]), 0])
 
     context.translate translate.x, translate.y
 
