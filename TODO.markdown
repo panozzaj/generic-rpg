@@ -4,21 +4,19 @@ Things that we can work on:
  - map mode
   - a dude moving around on a landscape
    - collision
-#  - scrolling
    - change maps
     - enter / exit town
     - enter building
    - some sort of bounds checking on landscape (or other screens)
-   - center map around dude
    - restrict to map boundaries
+  - context.scale(4,4) instead of passing MapScreen#tileSize around?
 
   - NPC box that when you walk up to it, it opens a quick chat dialog
    - Move NPC around
    - passing text and splitting on words intelligently
    - multiple dialog boxes in a row ("conversation")
    - data driven from map file or something to generate NPCs
-
-
+   - fix dialog to not be absolutely positioned at (320,240) (or whatever it is)
 
  - screen modes
    - menu
