@@ -48,3 +48,4 @@ class Game
 Battle = {}
 Map = {}
 Model = {}
+
