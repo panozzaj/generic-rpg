@@ -33,10 +33,14 @@ class Map.Screen
   draw: (context) ->
     context.save()
     { position } = @camera
-    context.translate -position.x + @width / 2, -position.y + @height / 2
+
+    translate =
+      x: _.min([_.max([-position.x + @width / 2, -2048 + @width]), 0])
+      y: _.min([_.max([-position.y + @height / 2, -2048 + @height]), 0])
+
+    context.translate translate.x, translate.y
 
     @map.draw context
     for object in @objects
       object.draw context
     context.restore()
-

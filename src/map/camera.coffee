@@ -6,4 +6,3 @@ class Map.Camera
 
   update: ->
     @position = @following.screenPosition
-

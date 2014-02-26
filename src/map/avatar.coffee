@@ -2,7 +2,7 @@ class Map.Avatar
 
   constructor: (map) ->
     @tileSize = map.tileSize
-    @setMapPosition(1, 1)
+    @setMapPosition(10, 10)
     @velocity = { x: 0, y: 0 }
     @speed = 8
     @spriteSheet = new Image()

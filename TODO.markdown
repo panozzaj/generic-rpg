@@ -4,7 +4,7 @@ Things that we can work on:
  - map mode
   - a dude moving around on a landscape
    - collision
-   - scrolling
+#  - scrolling
    - change maps
     - enter / exit town
     - enter building
