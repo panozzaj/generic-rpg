@@ -1,4 +1,6 @@
 class Battle.Screen
+  music: 'battle.mp3'
+
   events: ->
     die: @handleDeath
 
@@ -66,4 +68,3 @@ class Battle.Screen
           @victoryDialog = new Battle.VictoryDialog text: "Victory!"
           @actionManager.destroy()
           @actionManager = null
-

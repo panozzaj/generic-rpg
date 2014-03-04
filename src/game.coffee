@@ -3,6 +3,7 @@ class Game
   constructor: ->
     @responderManager = new ResponderManager
     @screenManager = new ScreenManager
+    @audioManager = new AudioManager
 
     @canvas = document.getElementById 'game'
     @context = @canvas.getContext '2d'
@@ -48,4 +49,3 @@ class Game
 Battle = {}
 Map = {}
 Model = {}
-

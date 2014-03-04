@@ -1,4 +1,6 @@
 class Map.Screen
+  music: 'sad_town.mp3'
+
   constructor: (game) ->
     @width = game.canvas.width
     @height = game.canvas.height
