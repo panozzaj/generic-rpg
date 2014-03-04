@@ -83,6 +83,7 @@ class Map.Avatar
           GameEvent.trigger 'talk', facing: @facing()
       when 66 # b
         if !@isMoving()
+          GameEvent.trigger 'playSound', sound: 'battle_start.wav'
           GameEvent.trigger 'battle', random: true
 
   facing: ->

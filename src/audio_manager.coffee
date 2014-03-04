@@ -3,7 +3,13 @@ class AudioManager
     if window.location.search.match("music=true")
       GameEvent.on 'playMusic', @handlePlayMusic
 
+    GameEvent.on 'playSound', @handlePlaySound
+
   handlePlayMusic: (e) =>
-    @audio?.pause()
-    @audio = new Audio("assets/audio/#{e.attributes.music}")
-    @audio.play()
+    @music?.pause()
+    @music = new Audio("assets/music/#{e.attributes.music}")
+    @music.play()
+
+  handlePlaySound: (e) =>
+    audio = new Audio("assets/sound/#{e.attributes.sound}")
+    audio.play()
