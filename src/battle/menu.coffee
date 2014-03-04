@@ -1,7 +1,7 @@
 class Battle.Menu
   constructor: ->
     @cursor = new Image()
-    @cursor.src = "images/cursor.png"
+    @cursor.src = "assets/images/cursor.png"
     @cursor.size =
       width: 30
       height: 30

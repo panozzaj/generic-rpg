@@ -6,7 +6,7 @@ class Battle.Avatar
     { @name, @stats } = @hero
 
     @sprite = new Image()
-    @sprite.src = "images/cecil-left.png"
+    @sprite.src = "assets/images/cecil-left.png"
 
   update: ->
     # TODO

@@ -5,7 +5,7 @@ class Battle.Enemy
       height: 64
 
     @sprite = new Image()
-    @sprite.src = "images/goblin.png"
+    @sprite.src = "assets/images/goblin.png"
     @stats = {
       hp:
         max: 30,

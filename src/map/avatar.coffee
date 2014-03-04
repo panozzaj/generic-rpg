@@ -6,7 +6,7 @@ class Map.Avatar
     @velocity = { x: 0, y: 0 }
     @speed = 8
     @spriteSheet = new Image()
-    @spriteSheet.src = "images/cecil-sheet.png"
+    @spriteSheet.src = "assets/images/cecil-sheet.png"
     @setDirection('down')
     @directionMappings =
       'down':  0
@@ -100,6 +100,6 @@ class Map.Avatar
 
     if @millisecondsWas < 500 && milliseconds >= 500
     else if @millisecondsWas >= 500 && milliseconds < 0
-      @sprite1.src = "images/cecil-#{@direction}.png"
+      @sprite1.src = "assets/images/cecil-#{@direction}.png"
 
     @millisecondsWas = milliseconds
