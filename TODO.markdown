@@ -53,7 +53,12 @@ Things that we can work on:
 
   - make run probabilistically succeed
 
+ - audio
+  - cache sound effects + music?
+  - give different weapons and spells unique sounds
+
  - refactor drawing dialogs, menus, etc. to extend from a common class
+
 
 
  Nice-to-haves:
