@@ -60,13 +60,14 @@ tmxloader.Layer = function (layerName, width, height, properties) {
   }
 }
 
-tmxloader.Object = function (objectname, type, x, y, width, height, properties) {
+tmxloader.Object = function (objectname, type, x, y, width, height, gid, properties) {
   this.name = objectname;
   this.width = width;
   this.height = height;
   this.x = x;
   this.y = y;
   this.type = type;
+  this.gid = gid;
   this.properties = properties;
 }
 
@@ -153,26 +154,28 @@ tmxloader.load = function (url) {
     tmxloader.map.tilesets.push(new tmxloader.Tileset($firstgid, $name, $tilewidth, $tileheight, $src, $width, $height, properties));
   });
 
+  tmxloader.map.objectgroups = new Object();
+
   $xml.find('objectgroup').each(function () {
     $lwidth = $(this).attr("width");
     $lheight = $(this).attr("height");
     $numobjects = $(this).find('object').length;
-    tmxloader.map.objectgroup = new Object();
     console.log("Processing Object Group: " + $(this).attr("name") + " with " + $numobjects + " Objects");
     var properties = tmxloader.parseProperties($(this));
-    tmxloader.map.objectgroup['' + $(this).attr("name") + ''] = new tmxloader.ObjectGroup($(this).attr("name"), $lwidth, $lheight, properties);
+    tmxloader.map.objectgroups['' + $(this).attr("name") + ''] = new tmxloader.ObjectGroup($(this).attr("name"), $lwidth, $lheight, properties);
 
     $objectGroupName = $(this).attr("name");
-    $xml.find('object').each(function () {
+    $(this).find('object').each(function () {
       $objectname = $(this).attr("name");
       $objecttype = $(this).attr("type");
       $objectx = $(this).attr("x");
       $objecty = $(this).attr("y");
       $objectwidth = $(this).attr("width");
       $objectheight = $(this).attr("height");
+      $objectGid = $(this).attr("gid");
       console.log("Processing Object: " + $objectname);
       var properties = tmxloader.parseProperties($(this));
-      tmxloader.map.objectgroup['' + $objectGroupName + ''].objects.push(new tmxloader.Object($objectname, $objecttype, $objectx, $objecty, $objectwidth, $objectheight, properties));
+      tmxloader.map.objectgroups['' + $objectGroupName + ''].objects.push(new tmxloader.Object($objectname, $objecttype, $objectx, $objecty, $objectwidth, $objectheight, $objectGid, properties));
     });
   });
 }
