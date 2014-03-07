@@ -1,7 +1,7 @@
 class Map.Avatar
 
-  constructor: (map) ->
-    @tileSize = map.tileSize
+  constructor: (@screen) ->
+    @tileSize = @screen.tileSize
     @setMapPosition(10, 10)
     @velocity = { x: 0, y: 0 }
     @speed = 8
@@ -48,16 +48,16 @@ class Map.Avatar
 
   moveInDirection: (direction) ->
     @setDirection(direction)
-    if direction == 'left'
+    if direction == 'left' && !@screen.map.isCollidable(@mapPosition.x - 1, @mapPosition.y)
       @velocity.x = -@speed
       @mapPosition.x -= 1
-    else if direction == 'right'
+    else if direction == 'right' && !@screen.map.isCollidable(@mapPosition.x + 1, @mapPosition.y)
       @velocity.x = @speed
       @mapPosition.x += 1
-    else if direction == 'up'
+    else if direction == 'up' && !@screen.map.isCollidable(@mapPosition.x, @mapPosition.y - 1)
       @velocity.y = -@speed
       @mapPosition.y -= 1
-    else if direction == 'down'
+    else if direction == 'down' && !@screen.map.isCollidable(@mapPosition.x, @mapPosition.y + 1)
       @velocity.y = @speed
       @mapPosition.y += 1
 

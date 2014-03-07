@@ -14,7 +14,7 @@ class Map.Map
 
     @tilesetColumns = @tileset.width / @tilesetTileSize
 
-    @collidables = _.find(@layers, name: "collidable").data
+    @objects = tmxloader.map.objects
 
   draw: (context) =>
     _.each @layers, (layer) =>
@@ -34,4 +34,8 @@ class Map.Map
             @tileSize, @tileSize
           context.restore()
 
-  isCollidable: (x, y) -> @collidables[y][x] != "0"
+  isCollidable: (x, y) -> 
+    console.log('isCollidable: ' + _.find(@layers, name: "fg").data[y][x] != "0")
+    _.find(@layers, name: "fg").data[y][x] != "0"
+    # _.any @objects, (object) ->
+    #   (object.x / @tilesetTileSize == x && object.y / @tilesetTileSize == y)
