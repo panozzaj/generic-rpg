@@ -19,6 +19,7 @@ class Map.Screen
     @objects.push(@dialog)
 
     @camera.follow @avatar
+    @blurIntensity = 0.0
 
     GameEvent.trigger 'pushResponder', responder: @avatar
 
@@ -47,7 +48,6 @@ class Map.Screen
       object.draw context
     context.restore()
 
-
   blur: () ->
     try
       glcanvas = fx.canvas()
@@ -68,15 +68,16 @@ class Map.Screen
     glcanvas.id = source.id
     source.id = 'old_' + source.id
 
-    setInterval ->
+    blurCanvas = setInterval =>
       # Load the background from our canvas
       texture.loadContentsOf(source)
 
       # Apply WebGL magic
-      # leave this for now and see if we can get an effect
       glcanvas.draw(texture)
-        .bulgePinch(source.width / 2, source.height / 2, source.width * 0.75, 0.12)
-        .vignette(0.25, 0.74)
-        .update()
+        .zoomBlur(source.width / 2, source.height / 2, @blurIntensity).update()
+      @blurIntensity += 0.03
+      #if @blurIntensity >= 0.75
+        #clearInterval blurCanvas
+        #@blurIntensity = 0
     , Math.floor(1000 / 40)
 
