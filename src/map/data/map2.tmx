@@ -114,12 +114,6 @@
  <objectgroup name="objects" width="32" height="32">
   <object name="Gold Urn" type="object" gid="1702" x="432" y="192"/>
   <object name="Treasure" type="object" gid="1704" x="144" y="112"/>
-  <object name="Shop Door" type="trigger" gid="55" x="320" y="368">
-   <properties>
-    <property name="map" value="shop"/>
-    <property name="position" value="10,10"/>
-   </properties>
-  </object>
  </objectgroup>
  <layer name="top" width="32" height="32">
   <data encoding="csv">
@@ -157,4 +151,12 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
+ <objectgroup name="triggers" width="32" height="32">
+  <object name="Shop Door" type="trigger" gid="55" x="320" y="368">
+   <properties>
+    <property name="map" value="shop"/>
+    <property name="position" value="10,10"/>
+   </properties>
+  </object>
+ </objectgroup>
 </map>

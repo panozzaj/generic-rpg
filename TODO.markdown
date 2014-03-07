@@ -3,12 +3,11 @@ Things that we can work on:
 
  - map mode
   - a dude moving around on a landscape
-   - collision
-   - draw top layer last
    - change maps
     - enter building
     - enter / exit town
      - can set properties on map and look at these when the map bounds are stepped on
+   - handling events on objects
    - some sort of bounds checking on landscape (or other screens)
    - restrict to map boundaries
   - context.scale(4,4) instead of passing MapScreen#tileSize around?

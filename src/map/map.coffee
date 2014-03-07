@@ -15,21 +15,22 @@ class Map.Map
     @tilesetColumns = @tileset.width / @tilesetTileSize
 
     @objectGroups = tmxloader.map.objectgroups
+    @objects = _.flatten(_.map(_.values(@objectGroups), (objectGroup) -> objectGroup.objects))
 
   drawBottom: (context) =>
     _.each _.reject(@layers, { name: 'top' }), (layer) =>
       @drawLayer layer, context
 
-    _.forEach @objectGroups, (objectGroup) =>
-      _.each objectGroup.objects, (object) =>
-        tileId = parseInt(object.gid) - 1
-        tileRow = Math.floor(tileId / @tilesetColumns)
-        tileColumn = tileId % @tilesetColumns
-        context.drawImage @tilesetImage,
-          tileColumn * @tilesetTileSize, tileRow * @tilesetTileSize,
-          @tilesetTileSize, @tilesetTileSize,
-          parseInt(object.y) * @tileSize, parseInt(object.x) * @tileSize,
-          @tileSize, @tileSize
+    _.each @objects, (object) =>
+      tileId = parseInt(object.gid) - 1
+      tileRow = Math.floor(tileId / @tilesetColumns)
+      tileColumn = tileId % @tilesetColumns
+      context.drawImage @tilesetImage,
+        tileColumn * @tilesetTileSize, tileRow * @tilesetTileSize,
+        @tilesetTileSize, @tilesetTileSize,
+        # not sure why y has off by one
+        parseInt(object.x) / @tilesetTileSize * @tileSize, (parseInt(object.y) / @tilesetTileSize - 1) * @tileSize,
+        @tileSize, @tileSize
 
   drawTop: (context) =>
     _.each _.filter(@layers, { name: 'top' }), (layer) =>
@@ -50,7 +51,8 @@ class Map.Map
           y * @tileSize, x * @tileSize,
           @tileSize, @tileSize
 
-  isCollidable: (x, y) -> 
-    _.find(@layers, name: "fg").data[y][x] != "0"
-    # _.any @objects, (object) ->
-    #   (object.x / @tilesetTileSize == x && object.y / @tilesetTileSize == y)
+  isCollidable: (x, y) ->
+    collidableObjects = _.flatten(_.map(_.filter(_.values(@objectGroups), name: 'objects'), (objectGroup) -> objectGroup.objects))
+    # not sure why y has off by one
+    willCollideWithObject = _.any(collidableObjects, (object) => parseInt(object.y) / @tilesetTileSize == y + 1 && parseInt(object.x) / @tilesetTileSize == x)
+    _.find(@layers, name: "fg").data[y][x] != "0" || willCollideWithObject
