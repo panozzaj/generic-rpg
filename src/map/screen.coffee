@@ -40,7 +40,8 @@ class Map.Screen
 
     context.translate translate.x, translate.y
 
-    @map.draw context
+    @map.drawBottom context
     for object in @objects
       object.draw context
+    @map.drawTop context
     context.restore()
