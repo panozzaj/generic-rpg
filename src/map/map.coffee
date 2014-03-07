@@ -14,6 +14,8 @@ class Map.Map
 
     @tilesetColumns = @tileset.width / @tilesetTileSize
 
+    @collidables = _.find(@layers, name: "collidable").data
+
   draw: (context) =>
     _.each @layers, (layer) =>
       data = layer.data
@@ -31,3 +33,5 @@ class Map.Map
             y * @tileSize, x * @tileSize,
             @tileSize, @tileSize
           context.restore()
+
+  isCollidable: (x, y) -> @collidables[y][x] != "0"
