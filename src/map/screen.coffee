@@ -1,7 +1,13 @@
 class Map.Screen
   music: 'sad_town.mp3'
 
+  events: ->
+    blurScreen: @handleBlur
+
   constructor: (@game) ->
+    _.each @events(), (handler, eventName) ->
+      GameEvent.on eventName, handler
+
     @width = @game.canvas.width
     @height = @game.canvas.height
 
@@ -23,7 +29,9 @@ class Map.Screen
 
     GameEvent.trigger 'pushResponder', responder: @avatar
 
-    @blur()
+  destroy: ->
+    _.each @events(), (handler, eventName) ->
+      GameEvent.off eventName, handler
 
   onkeydown: (event) =>
     @avatar.onkeydown(event)
@@ -49,7 +57,8 @@ class Map.Screen
     @map.drawTop context
     context.restore()
 
-  blur: () ->
+  handleBlur: () =>
+    console.log('handling blur')
     try
       glcanvas = fx.canvas()
     catch e
@@ -64,9 +73,11 @@ class Map.Screen
 
     # Hide the source 2D canvas and put the WebGL Canvas in its place
     source.parentNode.insertBefore(glcanvas, source)
+    oldCanvasStyle = source.style.display
     source.style.display = 'none'
     glcanvas.className = source.className
     glcanvas.id = source.id
+    oldSourceId = source.id
     source.id = 'old_' + source.id
 
     blurCanvas = setInterval =>
@@ -74,11 +85,16 @@ class Map.Screen
       texture.loadContentsOf(source)
 
       # Apply WebGL magic
+      @blurIntensity += 0.03
+      if @blurIntensity >= 0.75
+        @blurIntensity = 0
+        $('#' + glcanvas.id).remove()
+        source.style.display = oldCanvasStyle
+        source.id = oldSourceId
+        GameEvent.trigger 'battle', random: true
+        clearInterval blurCanvas
+
       glcanvas.draw(texture)
         .zoomBlur(source.width / 2, source.height / 2, @blurIntensity).update()
-      @blurIntensity += 0.03
-      #if @blurIntensity >= 0.75
-        #clearInterval blurCanvas
-        #@blurIntensity = 0
     , Math.floor(1000 / 40)
 
