@@ -16,6 +16,7 @@ class Map.Avatar
     @frameCounter = 0
     @frame = 1
 
+  # TODO: extract to generic animation handler
   update: ->
     if @velocity.x != 0
       @screenPosition.x += @velocity.x
@@ -48,18 +49,16 @@ class Map.Avatar
 
   moveInDirection: (direction) ->
     @setDirection(direction)
-    if direction == 'left' && !@screen.map.isCollidable(@mapPosition.x - 1, @mapPosition.y)
-      @velocity.x = -@speed
-      @mapPosition.x -= 1
-    else if direction == 'right' && !@screen.map.isCollidable(@mapPosition.x + 1, @mapPosition.y)
-      @velocity.x = @speed
-      @mapPosition.x += 1
-    else if direction == 'up' && !@screen.map.isCollidable(@mapPosition.x, @mapPosition.y - 1)
-      @velocity.y = -@speed
-      @mapPosition.y -= 1
-    else if direction == 'down' && !@screen.map.isCollidable(@mapPosition.x, @mapPosition.y + 1)
-      @velocity.y = @speed
-      @mapPosition.y += 1
+    if @screen.map.isWalkable @facing()
+      @mapPosition = @facing()
+      if direction == 'left'
+        @velocity.x = -@speed
+      else if direction == 'right'
+        @velocity.x = @speed
+      else if direction == 'up'
+        @velocity.y = -@speed
+      else if direction == 'down'
+        @velocity.y = @speed
 
   setDirection: (direction) ->
     @direction = direction
@@ -84,17 +83,18 @@ class Map.Avatar
       when 66 # b
         if !@isMoving()
           GameEvent.trigger 'playSound', sound: 'battle_start.wav'
-          GameEvent.trigger 'battle', random: true
+          GameEvent.trigger 'blurScreen'
 
   facing: ->
     { x, y } = @mapPosition
     switch @direction
-      when 'left' then x -= 1
+      when 'left'  then x -= 1
       when 'right' then x += 1
-      when 'up' then y -= 1
-      when 'down' then y += 1
+      when 'up'    then y -= 1
+      when 'down'  then y += 1
     { x: x, y: y }
 
+  # TODO: extract to generic animation handler
   animate: ->
     milliseconds = new Date().getMilliseconds()
     @millisecondsWas ||= milliseconds
