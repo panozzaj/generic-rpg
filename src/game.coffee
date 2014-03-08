@@ -7,6 +7,7 @@ class Game
 
     @canvas = document.getElementById 'game'
     @context = @canvas.getContext '2d'
+    @context.imageSmoothingEnabled = false
 
     @mapScreen = new Map.Screen @
     @screenManager.push @mapScreen
@@ -49,3 +50,4 @@ class Game
 Battle = {}
 Map = {}
 Model = {}
+
