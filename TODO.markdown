@@ -47,8 +47,6 @@ Things that we can work on:
    - abstract dialog/menu out a little
    - moving subaction off of the action superclass
 
-  - enter battle animation
-
   - showing who is next in a list?
   - spritifying at some point
 
