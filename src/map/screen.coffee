@@ -82,23 +82,26 @@ class Map.Screen
     glcanvas.draw(texture)
       .zoomBlur(source.width / 2, source.height / 2, @blurIntensity).update()
 
-    blurCanvas = setInterval =>
-      # Load the background from our canvas
-      texture.loadContentsOf(source)
+    new Promise (resolve, reject) =>
 
-      # Apply WebGL magic
-      @blurIntensity += 0.03
-      if @blurIntensity >= 0.80
-        @blurIntensity = 0
-        $('#' + glcanvas.id).remove()
-        source.style.display = oldCanvasStyle
-        source.id = oldSourceId
-        GameEvent.trigger 'battle', random: true
-        clearInterval blurCanvas
+      blurCanvas = setInterval =>
+        # Load the background from our canvas
+        texture.loadContentsOf(source)
 
-      glcanvas.draw(texture)
-        .zoomBlur(source.width / 2 + Math.random() * 30 - 15, source.height / 2 + Math.random() * 30 - 15, @blurIntensity)
-        .brightnessContrast(-@blurIntensity / 6, 0)
-        .update()
-    , Math.floor(1000 / 40)
+        # Apply WebGL magic
+        @blurIntensity += 0.03
+        if @blurIntensity >= 0.90
+          @blurIntensity = 0
+          $('#' + glcanvas.id).remove()
+          source.style.display = oldCanvasStyle
+          source.id = oldSourceId
+          clearInterval blurCanvas
+          resolve()
+
+        glcanvas.draw(texture)
+          .zoomBlur(source.width / 2 + Math.random() * 30 - 15, source.height / 2 + Math.random() * 30 - 15, @blurIntensity)
+          .brightnessContrast(-@blurIntensity / 6, 0)
+          .update()
+      , Math.floor(1000 / 40)
+
 

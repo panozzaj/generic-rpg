@@ -80,10 +80,9 @@ class Map.Avatar
       when 90 # z
         if !@isMoving()
           GameEvent.trigger 'talk', facing: @facing()
-      when 66 # b
+      when 66 #
         if !@isMoving()
-          GameEvent.trigger 'playSound', sound: 'battle_start.wav'
-          GameEvent.trigger 'blurScreen'
+          GameEvent.trigger 'battle'
 
   facing: ->
     { x, y } = @mapPosition
@@ -92,7 +91,7 @@ class Map.Avatar
       when 'right' then x += 1
       when 'up'    then y -= 1
       when 'down'  then y += 1
-    { x: x, y: y }
+    { x, y }
 
   # TODO: extract to generic animation handler
   animate: ->
@@ -104,3 +103,4 @@ class Map.Avatar
       @sprite1.src = "assets/images/cecil-#{@direction}.png"
 
     @millisecondsWas = milliseconds
+

@@ -43,7 +43,12 @@ class Game
     @responderManager.onkeydown(event)
 
   handleBattle: (e) =>
-    @screenManager.push(new Battle.Screen game: @, party: @party)
+    Q.allSettled([
+      @audioManager.play('battle_start.wav'),
+      @mapScreen.handleBlur()
+    ]).then (val) =>
+      @screenManager.push(new Battle.Screen game: @, party: @party)
+
 
 # Namespace creation / setup
 # TODO: Move this somewhere more intelligent

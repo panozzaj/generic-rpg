@@ -7,9 +7,15 @@ class AudioManager
 
   handlePlayMusic: (e) =>
     @music?.pause()
-    @music = new Audio("assets/music/#{e.attributes.music}")
-    @music.play()
+    @play e.attributes.music
 
   handlePlaySound: (e) =>
-    audio = new Audio("assets/sound/#{e.attributes.sound}")
-    audio.play()
+    @play e.attributes.sound
+
+  play: (sound) =>
+    new Promise (resolve, reject) ->
+      audio = new Audio("assets/sound/#{sound}")
+      audio.addEventListener 'canplaythrough', -> @play()
+      audio.addEventListener 'ended', -> resolve()
+      audio.addEventListener 'error', -> reject()
+
