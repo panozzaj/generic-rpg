@@ -25,9 +25,6 @@ class Map.Screen
     @objects.push(@dialog)
 
     @camera.follow @avatar
-    @blurIntensity = 0.0
-
-    GameEvent.trigger 'pushResponder', responder: @avatar
 
   destroy: ->
     _.each @events(), (handler, eventName) ->
@@ -37,8 +34,7 @@ class Map.Screen
     @avatar.onkeydown(event)
 
   update: ->
-    for object in @objects
-      object.update()
+    object.update() for object in @objects
     @camera.update()
 
   draw: (context) ->
@@ -56,52 +52,3 @@ class Map.Screen
       object.draw context
     @map.drawTop context
     context.restore()
-
-  handleBlur: () =>
-    console.log('handling blur')
-    try
-      glcanvas = fx.canvas()
-    catch e
-      console.log 'got an exception blurring'
-      return
-
-    source = @game.canvas
-    srcctx = source.getContext('2d')
-
-    # This tells glfx what to use as a source image
-    texture = glcanvas.texture(source)
-
-    # Hide the source 2D canvas and put the WebGL Canvas in its place
-    source.parentNode.insertBefore(glcanvas, source)
-    oldCanvasStyle = source.style.display
-    source.style.display = 'none'
-    glcanvas.className = source.className
-    glcanvas.id = source.id
-    oldSourceId = source.id
-    source.id = 'old_' + source.id
-    glcanvas.draw(texture)
-      .zoomBlur(source.width / 2, source.height / 2, @blurIntensity).update()
-
-    new Promise (resolve, reject) =>
-
-      blurCanvas = setInterval =>
-        # Load the background from our canvas
-        texture.loadContentsOf(source)
-
-        # Apply WebGL magic
-        @blurIntensity += 0.03
-        if @blurIntensity >= 0.90
-          @blurIntensity = 0
-          $('#' + glcanvas.id).remove()
-          source.style.display = oldCanvasStyle
-          source.id = oldSourceId
-          clearInterval blurCanvas
-          resolve()
-
-        glcanvas.draw(texture)
-          .zoomBlur(source.width / 2 + Math.random() * 30 - 15, source.height / 2 + Math.random() * 30 - 15, @blurIntensity)
-          .brightnessContrast(-@blurIntensity / 6, 0)
-          .update()
-      , Math.floor(1000 / 40)
-
-

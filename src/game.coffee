@@ -43,7 +43,7 @@ class Game
   handleBattle: (e) =>
     Q.allSettled([
       AudioManager.playSound 'battle_start.wav',
-      @mapScreen.handleBlur()
+      new Effect.Blur(@canvas)
     ]).then (val) =>
       @screenManager.push(new Battle.Screen game: @, party: @party)
 
@@ -53,4 +53,4 @@ class Game
 Battle = {}
 Map = {}
 Model = {}
-
+Effect = {}
