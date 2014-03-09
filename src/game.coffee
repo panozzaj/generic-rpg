@@ -18,8 +18,6 @@ class Game
     ]
 
     GameEvent.on 'battle', @handleBattle
-    GameEvent.on 'popScreen', =>
-      @screenManager.pop()
 
   destructor: =>
     console.log 'destructed Game'

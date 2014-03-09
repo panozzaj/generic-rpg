@@ -2,12 +2,14 @@ class ScreenManager
   constructor: ->
     @screens = []
 
-  push: (screen) ->
+    GameEvent.on 'popScreen', @pop
+
+  push: (screen) =>
     @screens.push screen
     GameEvent.trigger 'pushResponder', responder: screen
     GameEvent.trigger 'playMusic', music: @activeScreen().music
 
-  pop: ->
+  pop: =>
     screen = @screens.pop()
     screen.destroy()
     GameEvent.trigger 'popResponder', responder: screen
