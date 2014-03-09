@@ -42,7 +42,7 @@ class Game
 
   handleBattle: (e) =>
     Q.allSettled([
-      @audioManager.play('battle_start.wav'),
+      AudioManager.playSound 'battle_start.wav',
       @mapScreen.handleBlur()
     ]).then (val) =>
       @screenManager.push(new Battle.Screen game: @, party: @party)

@@ -1,21 +1,22 @@
 class AudioManager
-  constructor: ->
-    if window.location.search.match("music=true")
-      GameEvent.on 'playMusic', @handlePlayMusic
+  @shouldPlayMusic: window.location.search.match("music=true")
 
-    GameEvent.on 'playSound', @handlePlaySound
+  @playMusic: (music) ->
+    return unless @shouldPlayMusic
 
-  handlePlayMusic: (e) =>
     @music?.pause()
-    @play e.attributes.music
+    @music = new Audio("assets/music/#{music}")
+    @music.loop = true
 
-  handlePlaySound: (e) =>
-    @play e.attributes.sound
+    new Promise (resolve, reject) =>
+      @music.addEventListener 'canplaythrough', -> @play()
+      @music.addEventListener 'ended', -> resolve()
+      @music.addEventListener 'error', -> reject()
 
-  play: (sound) =>
+  @playSound: (sound) ->
+    audio = new Audio("assets/sound/#{sound}")
+
     new Promise (resolve, reject) ->
-      audio = new Audio("assets/sound/#{sound}")
       audio.addEventListener 'canplaythrough', -> @play()
       audio.addEventListener 'ended', -> resolve()
       audio.addEventListener 'error', -> reject()
-

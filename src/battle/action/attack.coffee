@@ -11,7 +11,7 @@ class Battle.Action.Attack extends Battle.Action
     @source.flash(0)
     @target.flash(10)
 
-    GameEvent.trigger 'playSound', sound: _.sample(['low_slash.wav', 'high_slash.wav'])
+    AudioManager.playSound _.sample(['low_slash.wav', 'high_slash.wav'])
 
   update: ->
     if @damageDisplayTTL > 0
