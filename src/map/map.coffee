@@ -52,10 +52,16 @@ class Map.Map
           @tileSize, @tileSize
 
   isCollidable: ({ x, y }) ->
-    collidableObjects = _.flatten(_.map(_.filter(_.values(@objectGroups), name: 'objects'), (objectGroup) -> objectGroup.objects))
-    # not sure why y has off by one
-    willCollideWithObject = _.any(collidableObjects, (object) => parseInt(object.y) / @tilesetTileSize == y + 1 && parseInt(object.x) / @tilesetTileSize == x)
-    _.find(@layers, name: "fg").data[y][x] != "0" || willCollideWithObject
+    _.find(@layers, name: "fg").data[y][x] != "0"
 
   isWalkable: (params) ->
     !@isCollidable(params)
+
+  contents: ({ x, y }) ->
+    objects = @objectsForGroup 'objects'
+    match = _.find objects, (object) =>
+      parseInt(object.x) / @tilesetTileSize == x && parseInt(object.y) / @tilesetTileSize == y
+    match?.properties.contents
+
+  objectsForGroup: (name) ->
+    _.flatten(_.map(_.filter(_.values(@objectGroups), name: name), (objectGroup) -> objectGroup.objects))
