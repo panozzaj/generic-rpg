@@ -1,6 +1,6 @@
 class Map.Map
   constructor: (mapScreen) ->
-    tmxloader.load('src/map/data/map2.tmx')
+    tmxloader.load('src/map/data/outdoors.tmx')
 
     @tileset = tmxloader.map.tilesets[0]
     @tilesetImage = new Image
