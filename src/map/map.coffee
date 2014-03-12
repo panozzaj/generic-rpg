@@ -1,12 +1,21 @@
 class Map.Map
   constructor: (mapScreen) ->
-    tmxloader.load('src/map/data/outdoors.tmx')
+    @changeMap 'town'
+    { @tileSize } = mapScreen
+
+    GameEvent.on 'mapChange', @handleChangeMap
+
+  handleChangeMap: (e) =>
+    console.log e
+    @changeMap e.attributes.mapName
+
+  changeMap: (mapName) =>
+    tmxloader.load("src/map/data/#{mapName}.tmx")
 
     @tileset = tmxloader.map.tilesets[0]
     @tilesetImage = new Image
     @tilesetImage.src = "src/map/data/#{@tileset.src}"
     @layers = tmxloader.map.layers
-    { @tileSize } = mapScreen
 
     @tilesetTileSize = @tileset.tileWidth
     @tilesWide = tmxloader.map.width
@@ -56,6 +65,10 @@ class Map.Map
 
   isWalkable: (params) ->
     !@isCollidable(params)
+
+  triggerAt: ({ x, y }) ->
+    _.find @objectsForGroup('triggers'), (trigger) =>
+      parseInt(trigger.x) / @tilesetTileSize == x && parseInt(trigger.y) / @tilesetTileSize == y
 
   contents: ({ x, y }) ->
     objects = @objectsForGroup 'objects'

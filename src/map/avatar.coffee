@@ -2,7 +2,7 @@ class Map.Avatar
 
   constructor: (@screen) ->
     @tileSize = @screen.tileSize
-    @setMapPosition(10, 10)
+    @setMapPosition(20, 24)
     @velocity = { x: 0, y: 0 }
     @speed = 8
     @spriteSheet = new Image()
@@ -20,13 +20,11 @@ class Map.Avatar
   update: ->
     if @velocity.x != 0
       @screenPosition.x += @velocity.x
-      if @screenPosition.x % @tileSize == 0
-        @velocity.x = 0
+      @stopMoving() if @screenPosition.x % @tileSize == 0
 
     if @velocity.y != 0
       @screenPosition.y += @velocity.y
-      if @screenPosition.y % @tileSize == 0
-        @velocity.y = 0
+      @stopMoving() if @screenPosition.y % @tileSize == 0
 
     # animation frame counter
     if @frameCounter > 8
@@ -65,6 +63,11 @@ class Map.Avatar
 
   isMoving: ->
     @velocity.x != 0 || @velocity.y != 0
+
+  stopMoving: ->
+    @velocity = { x: 0, y: 0 }
+    if trigger = @screen.map.triggerAt @mapPosition
+      GameEvent.trigger 'mapChange', mapName: trigger.properties.mapName
 
   onkeydown: (event) =>
     return if @velocity.x || @velocity.y
@@ -105,4 +108,3 @@ class Map.Avatar
       @sprite1.src = "assets/images/cecil-#{@direction}.png"
 
     @millisecondsWas = milliseconds
-

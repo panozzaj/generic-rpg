@@ -162,7 +162,7 @@
  <objectgroup name="triggers" width="32" height="32">
   <object name="Shop Door" type="trigger" x="320" y="352" width="16" height="16">
    <properties>
-    <property name="map" value="shop"/>
+    <property name="mapName" value="shop"/>
    </properties>
   </object>
  </objectgroup>
