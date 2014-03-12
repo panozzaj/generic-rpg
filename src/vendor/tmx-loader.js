@@ -112,7 +112,7 @@ tmxloader.load = function (url) {
 
   $tilewidth = $xml.find("map").attr("tilewidth");
   $tileheight = $xml.find("map").attr("tileheight");
-  var properties = tmxloader.parseProperties($xml.find("map"));
+  var properties = tmxloader.parseProperties($xml);
   tmxloader.map = new tmxloader.Map($width, $height, $tilewidth, $tileheight, $xml.find('layer').length, properties);
 
   console.log('Creating Map...' + tmxloader.map.width + " x " + tmxloader.map.height + " Tiles: " + tmxloader.map.tileWidth + " x " + tmxloader.map.tileHeight);

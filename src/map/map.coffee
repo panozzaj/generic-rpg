@@ -79,3 +79,4 @@ class Map.Map
   objectsForGroup: (name) ->
     _.flatten(_.map(_.filter(_.values(@objectGroups), name: name), (objectGroup) -> objectGroup.objects))
 
+

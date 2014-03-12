@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="32" height="32" tilewidth="16" tileheight="16">
- <properties>
-  <property name="mapName" value="overworld"/>
-  <property name="xPosition" value="29"/>
-  <property name="yPosition" value="36"/>
- </properties>
  <tileset firstgid="1" name="FF6MapTileCitiesTown" tilewidth="16" tileheight="16">
   <image source="FF6MapTileCitiesTown.png" width="800" height="1040"/>
  </tileset>
@@ -175,8 +170,11 @@
   <object name="exitEast" type="trigger" x="512" y="0" width="16" height="512">
    <properties>
     <property name="mapName" value="overworld"/>
+    <property name="xPosition" value="29"/>
+    <property name="yPosition" value="36"/>
    </properties>
   </object>
  </objectgroup>
 </map>
+
 
