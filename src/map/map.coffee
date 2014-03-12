@@ -55,13 +55,18 @@ class Map.Map
           @tileSize, @tileSize
 
   isCollidable: ({ x, y }) ->
-    _.find(@layers, name: "fg").data[y][x] != "0"
+    tile = _.find(@layers, name: "fg").data[y][x]
+    if tile == undefined
+      false
+    else if tile != "0"
+      true
 
   isWalkable: (params) ->
     !@isCollidable(params)
 
   triggerAt: ({ x, y }) ->
     _.find @objectsForGroup('triggers'), (trigger) =>
+      console.log x, y, trigger
       parseInt(trigger.x) / @tilesetTileSize <= x < (parseInt(trigger.x) + parseInt(trigger.width)) / @tilesetTileSize &&
       parseInt(trigger.y) / @tilesetTileSize <= y < (parseInt(trigger.y) + parseInt(trigger.height)) / @tilesetTileSize
 
@@ -73,3 +78,4 @@ class Map.Map
 
   objectsForGroup: (name) ->
     _.flatten(_.map(_.filter(_.values(@objectGroups), name: name), (objectGroup) -> objectGroup.objects))
+

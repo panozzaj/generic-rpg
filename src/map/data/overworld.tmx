@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="100" height="100" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="FF6MapTileOverworld" tilewidth="16" tileheight="16">
+  <image source="FF6MapTileOverworld.png" width="256" height="535"/>
+ </tileset>
+ <layer name="bg" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJzt211KAzEYRuFxOeoCxAreq1vRJXTN3YJT2mApk8xfkvfEvB+cG6F28j2OUG1PwzCcVnbc8JjW+ol8vfT0uGu6R+y5ey21j9KT06P0vZXz5+aYuN4WPFK7Dmf7XvB9tlqWsIhdr9Jj7pxT175392QLskeOn/sc+835+3TJecgeuS3W7jeHRcwh9r2pHufrPzxMlzp/7DGpSnmk7onWPOZ2m8Mh9T1LWmz1Lz17PML+cjgsvfdKWqjvjWHm+UvsuoZJCYvePbaalLKwRz2LFjyUDms9phxKvMapMffXoTZY67H2tUUrHurdb/HIZWGP/R45LZY8rtaEa1Hvfs5j6Z7twfHY83pe/TowTHhO9e7tcZn/4rH3b132WO5R4//7qvcv3A/ZI2SPNrIHs1IWCg/1Lmu5pN4zYQ/W/WIPlos9WC72YJnYg2NC+Ttijx5TJvZox0Mx6v2oTXr3eBx7uvYsNqH9rlJ4vI69j72Mz/0mvk/sMQwfY5/XvsQe4T7p2YOWPXhRLOwRN7GHPexhD2oEC3v8dfv/Q3vou30fsD30UUa9B0qUUe+BEmXUe6BEGfUeqNmDlT1Y2YOVPVjZg5U9WNmDlT1Y2YOVPVjZg5U9WNmDlT1Y2YOTctRnJ2YPVvZg1ZMH5fNR9rgUPh91Tv35KHvwPh/Vu0cL2YOVPVjZg5U9WNmDlT1Y2YOVPVjZg5U9WNmDlT04qUd9flrqUZ+flnrU56elHvX5aalHfX5ShFHvgBRh1DsgRRj1DkgRRr0DUoRR74AUYdQ7IEUY9Q5IEUa9A1KEUe+AFGHUOyBFmF/HODf1
+  </data>
+ </layer>
+</map>

@@ -59,3 +59,4 @@ class Map.Screen
     @map.drawTop context
     context.restore()
 
+
