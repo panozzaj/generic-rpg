@@ -67,7 +67,7 @@ class Map.Avatar
   stopMoving: ->
     @velocity = { x: 0, y: 0 }
     if trigger = @screen.map.triggerAt @mapPosition
-      GameEvent.trigger 'mapChange', trigger: trigger
+      GameEvent.trigger 'mapChange', { trigger }
 
   onkeydown: (event) =>
     return if @velocity.x || @velocity.y

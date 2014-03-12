@@ -62,7 +62,8 @@ class Map.Map
 
   triggerAt: ({ x, y }) ->
     _.find @objectsForGroup('triggers'), (trigger) =>
-      parseInt(trigger.x) / @tilesetTileSize == x && parseInt(trigger.y) / @tilesetTileSize == y
+      parseInt(trigger.x) / @tilesetTileSize <= x < (parseInt(trigger.x) + parseInt(trigger.width)) / @tilesetTileSize &&
+      parseInt(trigger.y) / @tilesetTileSize <= y < (parseInt(trigger.y) + parseInt(trigger.height)) / @tilesetTileSize
 
   contents: ({ x, y }) ->
     objects = @objectsForGroup 'objects'

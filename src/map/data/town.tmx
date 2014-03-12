@@ -164,7 +164,7 @@
    <properties>
     <property name="mapName" value="shop"/>
     <property name="xPosition" value="8"/>
-    <property name="yPosition" value="14"/>
+    <property name="yPosition" value="12"/>
    </properties>
   </object>
  </objectgroup>

@@ -4,7 +4,6 @@ Things that we can work on:
  - map mode
   - a dude moving around on a landscape
    - change maps
-    - enter building
     - enter / exit town
      - can set properties on map and look at these when the map bounds are stepped on
    - handling events on objects

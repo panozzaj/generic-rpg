@@ -28,10 +28,9 @@ class Map.Screen
     @camera.follow @avatar
 
   handleChangeMap: (e) =>
-    console.log e
     { mapName, xPosition, yPosition } = e.attributes.trigger.properties
     @map.changeMap mapName
-    @avatar.setMapPosition xPosition, yPosition
+    @avatar.setMapPosition parseInt(xPosition), parseInt(yPosition)
 
   destroy: ->
     _.each @events(), (handler, eventName) ->
