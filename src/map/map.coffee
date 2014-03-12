@@ -3,12 +3,6 @@ class Map.Map
     @changeMap 'town'
     { @tileSize } = mapScreen
 
-    GameEvent.on 'mapChange', @handleChangeMap
-
-  handleChangeMap: (e) =>
-    console.log e
-    @changeMap e.attributes.mapName
-
   changeMap: (mapName) =>
     tmxloader.load("src/map/data/#{mapName}.tmx")
 

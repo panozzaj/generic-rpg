@@ -163,6 +163,8 @@
   <object name="Shop Door" type="trigger" x="320" y="352" width="16" height="16">
    <properties>
     <property name="mapName" value="shop"/>
+    <property name="xPosition" value="8"/>
+    <property name="yPosition" value="14"/>
    </properties>
   </object>
  </objectgroup>

@@ -3,6 +3,7 @@ class Map.Screen
 
   events: ->
     blurScreen: @handleBlur
+    mapChange: @handleChangeMap
 
   constructor: (@game) ->
     _.each @events(), (handler, eventName) ->
@@ -25,6 +26,12 @@ class Map.Screen
     @objects.push(@dialog)
 
     @camera.follow @avatar
+
+  handleChangeMap: (e) =>
+    console.log e
+    { mapName, xPosition, yPosition } = e.attributes.trigger.properties
+    @map.changeMap mapName
+    @avatar.setMapPosition xPosition, yPosition
 
   destroy: ->
     _.each @events(), (handler, eventName) ->
@@ -52,3 +59,4 @@ class Map.Screen
       object.draw context
     @map.drawTop context
     context.restore()
+

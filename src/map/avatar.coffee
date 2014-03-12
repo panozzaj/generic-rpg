@@ -67,7 +67,7 @@ class Map.Avatar
   stopMoving: ->
     @velocity = { x: 0, y: 0 }
     if trigger = @screen.map.triggerAt @mapPosition
-      GameEvent.trigger 'mapChange', mapName: trigger.properties.mapName
+      GameEvent.trigger 'mapChange', trigger: trigger
 
   onkeydown: (event) =>
     return if @velocity.x || @velocity.y
@@ -108,3 +108,4 @@ class Map.Avatar
       @sprite1.src = "assets/images/cecil-#{@direction}.png"
 
     @millisecondsWas = milliseconds
+
