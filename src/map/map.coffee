@@ -1,7 +1,6 @@
 class Map.Map
   constructor: (mapScreen) ->
     @changeMap 'town'
-    { @tileSize } = mapScreen
 
   changeMap: (mapName) =>
     tmxloader.load("src/map/data/#{mapName}.tmx")
@@ -11,7 +10,7 @@ class Map.Map
     @tilesetImage.src = "src/map/data/#{@tileset.src}"
     @layers = tmxloader.map.layers
 
-    @tilesetTileSize = @tileset.tileWidth
+    @tilesetTileSize = parseInt(@tileset.tileWidth)
     @tilesWide = tmxloader.map.width
     @tilesTall = tmxloader.map.height
 
@@ -20,39 +19,30 @@ class Map.Map
     @objectGroups = tmxloader.map.objectgroups
     @objects = _.flatten(_.map(_.values(@objectGroups), (objectGroup) -> objectGroup.objects))
 
-  drawBottom: (context) =>
-    _.each _.reject(@layers, { name: 'top' }), (layer) =>
-      @drawLayer layer, context
+  tileDataFor: ({ layerNames, xRange, yRange }) ->
+    tileData = []
 
-    _.each @objects, (object) =>
-      tileId = parseInt(object.gid) - 1
-      tileRow = Math.floor(tileId / @tilesetColumns)
-      tileColumn = tileId % @tilesetColumns
-      context.drawImage @tilesetImage,
-        tileColumn * @tilesetTileSize, tileRow * @tilesetTileSize,
-        @tilesetTileSize, @tilesetTileSize,
-        # not sure why y has off by one
-        parseInt(object.x) / @tilesetTileSize * @tileSize, (parseInt(object.y) / @tilesetTileSize - 1) * @tileSize,
-        @tileSize, @tileSize
+    _.each layerNames, (layerName) =>
+      layer = _.find @layers, name: layerName
+      return unless layer
 
-  drawTop: (context) =>
-    _.each _.filter(@layers, { name: 'top' }), (layer) =>
-      @drawLayer layer, context
+      for y in yRange
+        for x in xRange
+          tileId = layer.data[y][x] - 1
+          tileRow = Math.floor(tileId / @tilesetColumns)
+          tileColumn = tileId % @tilesetColumns
 
-  drawLayer: (layer, context) =>
-    data = layer.data
-    for y in [0...data.length]
-      for x in [0...data.length]
-        tileId = data[x][y] - 1
+          continue if tileId == -1
+          tileData.push
+            image: @tilesetImage
+            sx: tileColumn * @tilesetTileSize
+            sy: tileRow * @tilesetTileSize
+            sw: @tilesetTileSize
+            sh: @tilesetTileSize
+            x: x
+            y: y
 
-        tileRow = Math.floor(tileId / @tilesetColumns)
-        tileColumn = tileId % @tilesetColumns
-
-        context.drawImage @tilesetImage,
-          tileColumn * @tilesetTileSize, tileRow * @tilesetTileSize,
-          @tilesetTileSize, @tilesetTileSize,
-          y * @tileSize, x * @tileSize,
-          @tileSize, @tileSize
+    tileData
 
   isCollidable: ({ x, y }) ->
     tile = _.find(@layers, name: "fg").data[y][x]
@@ -78,5 +68,3 @@ class Map.Map
 
   objectsForGroup: (name) ->
     _.flatten(_.map(_.filter(_.values(@objectGroups), name: name), (objectGroup) -> objectGroup.objects))
-
-

@@ -48,15 +48,13 @@ class Map.Screen
     { position } = @camera
 
     translate =
-      x: _.min([_.max([-position.x + @width / 2, -(@map.tilesWide*@tileSize) + @width]), 0])
-      y: _.min([_.max([-position.y + @height / 2, -(@map.tilesTall*@tileSize) + @height]), 0])
+      x: _.min([_.max([-position.x + @width / 2, -(@map.tilesWide * @tileSize) + @width]), 0])
+      y: _.min([_.max([-position.y + @height / 2, -(@map.tilesTall * @tileSize) + @height]), 0])
 
     context.translate translate.x, translate.y
 
-    @map.drawBottom context
+    @camera.drawBottom context, @map
     for object in @objects
       object.draw context
-    @map.drawTop context
+    @camera.drawTop context, @map
     context.restore()
-
-
