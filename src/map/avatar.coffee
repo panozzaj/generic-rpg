@@ -2,7 +2,7 @@ class Map.Avatar
 
   constructor: (@screen) ->
     @tileSize = @screen.tileSize
-    @setMapPosition(20, 16)
+    @setTilePosition(30, 30)
     @velocity = { x: 0, y: 0 }
     @speed = 8
     @spriteSheet = new Image()
@@ -41,14 +41,14 @@ class Map.Avatar
   spriteOffset: ->
     @directionMappings[@direction] * 64 + @frame * 32
 
-  setMapPosition: (x, y) ->
-    @mapPosition = { x: x, y: y }
+  setTilePosition: (x, y) ->
+    @tilePosition = { x: x, y: y }
     @screenPosition = { x: x * @tileSize, y: y * @tileSize }
 
   moveInDirection: (direction) ->
     @setDirection(direction)
     if @screen.map.isWalkable @facing()
-      @mapPosition = @facing()
+      @tilePosition = @facing()
       if direction == 'left'
         @velocity.x = -@speed
       else if direction == 'right'
@@ -66,7 +66,7 @@ class Map.Avatar
 
   stopMoving: ->
     @velocity = { x: 0, y: 0 }
-    if trigger = @screen.map.triggerAt @mapPosition
+    if trigger = @screen.map.triggerAt @tilePosition
       GameEvent.trigger 'mapChange', { trigger }
 
   onkeydown: (event) =>
@@ -90,7 +90,7 @@ class Map.Avatar
           GameEvent.trigger 'battle'
 
   facing: ->
-    { x, y } = @mapPosition
+    { x, y } = @tilePosition
     switch @direction
       when 'left'  then x -= 1
       when 'right' then x += 1

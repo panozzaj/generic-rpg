@@ -14,6 +14,9 @@ class Map.Screen
 
     @tileSize = 64
 
+    @tilesWide = @width / @tileSize
+    @tilesTall = @height / @tileSize
+
     @map = new Map.Map @
     @camera = new Map.Camera @
 
@@ -30,7 +33,7 @@ class Map.Screen
   handleChangeMap: (e) =>
     { mapName, xPosition, yPosition } = e.attributes.trigger.properties
     @map.changeMap mapName
-    @avatar.setMapPosition parseInt(xPosition), parseInt(yPosition)
+    @avatar.setTilePosition parseInt(xPosition), parseInt(yPosition)
 
   destroy: ->
     _.each @events(), (handler, eventName) ->
@@ -45,11 +48,11 @@ class Map.Screen
 
   draw: (context) ->
     context.save()
-    { position } = @camera
+    { screenPosition } = @camera
 
     translate =
-      x: _.min([_.max([-position.x + @width / 2, -(@map.tilesWide * @tileSize) + @width]), 0])
-      y: _.min([_.max([-position.y + @height / 2, -(@map.tilesTall * @tileSize) + @height]), 0])
+      x: _.min([_.max([-screenPosition.x + @width / 2, -(@map.tilesWide * @tileSize) + @width]), 0])
+      y: _.min([_.max([-screenPosition.y + @height / 2, -(@map.tilesTall * @tileSize) + @height]), 0])
 
     context.translate translate.x, translate.y
 
@@ -58,3 +61,4 @@ class Map.Screen
       object.draw context
     @camera.drawTop context, @map
     context.restore()
+

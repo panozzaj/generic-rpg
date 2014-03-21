@@ -2,7 +2,7 @@ class Map.NPC
 
   constructor: (map) ->
     @tileSize = map.tileSize
-    @setMapPosition(4, 5)
+    @setTilePosition(4, 5)
 
     GameEvent.on 'talk', @talk
 
@@ -15,12 +15,12 @@ class Map.NPC
     context.fillRect @screenPosition.x, @screenPosition.y, @tileSize, @tileSize
     context.restore()
 
-  setMapPosition: (x, y) ->
-    @mapPosition = { x: x, y: y }
+  setTilePosition: (x, y) ->
+    @tilePosition = { x: x, y: y }
     @screenPosition = { x: x * @tileSize, y: y * @tileSize }
 
   talk: (e) =>
-    if _.isEqual(e.attributes.facing, @mapPosition)
+    if _.isEqual(e.attributes.facing, @tilePosition)
       GameEvent.trigger 'dialog', text: """
         Hello Simba!
         This is your destiny...
