@@ -167,7 +167,28 @@
     <property name="yPosition" value="12"/>
    </properties>
   </object>
-  <object name="exitEast" type="trigger" x="512" y="0" width="16" height="512">
+  <object name="exitEast" type="trigger" x="496" y="0" width="16" height="512">
+   <properties>
+    <property name="mapName" value="overworld"/>
+    <property name="xPosition" value="29"/>
+    <property name="yPosition" value="36"/>
+   </properties>
+  </object>
+  <object name="exitNorth" type="trigger" x="0" y="0" width="512" height="16">
+   <properties>
+    <property name="mapName" value="overworld"/>
+    <property name="xPosition" value="29"/>
+    <property name="yPosition" value="36"/>
+   </properties>
+  </object>
+  <object name="exitWest" type="trigger" x="0" y="0" width="16" height="512">
+   <properties>
+    <property name="mapName" value="overworld"/>
+    <property name="xPosition" value="29"/>
+    <property name="yPosition" value="36"/>
+   </properties>
+  </object>
+  <object name="exitSouth" type="trigger" x="0" y="496" width="512" height="16">
    <properties>
     <property name="mapName" value="overworld"/>
     <property name="xPosition" value="29"/>
@@ -176,5 +197,3 @@
   </object>
  </objectgroup>
 </map>
-
-

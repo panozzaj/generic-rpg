@@ -3,12 +3,7 @@ Things that we can work on:
 
  - map mode
   - a dude moving around on a landscape
-   - change maps
-    - enter / exit town
-     - can set properties on map and look at these when the map bounds are stepped on
    - handling events on objects
-   - some sort of bounds checking on landscape (or other screens)
-   - restrict to map boundaries
   - context.scale(4,4) instead of passing MapScreen#tileSize around?
 
   - NPC box that when you walk up to it, it opens a quick chat dialog
