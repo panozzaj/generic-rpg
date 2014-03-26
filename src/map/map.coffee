@@ -66,5 +66,11 @@ class Map.Map
       parseInt(object.x) / @tilesetTileSize == x && parseInt(object.y) / @tilesetTileSize == y
     match?.properties.contents
 
+  npcs: ->
+    _.map _.filter(@objectsForGroup('objects'), type: "NPC"), (npc) =>
+      npc.tileX = npc.x / @tilesetTileSize
+      npc.tileY = npc.y / @tilesetTileSize
+      npc
+
   objectsForGroup: (name) ->
     _.flatten(_.map(_.filter(_.values(@objectGroups), name: name), (objectGroup) -> objectGroup.objects))

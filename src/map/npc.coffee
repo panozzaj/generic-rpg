@@ -1,8 +1,9 @@
 class Map.NPC
 
-  constructor: (map) ->
+  constructor: (map, data) ->
+    { @name, tileX, tileY } = data
     @tileSize = map.tileSize
-    @setTilePosition(4, 5)
+    @setTilePosition(tileX, tileY)
 
     GameEvent.on 'talk', @talk
 
@@ -24,4 +25,4 @@ class Map.NPC
       GameEvent.trigger 'dialog', text: """
         Hello Simba!
         This is your destiny...
-      """
+      """, npcScreenPosition: @screenPosition

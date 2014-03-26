@@ -2,6 +2,9 @@
 Things that we can work on:
 
  - map mode
+
+  - handle more than one tileset image
+
   - a dude moving around on a landscape
    - handling events on objects
   - context.scale(4,4) instead of passing MapScreen#tileSize around?
@@ -55,7 +58,7 @@ Things that we can work on:
 
 
  Nice-to-haves:
-  - parallax scrolling of map backgrounds
+  - parallax scrolling of battle backgrounds
 
  Technical debt
   - figure out a way to get both people with a valid git repository in floobits
@@ -73,3 +76,12 @@ Things that we can work on:
  Would be really sweet list
   - NPCs talk to each other with little speech bubbles, which you can see
   - bull monster that only attacks players with red clothes
+  - game where you try to rally the troops by conversation / motivation
+  - "massively single-player online RPG"
+    - only open certain quests when a certain number of all players have done X
+    - "mayor of a town" -- whoever has helped the most people in an area is adored by the inhabitants
+
+
+ Ecosystem improvements
+  - better texture loader program
+  - tmxloader.js improvement resubmission / fork

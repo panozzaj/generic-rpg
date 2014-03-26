@@ -23,8 +23,8 @@ class Map.Screen
     @objects = []
     @avatar = new Map.Avatar @
     @objects.push(@avatar)
-    @npc = new Map.NPC @
-    @objects.push(@npc)
+    @npcs = _.map @map.npcs(), (npc) =>
+      @objects.push new Map.NPC(@, npc)
     @dialog = new Map.Dialog @
     @objects.push(@dialog)
 
@@ -61,4 +61,3 @@ class Map.Screen
       object.draw context
     @camera.drawTop context, @map
     context.restore()
-

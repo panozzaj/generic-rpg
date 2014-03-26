@@ -23,9 +23,6 @@ class Map.Camera
     x1 = @calcCenter(@tilePosition.x, @halfTilesWide, map.tilesWide - 1)
     y1 = @calcCenter(@tilePosition.y, @halfTilesTall, map.tilesTall - 1)
 
-    console.log x1, y1 unless @logged
-    @logged = true
-
     tileData = map.tileDataFor
       layerNames: layerNames
       xRange: [(x1 - @halfTilesWide)..(x1 + @halfTilesWide)] # replace with correct value
@@ -57,4 +54,3 @@ class Map.Camera
     console.log @calcCenter(10, 6, 63) == 10 || throw "fail"
     console.log @calcCenter(31, 6, 63) == 31 || throw "fail"
     console.log @calcCenter(63, 6, 63) == 57 || throw "fail"
-
