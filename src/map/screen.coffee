@@ -4,6 +4,7 @@ class Map.Screen
   events: ->
     blurScreen: @handleBlur
     mapChange: @handleChangeMap
+    dialog: @handleCreateDialog
 
   constructor: (@game) ->
     _.each @events(), (handler, eventName) ->
@@ -25,8 +26,6 @@ class Map.Screen
     @objects.push(@avatar)
     @npcs = _.map @map.npcs(), (npc) =>
       @objects.push new Map.NPC(@, npc)
-    @dialog = new Map.Dialog @
-    @objects.push(@dialog)
 
     @camera.follow @avatar
 
@@ -61,3 +60,9 @@ class Map.Screen
       object.draw context
     @camera.drawTop context, @map
     context.restore()
+
+    @dialog?.draw()
+
+  handleCreateDialog: (e) =>
+    @dialog = new Map.Dialog e.attributes.text
+    @dialog.show()

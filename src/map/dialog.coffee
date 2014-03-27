@@ -1,20 +1,26 @@
 class Map.Dialog
-  constructor: (game) ->
-    @alive = false
-    GameEvent.on 'dialog', @show
+  constructor: (@text) ->
+    @canvas = document.createElement('canvas')
+    @canvas.width = 1024
+    @canvas.height = 200
+    @canvas.style.zIndex = 1000
+    @canvas.style.position = 'absolute'
+    @canvas.style.left = 0
+    @canvas.style.top = 0
+    document.getElementById('canvases').appendChild(@canvas)
 
-  update: ->
-    # something
+  destructor: () ->
+    document.getElementById('canvases').removeChild(@canvas)
 
-  draw: (context) ->
-    if @alive
-      @drawBackground(context)
-      @drawText(context)
+  draw: () ->
+    context = @canvas.getContext('2d')
+    @drawBackground(context)
+    @drawText(context)
 
   drawBackground: (context) ->
     context.save()
     context.fillStyle = "#33c"
-    context.fillRect @x, @y, 500, 250
+    context.fillRect 0, 0, 1024, 200
     context.restore()
 
   drawText: (context) ->
@@ -23,21 +29,15 @@ class Map.Dialog
     context.font = '30px manaspaceregular'
     lines = @text.split("\n")
     _.each lines, (line, i) =>
-      context.fillText line, @x + 30, @y + 60 + 40 * i
+      context.fillText line, 30, 60 + 40 * i
     context.restore()
 
   show: (e) =>
-    @alive = true
-    @text = e.attributes.text
-    @positionBasedOn e.attributes.npcScreenPosition
     GameEvent.trigger 'pushResponder', responder: @
 
-  positionBasedOn: ({ x, y }) ->
-    @x = x - 200
-    @y = y - 255
-
-  onkeydown: (event) ->
+  onkeydown: (event) =>
     switch event.which
       when 90 # z
-        @alive = false
         GameEvent.trigger 'popResponder', responder: @
+        @destructor()
+

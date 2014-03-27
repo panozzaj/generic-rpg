@@ -2,11 +2,11 @@
 Things that we can work on:
 
  - map mode
+  - handling events on objects
+   - better NPC decoupling
 
   - handle more than one tileset image
 
-  - a dude moving around on a landscape
-   - handling events on objects
   - context.scale(4,4) instead of passing MapScreen#tileSize around?
 
   - NPC box that when you walk up to it, it opens a quick chat dialog

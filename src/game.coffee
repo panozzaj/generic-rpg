@@ -6,6 +6,8 @@ class Game
     @audioManager = new AudioManager
 
     @canvas = document.getElementById 'game'
+    @canvas.width = 1024
+    @canvas.height = 640
     @context = @canvas.getContext '2d'
     @context.imageSmoothingEnabled = false
 

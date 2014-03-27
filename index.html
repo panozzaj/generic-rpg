@@ -20,13 +20,19 @@
       body {
         font-family: 'manaspaceregular';
       }
+
+      #canvases {
+        position: relative;
+      }
     </style>
   </head>
   <body>
     <h1>Generic RPG</h1>
-    <canvas id="game" width="1024" height="640">
-      Canvas not supported.
-    </canvas>
+    <div id="canvases">
+      <canvas id="game">
+        Canvas not supported.
+      </canvas>
+    </div>
     <script src="build/main.js"></script>
     <script>
       window.requestAnimFrame = (function(){
@@ -49,3 +55,4 @@
     </script>
   </body>
 </html>
+
