@@ -5,13 +5,16 @@ class Map.NPC
     @tileSize = map.tileSize
     @setTilePosition(tileX, tileY)
 
+    @sprite = new Image
+    @sprite.src = "assets/images/king.png"
+
   update: ->
     # no-op
 
   draw: (context) ->
     context.save()
-    context.fillStyle = "#eee"
-    context.fillRect @screenPosition.x, @screenPosition.y, @tileSize, @tileSize
+    context.drawImage @sprite, 0, 0, 16, 16, \
+      @screenPosition.x, @screenPosition.y, @tileSize, @tileSize
     context.restore()
 
   setTilePosition: (x, y) ->
