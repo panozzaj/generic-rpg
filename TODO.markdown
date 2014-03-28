@@ -2,8 +2,10 @@
 Things that we can work on:
 
  - map mode
-  - handling events on objects
-   - better NPC decoupling
+
+  - disable walking through NPCs
+
+  - getting items
 
   - handle more than one tileset image
 
@@ -21,6 +23,10 @@ Things that we can work on:
    - cutscene
   - party switch mechanism
   - deploy somewhere and see what things break
+
+
+ - generic animation handler
+  - sprite animation, etc.
 
 
  - battle mode
@@ -85,3 +91,6 @@ Things that we can work on:
  Ecosystem improvements
   - better texture loader program
   - tmxloader.js improvement resubmission / fork
+
+ General improvements
+  - tile vs. pixel dimensions for easier translation / readability

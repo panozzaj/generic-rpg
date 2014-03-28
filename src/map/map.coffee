@@ -44,21 +44,30 @@ class Map.Map
 
     tileData
 
+  # fg is a tile layer, so it will return "0" for no-match
+  # objects is an object layer, so it will return undefined for no-match
+  # See *.tmx for an example
   isCollidable: ({ x, y }) ->
-    tile = _.find(@layers, name: "fg").data[y][x]
-    if tile == undefined
-      false
-    else if tile != "0"
-      true
+    fgTile = @tileAt({ x, y })
+    objTile = @objectAt({ x, y })
+
+    _.any [fgTile, objTile], (tile) => @hasContents(tile)
 
   isWalkable: (params) ->
     !@isCollidable(params)
 
+  tileAt: ({ x, y }) ->
+    _.find(@layers, name: "fg").data[y][x]
+
   triggerAt: ({ x, y }) ->
     _.find @objectsForGroup('triggers'), (trigger) =>
-      console.log x, y, trigger
       parseInt(trigger.x) / @tilesetTileSize <= x < (parseInt(trigger.x) + parseInt(trigger.width)) / @tilesetTileSize &&
       parseInt(trigger.y) / @tilesetTileSize <= y < (parseInt(trigger.y) + parseInt(trigger.height)) / @tilesetTileSize
+
+  objectAt: ({ x, y }) ->
+    _.find @objectsForGroup('objects'), (object) =>
+      parseInt(object.x) / @tilesetTileSize == x &&
+      parseInt(object.y) / @tilesetTileSize == y
 
   contents: ({ x, y }) ->
     objects = @objectsForGroup 'objects'
@@ -71,6 +80,8 @@ class Map.Map
       npc.tileX = npc.x / @tilesetTileSize
       npc.tileY = npc.y / @tilesetTileSize
       npc
+
+  hasContents: (tile) -> tile != undefined && tile != "0"
 
   objectsForGroup: (name) ->
     _.flatten(_.map(_.filter(_.values(@objectGroups), name: name), (objectGroup) -> objectGroup.objects))
