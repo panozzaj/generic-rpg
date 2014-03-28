@@ -82,8 +82,6 @@ class Map.Avatar
         @moveInDirection('down')
       when 90 # z
         if !@isMoving()
-          console.log @screen.map.contents @facing()
-          # legacy -- NPCs should move into map layer
           GameEvent.trigger 'talk', facing: @facing()
       when 66 #
         if !@isMoving()

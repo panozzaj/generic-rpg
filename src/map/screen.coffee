@@ -5,6 +5,7 @@ class Map.Screen
     blurScreen: @handleBlur
     mapChange: @handleChangeMap
     dialog: @handleCreateDialog
+    talk: @handleTalk
 
   constructor: (@game) ->
     _.each @events(), (handler, eventName) ->
@@ -66,3 +67,8 @@ class Map.Screen
   handleCreateDialog: (e) =>
     @dialog = new Map.Dialog e.attributes.text
     @dialog.show()
+
+  handleTalk: (e) =>
+    _.each @objects, (object) =>
+      if _.isEqual(e.attributes.facing, object.tilePosition)
+        object.talk()

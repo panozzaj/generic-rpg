@@ -5,8 +5,6 @@ class Map.NPC
     @tileSize = map.tileSize
     @setTilePosition(tileX, tileY)
 
-    GameEvent.on 'talk', @talk
-
   update: ->
     # no-op
 
@@ -20,9 +18,8 @@ class Map.NPC
     @tilePosition = { x: x, y: y }
     @screenPosition = { x: x * @tileSize, y: y * @tileSize }
 
-  talk: (e) =>
-    if _.isEqual(e.attributes.facing, @tilePosition)
-      GameEvent.trigger 'dialog', text: """
-        Hello Simba!
-        This is your destiny...
-      """, npcScreenPosition: @screenPosition
+  talk: =>
+    GameEvent.trigger 'dialog', text: """
+      Hello Simba!
+      This is your destiny...
+    """

@@ -9,10 +9,10 @@ class Map.Dialog
     @canvas.style.top = 0
     document.getElementById('canvases').appendChild(@canvas)
 
-  destructor: () ->
+  destructor: ->
     document.getElementById('canvases').removeChild(@canvas)
 
-  draw: () ->
+  draw: ->
     context = @canvas.getContext('2d')
     @drawBackground(context)
     @drawText(context)
@@ -40,4 +40,5 @@ class Map.Dialog
       when 90 # z
         GameEvent.trigger 'popResponder', responder: @
         @destructor()
+
 
