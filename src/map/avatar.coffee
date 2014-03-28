@@ -70,7 +70,7 @@ class Map.Avatar
       GameEvent.trigger 'mapChange', { trigger }
 
   onkeydown: (event) =>
-    return if @velocity.x || @velocity.y
+    return if @isMoving()
     switch event.which
       when 37 # left
         @moveInDirection('left')
@@ -81,11 +81,9 @@ class Map.Avatar
       when 40 # down
         @moveInDirection('down')
       when 90 # z
-        if !@isMoving()
-          GameEvent.trigger 'talk', facing: @facing()
-      when 66 #
-        if !@isMoving()
-          GameEvent.trigger 'battle'
+        GameEvent.trigger 'talk', facing: @facing()
+      when 66 # b
+        GameEvent.trigger 'battle'
 
   facing: ->
     { x, y } = @tilePosition
@@ -106,3 +104,4 @@ class Map.Avatar
       @sprite1.src = "assets/images/cecil-#{@direction}.png"
 
     @millisecondsWas = milliseconds
+
