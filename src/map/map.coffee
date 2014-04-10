@@ -44,6 +44,28 @@ class Map.Map
 
     tileData
 
+  objectDataFor: ({ xRange, yRange }) ->
+    tileData = []
+
+    inViewport = _.filter @objectsForGroup('objects'), (object) =>
+      (object.x / @tilesetTileSize) in xRange && (object.y / @tilesetTileSize) in yRange
+
+    _.each inViewport, (object) =>
+      tileId = object.gid - 1
+      tileRow = Math.floor(tileId / @tilesetColumns)
+      tileColumn = tileId % @tilesetColumns
+
+      tileData.push
+        image: @tilesetImage
+        sx: tileColumn * @tilesetTileSize
+        sy: tileRow * @tilesetTileSize
+        sw: @tilesetTileSize
+        sh: @tilesetTileSize
+        x: object.x / @tilesetTileSize
+        y: object.y / @tilesetTileSize
+
+    tileData
+
   # fg is a tile layer, so it will return "0" for no-match
   # objects is an object layer, so it will return undefined for no-match
   # See *.tmx for an example

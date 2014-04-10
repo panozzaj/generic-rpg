@@ -2,7 +2,7 @@ class Map.Avatar
 
   constructor: (@screen) ->
     @tileSize = @screen.tileSize
-    @setTilePosition(20, 10)
+    @setTilePosition(9, 8)
     @velocity = { x: 0, y: 0 }
     @speed = 8
     @spriteSheet = new Image()
@@ -104,4 +104,3 @@ class Map.Avatar
       @sprite1.src = "assets/images/cecil-#{@direction}.png"
 
     @millisecondsWas = milliseconds
-

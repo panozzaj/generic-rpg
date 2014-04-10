@@ -3,8 +3,6 @@ Things that we can work on:
 
  - map mode
 
-  - disable walking through NPCs
-
   - getting items
 
   - handle more than one tileset image
@@ -15,8 +13,8 @@ Things that we can work on:
    - Move NPC around
    - passing text and splitting on words intelligently
    - multiple dialog boxes in a row ("conversation")
+   - loading conversations from a file instead of it being in the source
    - data driven from map file or something to generate NPCs
-   - fix dialog to not be absolutely positioned at (320,240) (or whatever it is)
 
  - screen modes
    - menu

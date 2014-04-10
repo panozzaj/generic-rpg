@@ -16,17 +16,30 @@ class Map.Camera
   drawBottom: (context, map) =>
     @drawTiles context, map: map, layerNames: ['bg', 'bg2', 'fg']
 
+  drawObjects: (context, map) =>
+    x1 = @calcCenter(@tilePosition.x, @halfTilesWide, map.tilesWide - 1)
+    y1 = @calcCenter(@tilePosition.y, @halfTilesTall, map.tilesTall - 1)
+
+    tileData = map.objectDataFor
+      xRange: [(x1 - @halfTilesWide)..(x1 + @halfTilesWide)]
+      yRange: [(y1 - @halfTilesTall)..(y1 + @halfTilesTall)]
+
+    _.each tileData, (tile) =>
+      context.drawImage tile.image,
+        tile.sx, tile.sy, tile.sw, tile.sh,
+        tile.x * @tileSize, tile.y * @tileSize, @tileSize, @tileSize
+
   drawTop: (context, map) =>
     @drawTiles context, map: map, layerNames: ['top']
 
-  drawTiles: (context, { map, layerNames }) ->
+  drawTiles: (context, { map, layerNames, objectLayers }) ->
     x1 = @calcCenter(@tilePosition.x, @halfTilesWide, map.tilesWide - 1)
     y1 = @calcCenter(@tilePosition.y, @halfTilesTall, map.tilesTall - 1)
 
     tileData = map.tileDataFor
       layerNames: layerNames
-      xRange: [(x1 - @halfTilesWide)..(x1 + @halfTilesWide)] # replace with correct value
-      yRange: [(y1 - @halfTilesTall)..(y1 + @halfTilesTall)] # replace with correct value
+      xRange: [(x1 - @halfTilesWide)..(x1 + @halfTilesWide)]
+      yRange: [(y1 - @halfTilesTall)..(y1 + @halfTilesTall)]
 
     _.each tileData, (tile) =>
       context.drawImage tile.image,
@@ -54,3 +67,4 @@ class Map.Camera
     console.log @calcCenter(10, 6, 63) == 10 || throw "fail"
     console.log @calcCenter(31, 6, 63) == 31 || throw "fail"
     console.log @calcCenter(63, 6, 63) == 57 || throw "fail"
+
