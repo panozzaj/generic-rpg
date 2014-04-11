@@ -25,8 +25,8 @@ class Map.Screen
     @objects = []
     @avatar = new Map.Avatar @
     @objects.push(@avatar)
-    @npcs = _.map @map.npcs(), (npc) =>
-      @objects.push new Map.NPC(@, npc)
+    _.map @map.npcs(), (npc) =>
+      @objects.push new Map.Object.NPC(@, npc)
 
     @camera.follow @avatar
 

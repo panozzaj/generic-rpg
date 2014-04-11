@@ -1,15 +1,11 @@
-class Map.NPC
-
+class Map.Object
   constructor: (map, data) ->
     { @name, tileX, tileY } = data
     @tileSize = map.tileSize
     @setTilePosition(tileX, tileY)
 
-    @sprite = new Image
-    @sprite.src = "assets/images/king.png"
-
   update: ->
-    # no-op
+    # no-op by default
 
   draw: (context) ->
     context.save()
@@ -22,7 +18,4 @@ class Map.NPC
     @screenPosition = { x: x * @tileSize, y: y * @tileSize }
 
   talk: =>
-    GameEvent.trigger 'dialog', text: """
-      Hello Simba!
-      This is your destiny...
-    """
+    # no-op by default
