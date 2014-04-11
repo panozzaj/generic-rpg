@@ -102,6 +102,12 @@ class Map.Map
       npc.tileY = npc.y / @tilesetTileSize
       npc
 
+  treasures: ->
+    _.map _.filter(@objectsForGroup('objects'), type: "Treasure"), (treasure) =>
+      treasure.tileX = treasure.x / @tilesetTileSize
+      treasure.tileY = treasure.y / @tilesetTileSize
+      treasure
+
   hasContents: (tile) -> tile != undefined && tile != "0"
 
   objectsForGroup: (name) ->

@@ -27,6 +27,8 @@ class Map.Screen
     @objects.push(@avatar)
     _.map @map.npcs(), (npc) =>
       @objects.push new Map.Object.NPC(@, npc)
+    _.map @map.treasures(), (treasure) =>
+      @objects.push new Map.Object.Treasure(@, treasure)
 
     @camera.follow @avatar
 
