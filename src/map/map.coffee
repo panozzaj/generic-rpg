@@ -17,7 +17,6 @@ class Map.Map
     @tilesetColumns = @tileset.width / @tilesetTileSize
 
     @objectGroups = tmxloader.map.objectgroups
-    @objects = _.flatten(_.map(_.values(@objectGroups), (objectGroup) -> objectGroup.objects))
 
   tileDataFor: ({ layerNames, xRange, yRange }) ->
     tileData = []
