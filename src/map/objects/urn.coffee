@@ -1,4 +1,4 @@
-class Map.Object.Treasure extends Map.Object
+class Map.Object.Urn extends Map.Object
 
   constructor: (map, data) ->
     super
@@ -8,6 +8,6 @@ class Map.Object.Treasure extends Map.Object
 
   talk: =>
     GameEvent.trigger 'dialog', text: """
-      Howdy, this is a treasure chest!
+      Howdy, this is an urn!
     """
 

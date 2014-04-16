@@ -106,6 +106,7 @@ class Map.Map
     _.map _.filter(@objectsForGroup('objects'), type: "Treasure"), (treasure) =>
       treasure.tileX = treasure.x / @tilesetTileSize
       treasure.tileY = treasure.y / @tilesetTileSize
+      treasure.type = @treasureType(treasure.gid)
       treasure
 
   hasContents: (tile) -> tile != undefined && tile != "0"
@@ -113,4 +114,10 @@ class Map.Map
   objectsForGroup: (name) ->
     _.flatten(_.map(_.filter(_.values(@objectGroups), name: name), (objectGroup) -> objectGroup.objects))
 
-
+  # When CoffeeScript is evaluating this class, it wraps it in an IIFE.
+  # Inside the IIFE, Map refers to the constructor for this class (Map.Map)
+  # instead of the top-level namespace. As a result, we need to use window.Map.
+  treasureType: (gid) ->
+    switch parseInt(gid)
+      when 1704 then window.Map.Object.Chest
+      when 1702 then window.Map.Object.Urn

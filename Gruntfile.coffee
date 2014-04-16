@@ -8,7 +8,12 @@ module.exports = (grunt) ->
         bare: true
       compile:
         files:
-          'build/main.js': ['src/game.coffee', 'src/**/*.coffee']
+          'build/main.js': [
+            'src/game.coffee'
+            'src/map/object.coffee'
+            'src/map/objects/*.coffee'
+            'src/**/*.coffee'
+          ]
 
     watch:
       scripts:
