@@ -3,6 +3,9 @@ Things that we can work on:
 
  - map mode
 
+  - need to draw only objects that are in the current viewport
+   - (currently drawing all of them)
+
   - getting items
 
   - handle more than one tileset image
