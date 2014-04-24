@@ -59,9 +59,7 @@ class Map.Screen
     context.translate translate.x, translate.y
 
     @camera.drawBottom context, @map
-    @camera.drawObjects context, @map
-    for object in @objects
-      object.draw context
+    @camera.drawObjects context, @map, @objects
     @camera.drawTop context, @map
     context.restore()
 
