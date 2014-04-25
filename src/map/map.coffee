@@ -28,20 +28,23 @@ class Map.Map
       for y in yRange
         for x in xRange
           tileId = layer.data[y][x] - 1
-          tileRow = Math.floor(tileId / @tilesetColumns)
-          tileColumn = tileId % @tilesetColumns
-
           continue if tileId == -1
-          tileData.push
-            image: @tilesetImage
-            sx: tileColumn * @tilesetTileSize
-            sy: tileRow * @tilesetTileSize
-            sw: @tilesetTileSize
-            sh: @tilesetTileSize
+
+          tileData.push _.extend @tileDataForGid(tileId),
             x: x
             y: y
 
     tileData
+
+  tileDataForGid: (tileId)  ->
+    tileRow = Math.floor(tileId / @tilesetColumns)
+    tileColumn = tileId % @tilesetColumns
+
+    image: @tilesetImage
+    sx: tileColumn * @tilesetTileSize
+    sy: tileRow * @tilesetTileSize
+    sw: @tilesetTileSize
+    sh: @tilesetTileSize
 
   objectDataFor: ({ xRange, yRange }) ->
     tileData = []

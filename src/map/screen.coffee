@@ -24,11 +24,10 @@ class Map.Screen
 
     @objects = []
     @avatar = new Map.Avatar @
-    @objects.push(@avatar)
     _.map @map.npcs(), (npc) =>
       @objects.push new Map.Object.NPC(@, npc)
     _.map @map.treasures(), (treasure) =>
-      @objects.push new treasure.type(@, treasure)
+      @objects.push new treasure.type(@map, treasure)
 
     @camera.follow @avatar
 
@@ -46,6 +45,7 @@ class Map.Screen
 
   update: ->
     object.update() for object in @objects
+    @avatar.update()
     @camera.update()
 
   draw: (context) ->
@@ -60,6 +60,7 @@ class Map.Screen
 
     @camera.drawBottom context, @map
     @camera.drawObjects context, @map, @objects
+    @avatar.draw context
     @camera.drawTop context, @map
     context.restore()
 

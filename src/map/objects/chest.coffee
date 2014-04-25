@@ -1,10 +1,13 @@
 class Map.Object.Chest extends Map.Object
 
-  constructor: (map, data) ->
+  constructor: (@map, data) ->
     super
-    # hack due to not having multiple tilesets
-    @sprite = new Image
-    @sprite.src = "assets/images/king.png"
+
+    @gid = 1703
+
+  drawingData: ->
+    _.extend @map.tileDataForGid(@gid),
+      tilePosition: @tilePosition
 
   talk: =>
     GameEvent.trigger 'dialog', text: """

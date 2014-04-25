@@ -10,8 +10,7 @@ class Map.Camera
     @following = toFollow
 
   update: ->
-    @screenPosition = @following.screenPosition
-    @tilePosition = @following.tilePosition
+    { @tilePosition, @screenPosition } = @following
 
   drawBottom: (context, map) =>
     @drawTiles context, map: map, layerNames: ['bg', 'bg2', 'fg']
@@ -25,8 +24,11 @@ class Map.Camera
 
     _(objects).filter (object) ->
       object.tilePosition.x in xRange && object.tilePosition.y in yRange
-    .each (object) ->
-      object.draw context
+    .each (object) =>
+      { image, sx, sy, sw, sh, tilePosition } = object.drawingData()
+      { x, y } = tilePosition
+      context.drawImage image, sx, sy, sw, sh,
+        x * @tileSize, y * @tileSize, @tileSize, @tileSize
 
   drawTop: (context, map) =>
     @drawTiles context, map: map, layerNames: ['top']

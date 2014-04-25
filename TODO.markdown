@@ -3,6 +3,8 @@ Things that we can work on:
 
  - map mode
 
+  - change Map.Avatar to work in terms of fractions of a tile
+
   - need to draw only objects that are in the current viewport
    - (currently drawing all of them)
 
