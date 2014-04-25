@@ -5,14 +5,11 @@ Things that we can work on:
 
   - change Map.Avatar to work in terms of fractions of a tile
 
-  - need to draw only objects that are in the current viewport
-   - (currently drawing all of them)
+  - chests appear in shop when you go in there
 
-  - getting items
+  - getting items and being able to use them
 
   - handle more than one tileset image
-
-  - context.scale(4,4) instead of passing MapScreen#tileSize around?
 
   - NPC box that when you walk up to it, it opens a quick chat dialog
    - Move NPC around
@@ -97,3 +94,6 @@ Things that we can work on:
 
  General improvements
   - tile vs. pixel dimensions for easier translation / readability
+
+ Consider:
+  - context.scale(4,4) instead of passing MapScreen#tileSize around?
