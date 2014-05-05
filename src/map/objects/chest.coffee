@@ -2,8 +2,19 @@ class Map.Object.Chest extends Map.Object
 
   constructor: (@map, data) ->
     super
-    @state = 'closed'
-    @gid = 1703
+    @name = "#{@map.name}:#{@name}"
+    @loadState()
+
+  loadState: ->
+    if window.localStorage[@name] == 'open'
+      @setState 'open', 1702
+    else
+      @setState 'closed', 1703
+
+  setState: (newState, newGid) ->
+    @state = newState
+    @gid = newGid
+    window.localStorage[@name] = newState
 
   drawingData: ->
     _.extend @map.tileDataForGid(@gid),
@@ -14,9 +25,9 @@ class Map.Object.Chest extends Map.Object
       GameEvent.trigger 'dialog', text: """
         You got <treasure>!
       """
-      @gid = 1702
-      @state = 'open'
+      @setState 'open', 1702
     else
       GameEvent.trigger 'dialog', text: """
         The chest is empty... :(
       """
+

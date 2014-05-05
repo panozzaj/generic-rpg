@@ -1,9 +1,6 @@
 class Map.Map
-  constructor: (mapScreen) ->
-    @changeMap 'town'
-
-  changeMap: (mapName) =>
-    tmxloader.load("src/map/data/#{mapName}.tmx")
+  constructor: (@name) ->
+    tmxloader.load("src/map/data/#{@name}.tmx")
 
     @tileset = tmxloader.map.tilesets[0]
     @tilesetImage = new Image

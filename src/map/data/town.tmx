@@ -123,6 +123,11 @@
     <property name="contents" value="potion"/>
    </properties>
   </object>
+  <object name="Chest 2" type="Treasure" gid="1704" x="208" y="128">
+   <properties>
+    <property name="contents" value="ether"/>
+   </properties>
+  </object>
  </objectgroup>
  <layer name="top" width="32" height="32">
   <data encoding="csv">
@@ -198,5 +203,3 @@
   </object>
  </objectgroup>
 </map>
-
-

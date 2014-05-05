@@ -19,7 +19,7 @@ class Map.Screen
     @tilesWide = @width / @tileSize
     @tilesTall = @height / @tileSize
 
-    @map = new Map.Map @
+    @map = new Map.Map 'town'
     @camera = new Map.Camera @
 
     @objects = @map.loadObjects()
@@ -30,7 +30,7 @@ class Map.Screen
 
   handleChangeMap: (e) =>
     { mapName, xPosition, yPosition } = e.attributes.trigger.properties
-    @map.changeMap mapName
+    @map = new Map.Map mapName
     @avatar.setTilePosition parseInt(xPosition), parseInt(yPosition)
     @objects = @map.loadObjects()
 
@@ -72,4 +72,5 @@ class Map.Screen
     _.each @objects, (object) =>
       if _.isEqual(e.attributes.facing, object.tilePosition)
         object.talk()
+
 
