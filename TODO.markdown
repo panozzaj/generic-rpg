@@ -5,7 +5,7 @@ Things that we can work on:
 
   - change Map.Avatar to work in terms of fractions of a tile
 
-  - chests appear in shop when you go in there
+  - need to persist object changes
 
   - getting items and being able to use them
 

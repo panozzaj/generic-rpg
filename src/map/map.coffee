@@ -124,3 +124,12 @@ class Map.Map
     switch parseInt(gid)
       when 1704 then window.Map.Object.Chest
       when 1702 then window.Map.Object.Urn
+
+  loadObjects: =>
+    objects = []
+    _.map @npcs(), (npc) =>
+      objects.push new window.Map.Object.NPC(@, npc)
+    _.map @treasures(), (treasure) =>
+      objects.push new treasure.type(@, treasure)
+    objects
+

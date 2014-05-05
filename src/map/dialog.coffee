@@ -41,4 +41,3 @@ class Map.Dialog
         GameEvent.trigger 'popResponder', responder: @
         @destructor()
 
-

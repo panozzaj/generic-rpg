@@ -22,12 +22,9 @@ class Map.Screen
     @map = new Map.Map @
     @camera = new Map.Camera @
 
-    @objects = []
+    @objects = @map.loadObjects()
+
     @avatar = new Map.Avatar @
-    _.map @map.npcs(), (npc) =>
-      @objects.push new Map.Object.NPC(@, npc)
-    _.map @map.treasures(), (treasure) =>
-      @objects.push new treasure.type(@map, treasure)
 
     @camera.follow @avatar
 
@@ -35,6 +32,7 @@ class Map.Screen
     { mapName, xPosition, yPosition } = e.attributes.trigger.properties
     @map.changeMap mapName
     @avatar.setTilePosition parseInt(xPosition), parseInt(yPosition)
+    @objects = @map.loadObjects()
 
   destroy: ->
     _.each @events(), (handler, eventName) ->
@@ -74,3 +72,4 @@ class Map.Screen
     _.each @objects, (object) =>
       if _.isEqual(e.attributes.facing, object.tilePosition)
         object.talk()
+
