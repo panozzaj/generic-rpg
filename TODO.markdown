@@ -3,9 +3,9 @@ Things that we can work on:
 
  - map mode
 
-  - change Map.Avatar to work in terms of fractions of a tile
+  - move dialog from npc.coffee to somewhere less hard-coded
 
-  - need to persist object changes
+  - change Map.Avatar to work in terms of fractions of a tile
 
   - getting items and being able to use them
 
