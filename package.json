@@ -9,7 +9,19 @@
     "grunt-contrib-watch": "*",
     "grunt-contrib-connect": "*"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "browserify": "^3.46.0",
+    "coffee-script": "^1.7.1",
+    "coffeeify": "^0.6.0",
+    "connect": "^2.15.0",
+    "gulp": "^3.6.2",
+    "gulp-coffee": "^1.4.2",
+    "gulp-concat": "^2.2.0",
+    "gulp-duration": "0.0.0",
+    "open": "0.0.5",
+    "vinyl-source-stream": "^0.1.1",
+    "watchify": "^0.8.3"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -22,5 +34,10 @@
   "bugs": {
     "url": "https://github.com/panozzaj/generic-rpg/issues"
   },
-  "homepage": "https://github.com/panozzaj/generic-rpg"
+  "homepage": "https://github.com/panozzaj/generic-rpg",
+  "browserify": {
+    "transform": [
+      "coffeeify"
+    ]
+  }
 }

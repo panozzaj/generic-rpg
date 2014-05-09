@@ -47,10 +47,9 @@
       })();
 
       window.onload = function() {
+        var Game = require('game');
         var game = new Game;
         game.run();
-
-        document.onkeydown = game.onkeydown;
       };
     </script>
   </body>
