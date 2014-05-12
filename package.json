@@ -4,10 +4,6 @@
   "description": "",
   "main": "main.js",
   "dependencies": {
-    "grunt": "~0.4.2",
-    "grunt-contrib-coffee": "*",
-    "grunt-contrib-watch": "*",
-    "grunt-contrib-connect": "*"
   },
   "devDependencies": {
     "aliasify": "^1.4.0",
