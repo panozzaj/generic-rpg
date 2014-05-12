@@ -10,6 +10,7 @@
     "grunt-contrib-connect": "*"
   },
   "devDependencies": {
+    "aliasify": "^1.4.0",
     "browserify": "^3.46.0",
     "coffee-script": "^1.7.1",
     "coffeeify": "^0.6.0",
@@ -37,7 +38,16 @@
   "homepage": "https://github.com/panozzaj/generic-rpg",
   "browserify": {
     "transform": [
-      "coffeeify"
+      "coffeeify",
+      "aliasify"
     ]
+  },
+  "aliasify": {
+    "aliases": {
+      "src": "./src",
+      "battle": "./src/battle",
+      "map": "./src/map",
+      "effect": "./src/effect"
+    }
   }
 }

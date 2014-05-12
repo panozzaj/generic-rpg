@@ -1,4 +1,4 @@
-class Battle.StatusDisplay
+module.exports = class StatusDisplay
   constructor: (@avatars) ->
     @width = 400
     @height = 200

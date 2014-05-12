@@ -1,4 +1,6 @@
-class Battle.Avatar
+GameEvent = require 'src/game_event'
+
+module.exports = class Avatar
   constructor: ({ @position, @hero }) ->
     @size =
       width: 64

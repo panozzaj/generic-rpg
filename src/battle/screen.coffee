@@ -1,4 +1,11 @@
-class Battle.Screen
+GameEvent = require 'src/game_event'
+
+BattleData = require './data'
+ActionManager = require './action/manager'
+StatusDisplay = require './status_display'
+VictoryDialog = require './victory_dialog'
+
+module.exports = class BattleScreen
   music: 'battle.mp3'
 
   events: ->
@@ -11,11 +18,11 @@ class Battle.Screen
     @width = game.canvas.width
     @height = game.canvas.height
 
-    @battle = new Battle.Data party: party
+    @battle = new BattleData party: party
 
-    @actionManager = new Battle.Action.Manager @battle
+    @actionManager = new ActionManager @battle
 
-    @statusDisplay = new Battle.StatusDisplay @battle.avatars
+    @statusDisplay = new StatusDisplay @battle.avatars
 
     @battle.start()
 
@@ -60,11 +67,11 @@ class Battle.Screen
     switch event.attributes.enemy.constructor.name
       when 'Avatar'
         if _.every(@battle.avatars, (avatar) -> (!avatar.alive()))
-          @victoryDialog = new Battle.VictoryDialog text: "Failure!"
+          @victoryDialog = new VictoryDialog text: "Failure!"
           @actionManager.destroy()
           @actionManager = null
       when 'Enemy'
         if _.every(@battle.monsters, (monster) -> (!monster.alive()))
-          @victoryDialog = new Battle.VictoryDialog text: "Victory!"
+          @victoryDialog = new VictoryDialog text: "Victory!"
           @actionManager.destroy()
           @actionManager = null

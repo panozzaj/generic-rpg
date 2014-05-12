@@ -1,4 +1,8 @@
-class Map.Object.Chest extends Map.Object
+GameEvent = require 'src/game_event'
+
+MapObject = require 'map/object'
+
+module.exports = class Chest extends MapObject
 
   states:
     opened:

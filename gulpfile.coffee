@@ -11,10 +11,10 @@ open = require 'open'
 gulp.task 'build', ->
 
   bundler = watchify
-    entries: ['./src-require/game.coffee']
+    entries: ['./src/game.coffee']
     extensions: ['.coffee']
 
-  bundler.require './src-require/game.coffee',
+  bundler.require './src/game.coffee',
     expose: 'game'
 
   rebundle = ->

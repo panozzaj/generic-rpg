@@ -1,4 +1,6 @@
-class Map.Dialog
+GameEvent = require 'src/game_event'
+
+module.exports = class Dialog
   constructor: (@text) ->
     @canvas = document.createElement('canvas')
     @canvas.width = 1024
@@ -40,4 +42,3 @@ class Map.Dialog
       when 90 # z
         GameEvent.trigger 'popResponder', responder: @
         @destructor()
-

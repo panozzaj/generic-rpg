@@ -1,4 +1,4 @@
-class GameEvent
+module.exports = class GameEvent
 
   @trigger: (type, params={}) ->
     ev = new Event(type)

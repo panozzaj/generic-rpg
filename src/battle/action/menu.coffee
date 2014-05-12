@@ -1,4 +1,10 @@
-class Battle.Action.Menu extends Battle.Action
+GameEvent = require 'src/game_event'
+
+Action = require 'battle/action'
+
+MenuAction = require 'battle/menu/action'
+
+module.exports = class BattleMenu extends Action
   execute: ->
     @menuStack = []
     @getAction()

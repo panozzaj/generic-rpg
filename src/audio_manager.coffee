@@ -1,4 +1,4 @@
-class AudioManager
+module.exports = class AudioManager
   @shouldPlayMusic: window.location.search.match("music=true")
 
   @playMusic: (music) ->

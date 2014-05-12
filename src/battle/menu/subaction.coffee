@@ -1,4 +1,6 @@
-class Battle.Menu.Subaction extends Battle.Menu
+Menu = require 'battle/menu'
+
+module.exports = class MenuSubaction extends Menu
   constructor: ({ @spells, @select, @cancel }) ->
     super
 

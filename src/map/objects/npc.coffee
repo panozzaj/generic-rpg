@@ -1,4 +1,8 @@
-class Map.Object.NPC extends Map.Object
+GameEvent = require 'src/game_event'
+
+MapObject = require 'map/object'
+
+module.exports = class NPC extends MapObject
 
   states:
     firstContact:

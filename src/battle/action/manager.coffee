@@ -1,4 +1,6 @@
-class Battle.Action.Manager
+GameEvent = require 'src/game_event'
+
+module.exports = class ActionManager
   events: ->
     enqueue: @enqueue
     finishedAction: @finishedAction

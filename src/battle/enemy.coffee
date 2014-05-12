@@ -1,4 +1,6 @@
-class Battle.Enemy
+GameEvent = require 'src/game_event'
+
+module.exports = class Enemy
   constructor: ({ @position }) ->
     @size =
       width: 64

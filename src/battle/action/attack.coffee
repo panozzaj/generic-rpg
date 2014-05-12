@@ -1,4 +1,8 @@
-class Battle.Action.Attack extends Battle.Action
+AudioManager = require 'src/audio_manager'
+
+Action = require 'battle/action'
+
+module.exports = class Attack extends Action
   @needsTarget: true
 
   execute: ->

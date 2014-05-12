@@ -1,4 +1,6 @@
-class Map.Treasure
+GameEvent = require 'src/game_event'
+
+module.exports = class Treasure
 
   constructor: (map, data) ->
     { @name, tileX, tileY } = data

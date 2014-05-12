@@ -1,4 +1,10 @@
-class Map.Screen
+GameEvent = require 'src/game_event'
+Map = require './map'
+Camera = require './camera'
+Avatar = require './avatar'
+Dialog = require './dialog'
+
+module.exports = class MapScreen
   music: 'sad_town.mp3'
 
   events: ->
@@ -19,18 +25,18 @@ class Map.Screen
     @tilesWide = @width / @tileSize
     @tilesTall = @height / @tileSize
 
-    @map = new Map.Map 'town'
-    @camera = new Map.Camera @
+    @map = new Map 'town'
+    @camera = new Camera @
 
     @objects = @map.loadObjects()
 
-    @avatar = new Map.Avatar @
+    @avatar = new Avatar @
 
     @camera.follow @avatar
 
   handleChangeMap: (e) =>
     { mapName, xPosition, yPosition } = e.attributes.trigger.properties
-    @map = new Map.Map mapName
+    @map = new Map mapName
     @avatar.setTilePosition parseInt(xPosition), parseInt(yPosition)
     @objects = @map.loadObjects()
 
@@ -65,12 +71,10 @@ class Map.Screen
     @dialog?.draw()
 
   handleCreateDialog: (e) =>
-    @dialog = new Map.Dialog e.attributes.text
+    @dialog = new Dialog e.attributes.text
     @dialog.show()
 
   handleTalk: (e) =>
     _.each @objects, (object) =>
       if _.isEqual(e.attributes.facing, object.tilePosition)
         object.talk()
-
-

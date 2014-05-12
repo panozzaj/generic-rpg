@@ -1,4 +1,4 @@
-class Battle.Menu
+module.exports = class BattleMenu
   constructor: ->
     @cursor = new Image()
     @cursor.src = "assets/images/cursor.png"

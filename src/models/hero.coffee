@@ -1,4 +1,4 @@
-class Model.Hero
+module.exports = class Hero
   constructor: ({ @name }) ->
     @stats = {
       hp:
@@ -7,4 +7,3 @@ class Model.Hero
       damage: 10
       magic: 20
     }
-

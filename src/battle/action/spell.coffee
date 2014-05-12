@@ -1,4 +1,9 @@
-class Battle.Action.Spell extends Battle.Action
+GameEvent = require 'src/game_event'
+
+Action = require 'battle/action'
+ScheduleTurn = require 'battle/action/schedule_turn'
+
+module.exports = class Spell extends Action
   @needsSubaction: true
   @needsTarget:  true
 
@@ -15,7 +20,7 @@ class Battle.Action.Spell extends Battle.Action
       if @damageDisplayTTL <= 0
         GameEvent.trigger 'finishedAction'
         GameEvent.trigger 'enqueue', action:
-          type: Battle.Action.ScheduleTurn
+          type: ScheduleTurn
           source: @source
           executeIn: 0
 

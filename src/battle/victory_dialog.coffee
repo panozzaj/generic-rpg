@@ -1,4 +1,6 @@
-class Battle.VictoryDialog
+GameEvent = require 'src/game_event'
+
+module.exports = class VictoryDialog
   constructor: ({ @text }) ->
     GameEvent.trigger 'pushResponder', responder: @
 

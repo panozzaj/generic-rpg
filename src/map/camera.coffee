@@ -1,4 +1,4 @@
-class Map.Camera
+module.exports = class Camera
   constructor: (mapScreen) ->
     { @tileSize } = mapScreen
 
