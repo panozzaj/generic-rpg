@@ -37,6 +37,7 @@ module.exports = class ActionManager
 
   enqueue: (event) =>
     action = event.attributes.action
+    console.log event
     action.executeAt = @time + action.executeIn
     action.battle = @battle
     @actionList.push new action.type(action)

@@ -14,6 +14,9 @@ gulp.task 'build', ->
     entries: ['./src/game.coffee']
     extensions: ['.coffee']
 
+  bundler.require './src/extensions.coffee',
+    expose: 'extensions'
+
   bundler.require './src/game.coffee',
     expose: 'game'
 

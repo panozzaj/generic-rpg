@@ -47,6 +47,8 @@
       })();
 
       window.onload = function() {
+        require('extensions');
+
         var Game = require('game');
         var game = new Game;
         game.run();

@@ -1,7 +1,7 @@
 GameEvent = require 'src/game_event'
 
-Action = require 'battle/action'
-ScheduleTurn = require 'battle/action/schedule_turn'
+Action = require './base'
+ScheduleTurn = require './schedule_turn'
 
 module.exports = class Spell extends Action
   @needsSubaction: true

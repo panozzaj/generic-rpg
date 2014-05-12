@@ -3,7 +3,7 @@ GameEvent = require 'src/game_event'
 Avatar = require './avatar'
 Enemy = require './enemy'
 
-ScheduleTurn = require './action/schedule_turn'
+ScheduleTurn = require 'battle/action/schedule_turn'
 
 module.exports = class BattleData
   constructor: ({ @party }) ->

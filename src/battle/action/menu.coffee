@@ -1,6 +1,6 @@
 GameEvent = require 'src/game_event'
 
-Action = require 'battle/action'
+Action = require './base'
 
 MenuAction = require 'battle/menu/action'
 
