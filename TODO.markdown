@@ -5,18 +5,26 @@ Things that we can work on:
 
   - move dialog from npc.coffee to somewhere less hard-coded
 
-  - change Map.Avatar to work in terms of fractions of a tile
+  - create ideal document dialog
+   - multiple dialog boxes in a row ("conversation with next arrows")
+   - based on game state ("Don't have key. Have already talked to me once. Do have key.")
+   - branching conversation
+  - interpret that dialog file when talking to the NPC
+
+
+
+  - Move NPC around
+  - passing text and splitting on words intelligently?
+  - loading conversations from a file instead of it being in the source
+  - data driven from map file or something to generate NPCs
+
+
+  - change Map.Avatar to work in terms of tiles
+    - maybe as fractions of a tile?
 
   - getting items and being able to use them
 
   - handle more than one tileset image
-
-  - NPC box that when you walk up to it, it opens a quick chat dialog
-   - Move NPC around
-   - passing text and splitting on words intelligently
-   - multiple dialog boxes in a row ("conversation")
-   - loading conversations from a file instead of it being in the source
-   - data driven from map file or something to generate NPCs
 
  - screen modes
    - menu
@@ -67,17 +75,10 @@ Things that we can work on:
   - parallax scrolling of battle backgrounds
 
  Technical debt
-  - figure out a way to get both people with a valid git repository in floobits
-  - Need to have files / folders open in floobits for them to show up?
-   - basically generated files are also not working correctly?
-   - add "events" declaration to easily add event handlers to objects
+  - add "events" declaration to easily add event handlers to objects
 
  Floobits-specific
-  - having a tough time syncing things flawlessly
-   - basically it looks like we are pulling in files from the workspace instead of using what is on disk (Vim)
-   - or changes are not synced over to the workspace
-   - especially when we build files?
-
+  - figure out a way to get both people with a valid git repository in floobits
 
  Would be really sweet list
   - NPCs talk to each other with little speech bubbles, which you can see
@@ -86,6 +87,7 @@ Things that we can work on:
   - "massively single-player online RPG"
     - only open certain quests when a certain number of all players have done X
     - "mayor of a town" -- whoever has helped the most people in an area is adored by the inhabitants
+  - reputation / dark/light path
 
 
  Ecosystem improvements
