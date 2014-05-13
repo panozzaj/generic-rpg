@@ -1,19 +1,16 @@
+GameState = require 'src/data/game_state'
+
 module.exports =
   'town':
     'King':
       states:
         firstContact:
+          condition: ->
+            not GameState.instance().get 'town.King.talked'
           dialog: "Hello there, stranger!"
-
-
-
-# TownData = require 'town_behavior'
-
-# TownData['King']
-
-# or BehaviorLoader
-#class NPC
-#  doDialog: ->
-#    relevantState = _.find TownData[@name], (state) ->
-#      state.condition(gameState)
-
+          action: ->
+            GameState.instance().set 'town.King.talked', true
+        followUp:
+          condition: ->
+            GameState.instance().get 'town.King.talked'
+          dialog: "Nice to see you again!"

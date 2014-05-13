@@ -1,16 +1,33 @@
 GameEvent = require 'src/game_event'
+GameState = require 'src/data/game_state'
 
-MapObject = require 'map/object'
+module.exports = class NPC
 
-module.exports = class NPC extends MapObject
+  constructor: (map, { data, @behavior }) ->
+    { @name, tileX, tileY } = data
+    @tileSize = map.tileSize
+    @tilePosition = { x: tileX, y: tileY }
 
-  constructor: (map, { @data, @behavior }) ->
-    super map, @data
+    @name = "#{map.name}:#{@name}"
+
     @sprite = new Image
     @sprite.src = "assets/images/king.png"
-    @state = 'firstContact'
+
+  update: ->
+    # no-op by default
+
+  drawingData: ->
+    image: @sprite
+    sx: 0
+    sy: 0
+    sw: 16
+    sh: 16
+    tilePosition: @tilePosition
 
   talk: =>
-    console.log @behavior
-    GameEvent.trigger 'dialog', text: @behavior.states[@state].dialog
+    relevantState = _.find @behavior.states, (state) ->
+      state.condition GameState.instance()
+    GameEvent.trigger 'dialog', text: relevantState.dialog
+    relevantState.action? GameState.instance()
+
 
