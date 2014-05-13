@@ -128,8 +128,11 @@ module.exports = class Map
 
   loadObjects: =>
     objects = []
-    _.map @npcs(), (npc) =>
-      objects.push new NPC(@, npc)
+
+    MapBehavior = require "src/data/maps/town_behavior"
+    _.map @npcs(), (npcMapData) =>
+      objects.push new NPC @, data: npcMapData, behavior: MapBehavior[@name][npcMapData.name]
     _.map @treasures(), (treasure) =>
       objects.push new treasure.type(@, treasure)
     objects
+

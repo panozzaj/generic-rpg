@@ -78,3 +78,4 @@ module.exports = class MapScreen
     _.each @objects, (object) =>
       if _.isEqual(e.attributes.facing, object.tilePosition)
         object.talk()
+

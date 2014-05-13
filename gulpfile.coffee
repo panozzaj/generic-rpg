@@ -20,6 +20,9 @@ gulp.task 'build', ->
   bundler.require './src/game.coffee',
     expose: 'game'
 
+  bundler.require './src/data/maps/town_behavior.coffee',
+    expose: 'town_behavior'
+
   rebundle = ->
 
     bundler.bundle
@@ -47,3 +50,4 @@ gulp.task 'server', ->
   open "http://localhost:#{port}"
 
 gulp.task 'default', ['build', 'server']
+

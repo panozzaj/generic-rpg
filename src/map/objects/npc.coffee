@@ -4,22 +4,13 @@ MapObject = require 'map/object'
 
 module.exports = class NPC extends MapObject
 
-  states:
-    firstContact:
-      initial: true
-      transitions:
-        talk: 'followUp'
-      dialog: "Hello there, stranger!"
-    followUp:
-      dialog: "Nice to see you again!"
-      transitions:
-        talk: 'followUp'
-
-  constructor: (map, data) ->
-    super
+  constructor: (map, { @data, @behavior }) ->
+    super map, @data
     @sprite = new Image
     @sprite.src = "assets/images/king.png"
+    @state = 'firstContact'
 
   talk: =>
-    GameEvent.trigger 'dialog', text: @states[@state].dialog
-    @transitionState 'talk'
+    console.log @behavior
+    GameEvent.trigger 'dialog', text: @behavior.states[@state].dialog
+
