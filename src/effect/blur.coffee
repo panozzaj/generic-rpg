@@ -1,4 +1,4 @@
-class Effect.Blur
+module.exports = class Blur
   constructor: (source) ->
     console.log 'handling blur'
     try

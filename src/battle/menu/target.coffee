@@ -1,4 +1,6 @@
-class Battle.Menu.Target extends Battle.Menu
+Menu = require 'battle/menu'
+
+class MenuTarget extends Menu
   constructor: ({ @enemies, @allies, @select, @cancel }) ->
     super
 

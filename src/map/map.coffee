@@ -1,4 +1,8 @@
-class Map.Map
+NPC = require './objects/npc'
+Chest = require './objects/chest'
+Urn = require './objects/urn'
+
+module.exports = class Map
   constructor: (@name) ->
     tmxloader.load("src/map/data/#{@name}.tmx")
 
@@ -119,13 +123,15 @@ class Map.Map
   # instead of the top-level namespace. As a result, we need to use window.Map.
   treasureType: (gid) ->
     switch parseInt(gid)
-      when 1704 then window.Map.Object.Chest
-      when 1702 then window.Map.Object.Urn
+      when 1704 then Chest
+      when 1702 then Urn
 
   loadObjects: =>
     objects = []
-    _.map @npcs(), (npc) =>
-      objects.push new window.Map.Object.NPC(@, npc)
+
+    MapBehavior = require "src/data/maps/town_behavior"
+    _.map @npcs(), (npcMapData) =>
+      objects.push new NPC @, data: npcMapData, behavior: MapBehavior[@name][npcMapData.name]
     _.map @treasures(), (treasure) =>
       objects.push new treasure.type(@, treasure)
     objects

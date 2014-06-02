@@ -1,4 +1,7 @@
-class ScreenManager
+AudioManager = require './audio_manager'
+GameEvent = require './game_event'
+
+module.exports = class ScreenManager
   constructor: ->
     @screens = []
 

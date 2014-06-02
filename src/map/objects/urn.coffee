@@ -1,4 +1,8 @@
-class Map.Object.Urn extends Map.Object
+GameEvent = require 'src/game_event'
+
+MapObject = require 'map/object'
+
+module.exports = class Urn extends MapObject
 
   constructor: (@map, data) ->
     super

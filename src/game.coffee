@@ -1,4 +1,16 @@
-class Game
+GameEvent = require 'src/game_event'
+
+ResponderManager = require './responder_manager'
+ScreenManager = require './screen_manager'
+AudioManager = require './audio_manager'
+Hero = require './models/hero'
+
+BlurEffect = require 'effect/blur'
+
+BattleScreen = require 'battle/screen'
+MapScreen = require 'map/screen'
+
+module.exports = class Game
 
   constructor: ->
     @responderManager = new ResponderManager
@@ -11,12 +23,12 @@ class Game
     @context = @canvas.getContext '2d'
     @context.imageSmoothingEnabled = false
 
-    @mapScreen = new Map.Screen @
+    @mapScreen = new MapScreen @
     @screenManager.push @mapScreen
 
     @party = [
-      new Model.Hero(name: 'Simba'),
-      new Model.Hero(name: 'Rafiki')
+      new Hero(name: 'Simba'),
+      new Hero(name: 'Rafiki')
     ]
 
     GameEvent.on 'battle', @handleBattle
@@ -45,14 +57,6 @@ class Game
   handleBattle: (e) =>
     Q.allSettled([
       AudioManager.playSound 'battle_start.wav',
-      new Effect.Blur(@canvas)
+      new BlurEffect(@canvas)
     ]).then (val) =>
-      @screenManager.push(new Battle.Screen game: @, party: @party)
-
-
-# Namespace creation / setup
-# TODO: Move this somewhere more intelligent
-Battle = {}
-Map = {}
-Model = {}
-Effect = {}
+      @screenManager.push new BattleScreen(game: @, party: @party)

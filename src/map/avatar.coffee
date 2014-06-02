@@ -1,4 +1,6 @@
-class Map.Avatar
+GameEvent = require 'src/game_event'
+
+module.exports = class Avatar
 
   constructor: (@screen) ->
     @tileSize = @screen.tileSize

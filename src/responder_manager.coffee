@@ -1,4 +1,6 @@
-class ResponderManager
+GameEvent = require './game_event'
+
+module.exports = class ResponderManager
   constructor: ->
     @responderStack = []
     GameEvent.on 'pushResponder', @handlePushResponder

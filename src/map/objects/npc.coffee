@@ -1,21 +1,33 @@
-class Map.Object.NPC extends Map.Object
+GameEvent = require 'src/game_event'
+GameState = require 'src/data/game_state'
 
-  states:
-    firstContact:
-      initial: true
-      transitions:
-        talk: 'followUp'
-      dialog: "Hello there, stranger!"
-    followUp:
-      dialog: "Nice to see you again!"
-      transitions:
-        talk: 'followUp'
+module.exports = class NPC
 
-  constructor: (map, data) ->
-    super
+  constructor: (map, { data, @behavior }) ->
+    { @name, tileX, tileY } = data
+    @tileSize = map.tileSize
+    @tilePosition = { x: tileX, y: tileY }
+
+    @name = "#{map.name}:#{@name}"
+
     @sprite = new Image
     @sprite.src = "assets/images/king.png"
 
+  update: ->
+    # no-op by default
+
+  drawingData: ->
+    image: @sprite
+    sx: 0
+    sy: 0
+    sw: 16
+    sh: 16
+    tilePosition: @tilePosition
+
   talk: =>
-    GameEvent.trigger 'dialog', text: @states[@state].dialog
-    @transitionState 'talk'
+    relevantState = _.find @behavior.states, (state) ->
+      state.condition GameState.instance()
+    GameEvent.trigger 'dialog', text: relevantState.dialog
+    relevantState.action? GameState.instance()
+
+

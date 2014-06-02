@@ -1,4 +1,11 @@
-class Battle.Action.Attack extends Battle.Action
+GameEvent = require 'src/game_event'
+
+AudioManager = require 'src/audio_manager'
+
+Action = require './base'
+ScheduleTurn = require './schedule_turn'
+
+module.exports = class Attack extends Action
   @needsTarget: true
 
   execute: ->
@@ -20,7 +27,7 @@ class Battle.Action.Attack extends Battle.Action
         @target.takeDamage @effectiveDamage
         GameEvent.trigger 'finishedAction'
         GameEvent.trigger 'enqueue', action:
-          type: Battle.Action.ScheduleTurn
+          type: ScheduleTurn
           source: @source
           executeIn: 0
 

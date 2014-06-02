@@ -1,4 +1,4 @@
-class Map.Object
+module.exports = class MapObject
   constructor: (map, data) ->
     { @name, tileX, tileY } = data
     @tileSize = map.tileSize

@@ -1,4 +1,10 @@
-class Battle.Menu.Action extends Battle.Menu
+Menu = require 'battle/menu'
+
+Attack = require 'battle/action/attack'
+Spell = require 'battle/action/spell'
+Run = require 'battle/action/run'
+
+module.exports = class MenuAction extends Menu
 
   constructor: ({ @select, @cancel }) ->
     super
@@ -12,9 +18,9 @@ class Battle.Menu.Action extends Battle.Menu
       height: 200
 
     @actionDescriptions = [
-      { name: 'Fight', type: Battle.Action.Attack }
-      { name: 'Spell', type: Battle.Action.Spell  }
-      { name: 'Run',   type: Battle.Action.Run    }
+      { name: 'Fight', type: Attack }
+      { name: 'Spell', type: Spell  }
+      { name: 'Run',   type: Run    }
     ]
     @currentAction = 0
 
