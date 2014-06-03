@@ -16,7 +16,4 @@ module.exports = class Urn extends MapObject
 
   talk: =>
     if @state == 'full'
-      GameEvent.trigger 'dialog', text: """
-        You see a mouse jump out of the urn.
-      """
-      @state = 'empty'
+      GameEvent.trigger 'dialog', messages: ["You see a mouse jump out of the urn."]

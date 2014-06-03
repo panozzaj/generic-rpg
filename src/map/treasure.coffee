@@ -24,6 +24,4 @@ module.exports = class Treasure
     @screenPosition = { x: x * @tileSize, y: y * @tileSize }
 
   talk: =>
-    GameEvent.trigger 'dialog', text: """
-      Howdy, this is a treasure chest!
-    """
+    GameEvent.trigger 'dialog', message: ["Howdy, this is a treasure chest!"]

@@ -3,21 +3,12 @@ Things that we can work on:
 
  - map mode
 
-  - move dialog from npc.coffee to somewhere less hard-coded
-
-  - create ideal document dialog
-   - multiple dialog boxes in a row ("conversation with next arrows")
-   - based on game state ("Don't have key. Have already talked to me once. Do have key.")
-   - branching conversation
-  - interpret that dialog file when talking to the NPC
-
-
+  - branching conversation with NPC (Y/N prompts)
 
   - Move NPC around
-  - passing text and splitting on words intelligently?
+  - dialog: passing text and splitting on words intelligently?
   - loading conversations from a file instead of it being in the source
   - data driven from map file or something to generate NPCs
-
 
   - change Map.Avatar to work in terms of tiles
     - maybe as fractions of a tile?

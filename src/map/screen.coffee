@@ -52,6 +52,8 @@ module.exports = class MapScreen
     @avatar.update()
     @camera.update()
 
+    @dialog?.update()
+
   draw: (context) ->
     context.save()
     { screenPosition } = @camera
@@ -71,11 +73,10 @@ module.exports = class MapScreen
     @dialog?.draw()
 
   handleCreateDialog: (e) =>
-    @dialog = new Dialog e.attributes.text
+    @dialog = new Dialog e.attributes.messages, e.attributes.cb
     @dialog.show()
 
   handleTalk: (e) =>
     _.each @objects, (object) =>
       if _.isEqual(e.attributes.facing, object.tilePosition)
         object.talk()
-

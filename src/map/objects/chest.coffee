@@ -23,10 +23,6 @@ module.exports = class Chest extends MapObject
   talk: ->
     if @state == 'closed'
       if @transitionState 'open'
-        GameEvent.trigger 'dialog', text: """
-          You got <treasure>!
-        """
+        GameEvent.trigger 'dialog', messages: ["You got <treasure>!"]
     else
-      GameEvent.trigger 'dialog', text: """
-        The chest is empty... :(
-      """
+      GameEvent.trigger 'dialog', messages: ["The chest is empty... :("]

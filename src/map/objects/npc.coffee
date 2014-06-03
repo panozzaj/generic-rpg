@@ -27,7 +27,5 @@ module.exports = class NPC
   talk: =>
     relevantState = _.find @behavior.states, (state) ->
       state.condition GameState.instance()
-    GameEvent.trigger 'dialog', text: relevantState.dialog
+
     relevantState.action? GameState.instance()
-
-

@@ -4,7 +4,7 @@ module.exports = class Avatar
 
   constructor: (@screen) ->
     @tileSize = @screen.tileSize
-    @setTilePosition(9, 8)
+    @setTilePosition(20, 9)
     @velocity = { x: 0, y: 0 }
     @speed = 8
     @spriteSheet = new Image()
