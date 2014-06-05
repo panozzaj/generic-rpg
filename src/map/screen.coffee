@@ -73,7 +73,7 @@ module.exports = class MapScreen
     @dialog?.draw()
 
   handleCreateDialog: (e) =>
-    @dialog = new Dialog e.attributes.messages, e.attributes.cb
+    @dialog = new Dialog e.attributes
     @dialog.show()
 
   handleTalk: (e) =>

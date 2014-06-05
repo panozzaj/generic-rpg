@@ -1,8 +1,8 @@
 GameState = require 'src/data/game_state'
 GameEvent = require 'src/game_event'
 
-dialog = (messages, cb = null) ->
-  GameEvent.trigger 'dialog', { messages, cb }
+dialog = ({ messages, prompt }) ->
+  GameEvent.trigger 'dialog', { messages, prompt }
 
 module.exports =
   'town':
@@ -12,22 +12,31 @@ module.exports =
           condition: ->
             not GameState.instance().get 'town.King.talked'
           action: ->
-            dialog [
-              """
-                Hello there, stranger!
-                Here is the second line.
-              """
-              "How are you today?"
-            ]
+            dialog
+              messages: [
+                """
+                  Hello there, stranger!
+                  Here is the second line.
+                """
+                "How are you today?"
+              ]
             GameState.instance().set 'town.King.talked', true
         followUp:
           condition: ->
             GameState.instance().get 'town.King.talked'
           action: ->
-            dialog [
-              """
-                Nice to see you again!
-                You are looking well.
-              """
-              "How is the family?"
-            ]
+            dialog
+              messages: [
+                """
+                  Nice to see you again!
+                  You are looking well.
+                """
+                """
+                  How is the family?
+                """
+              ]
+              prompt: [
+                [ "Good", -> dialog messages: ["Glad to hear it!"] ]
+                [ "Dead", -> dialog messages: ["Aw, shucks!"] ]
+              ]
+

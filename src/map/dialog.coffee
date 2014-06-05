@@ -1,7 +1,7 @@
 GameEvent = require 'src/game_event'
 
 module.exports = class Dialog
-  constructor: (@messages, cb = null) ->
+  constructor: ({ @messages, @prompt }) ->
     @canvas = document.createElement('canvas')
     @canvas.width = 1024
     @canvas.height = 200
@@ -21,7 +21,10 @@ module.exports = class Dialog
     context = @canvas.getContext('2d')
     @drawBackground context
     @drawText context
-    @drawHasMore context if @hasMore()
+    if @hasMore()
+      @drawHasMore context
+    else
+      @drawPrompt context
 
   hasMore: ->
     @messageIndex < @messages.length - 1
@@ -54,6 +57,14 @@ module.exports = class Dialog
       context.fillText line, 30, 60 + 40 * i
     context.restore()
 
+  drawPrompt: (context) ->
+    if @prompt
+      context.save()
+      context.fillStyle = 'white'
+      context.font = '30px manaspaceregular'
+      context.fillText "[z] - #{@prompt[0][0]}    [x] - #{@prompt[1][0]}", 30, 60 + 40 * 3
+      context.restore()
+
   show: (e) =>
     GameEvent.trigger 'pushResponder', responder: @
 
@@ -62,7 +73,15 @@ module.exports = class Dialog
       when 90 # z
         if @messageIndex is @messages.length - 1
           GameEvent.trigger 'popResponder', responder: @
+          @prompt?[0][1]()
           @destructor()
         else
           @messageIndex++
+      when 88 # x
+        # TODO: extract
+        if @messageIndex is @messages.length - 1
+          GameEvent.trigger 'popResponder', responder: @
+          @prompt?[1][1]()
+          @destructor()
+
 

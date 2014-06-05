@@ -3,8 +3,6 @@ Things that we can work on:
 
  - map mode
 
-  - branching conversation with NPC (Y/N prompts)
-
   - Move NPC around
   - dialog: passing text and splitting on words intelligently?
   - loading conversations from a file instead of it being in the source
