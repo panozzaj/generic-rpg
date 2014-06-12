@@ -6,7 +6,7 @@
   "dependencies": {},
   "devDependencies": {
     "aliasify": "^1.4.0",
-    "browserify": "^4.1.2",
+    "browserify": "^4.1.8",
     "coffee-script": "^1.7.1",
     "coffeeify": "^0.6.0",
     "connect": "^2.15.0",
@@ -16,7 +16,7 @@
     "gulp-duration": "0.0.0",
     "open": "0.0.5",
     "vinyl-source-stream": "^0.1.1",
-    "watchify": "^0.8.3"
+    "watchify": "^0.10.2"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
