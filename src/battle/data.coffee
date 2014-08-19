@@ -3,8 +3,6 @@ GameEvent = require 'src/game_event'
 Avatar = require './avatar'
 Enemy = require './enemy'
 
-ScheduleTurn = require 'battle/action/schedule_turn'
-
 module.exports = class BattleData
   constructor: ({ @party }) ->
     @avatars = _.map @party, (hero, index) ->
@@ -21,12 +19,12 @@ module.exports = class BattleData
   start: ->
     _.each @avatars, (avatar) =>
       GameEvent.trigger 'enqueue', action:
-        type: ScheduleTurn
+        type: 'ScheduleTurn'
         source: avatar
         executeIn: 0
 
     _.each @monsters, (enemy) =>
       GameEvent.trigger 'enqueue', action:
-        type: ScheduleTurn
+        type: 'ScheduleTurn'
         source: enemy
         executeIn: 0

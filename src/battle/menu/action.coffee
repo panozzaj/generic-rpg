@@ -1,9 +1,5 @@
 Menu = require 'battle/menu'
 
-Attack = require 'battle/action/attack'
-Spell = require 'battle/action/spell'
-Run = require 'battle/action/run'
-
 module.exports = class MenuAction extends Menu
 
   constructor: ({ @select, @cancel }) ->
@@ -18,14 +14,12 @@ module.exports = class MenuAction extends Menu
       height: 200
 
     @actionDescriptions = [
-      { name: 'Fight', type: Attack }
-      { name: 'Spell', type: Spell  }
-      { name: 'Run',   type: Run    }
+      { name: 'Fight', type: 'Attack' }
+      { name: 'Spell', type: 'Spell'  }
+      { name: 'Run',   type: 'Run'    }
     ]
-    @currentAction = 0
 
-  actionType: ->
-    @actionDescriptions[@currentAction].type
+    @currentAction = 0
 
   draw: (context) ->
     @drawBackground context
@@ -52,7 +46,7 @@ module.exports = class MenuAction extends Menu
       when 40 # down
         @moveCursor 1
       when 90 # z
-        @select action: @actionType()
+        @select action: @actionDescriptions[@currentAction].type
 
   moveCursor: (offset) ->
     @currentAction = (@currentAction + @actionDescriptions.length + offset) % @actionDescriptions.length

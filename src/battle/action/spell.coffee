@@ -1,12 +1,7 @@
 GameEvent = require 'src/game_event'
-
 Action = require './base'
-ScheduleTurn = require './schedule_turn'
 
 module.exports = class Spell extends Action
-  @needsSubaction: true
-  @needsTarget:  true
-
   execute: ->
     @effectiveDamage = Math.round(@source.stats.magic * (Math.random() / 2 + 0.75))
     @target.takeDamage @effectiveDamage
@@ -20,7 +15,7 @@ module.exports = class Spell extends Action
       if @damageDisplayTTL <= 0
         GameEvent.trigger 'finishedAction'
         GameEvent.trigger 'enqueue', action:
-          type: ScheduleTurn
+          type: 'ScheduleTurn'
           source: @source
           executeIn: 0
 

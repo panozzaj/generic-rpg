@@ -1,6 +1,6 @@
 Menu = require 'battle/menu'
 
-class MenuTarget extends Menu
+module.exports = class MenuTarget extends Menu
   constructor: ({ @enemies, @allies, @select, @cancel }) ->
     super
 

@@ -1,10 +1,21 @@
 GameEvent = require 'src/game_event'
-
 Action = require './base'
-
 MenuAction = require 'battle/menu/action'
+MenuSubaction = require 'battle/menu/subaction'
+MenuTarget = require 'battle/menu/target'
 
 module.exports = class BattleMenu extends Action
+  MENU_CONTINUATIONS =
+    'Attack':
+      needsSubaction: false
+      needsTarget:    true
+    'Run':
+      needsSubaction: false
+      needsTarget:    false
+    'Spell':
+      needsSubaction: true
+      needsTarget:    true
+
   execute: ->
     @menuStack = []
     @getAction()
@@ -24,20 +35,26 @@ module.exports = class BattleMenu extends Action
     @activeMenu().onkeydown event
 
   getAction: ->
-    @menuStack.push new Battle.Menu.Action
+    @menuStack.push new MenuAction
       avatar: @source
       select: @setAction
 
   setAction: ({ @action }) =>
-    if @action.needsSubaction
+    if @needsSubaction(@action)
       @getSubaction()
-    else if @action.needsTarget
+    else if @needsTarget(@action)
       @getTarget()
     else
       @complete()
 
+  needsSubaction: (type) =>
+    MENU_CONTINUATIONS[type].needsSubaction
+
+  needsTarget: (type) =>
+    MENU_CONTINUATIONS[type].needsTarget
+
   getSubaction: ->
-    @menuStack.push new Battle.Menu.Subaction
+    @menuStack.push new MenuSubaction
       spells: @source.knownSpells()
       select: @setSubaction
       cancel: @popMenu
@@ -46,7 +63,7 @@ module.exports = class BattleMenu extends Action
     @getTarget()
 
   getTarget: ->
-    @menuStack.push new Battle.Menu.Target
+    @menuStack.push new MenuTarget
       allies: @battle.avatars
       enemies: @battle.monsters
       select: @setTarget
@@ -70,19 +87,3 @@ module.exports = class BattleMenu extends Action
 
   activeMenu: ->
     _.last(@menuStack)
-
-  # Attack
-  #   needsSubaction: false
-  #   needsTarget: true
-  # Magic
-  #   needsSubaction: true
-  #   needsTarget: true
-  # Item
-  #   needsSubaction: true
-  #   needsTarget: true
-  # Defend
-  #   needsSubaction: false
-  #   needsTarget: false
-  # Run
-  #   needsSubaction: false
-  #   needsTarget: false

@@ -21,12 +21,11 @@ module.exports = class ActionManager
     if @currentAction
       @currentAction.update?()
     else
-      #console.log "@time: #{@time}" if @time < 100
       action = _.find @actionList, (action) =>
         action.executeAt == @time
 
-      if action                  # an action this time tick?
-        if action.source.alive() # only do if person is alive
+      if action
+        if action.source.alive()
           @currentAction = action
           console.log "Executing ", @currentAction
           @currentAction.execute()
@@ -36,11 +35,18 @@ module.exports = class ActionManager
         @time += 1
 
   enqueue: (event) =>
-    action = event.attributes.action
     console.log event
+    console.log event.attributes
+    action = event.attributes.action
     action.executeAt = @time + action.executeIn
     action.battle = @battle
-    @actionList.push new action.type(action)
+
+    Attack = require './attack'
+    MenuAction = require './menu'
+    Run = require './run'
+    ScheduleTurn = require './schedule_turn'
+    Spell = require './spell'
+    @actionList.push new(eval(action.type))(action)
 
   finishedAction: (event) =>
     @dequeue @currentAction
