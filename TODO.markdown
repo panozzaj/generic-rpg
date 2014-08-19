@@ -1,6 +1,18 @@
 
 Things that we can work on:
 
+ - "The Quest"
+  - Cut scene when you talk to the king or when the game first loads that describes the scene
+  - Random battles with random monsters on the overworld
+  - Dungeon that you walk to
+  - A couple of items on the way that you can equip?
+  - Different random monsters in the dungeon
+  - Boss at the end
+  - Gives you an item / sets a flag and then when you go back (or are teleported back for minimum boringness)
+  - You win!
+
+
+
  - map mode
 
   - Move NPC around
@@ -60,9 +72,6 @@ Things that we can work on:
 
 
 
- Nice-to-haves:
-  - parallax scrolling of battle backgrounds
-
  Technical debt
   - add "events" declaration to easily add event handlers to objects
 
@@ -70,6 +79,7 @@ Things that we can work on:
   - figure out a way to get both people with a valid git repository in floobits
 
  Would be really sweet list
+  - parallax scrolling of battle backgrounds
   - NPCs talk to each other with little speech bubbles, which you can see
   - bull monster that only attacks players with red clothes
   - game where you try to rally the troops by conversation / motivation
