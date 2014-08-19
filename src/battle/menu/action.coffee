@@ -46,7 +46,7 @@ module.exports = class MenuAction extends Menu
       when 40 # down
         @moveCursor 1
       when 90 # z
-        @select action: @actionDescriptions[@currentAction].type
+        @select actionType: @actionDescriptions[@currentAction].type
 
   moveCursor: (offset) ->
     @currentAction = (@currentAction + @actionDescriptions.length + offset) % @actionDescriptions.length
