@@ -39,10 +39,10 @@ module.exports = class BattleMenu extends Action
       avatar: @source
       select: @setAction
 
-  setAction: ({ @action }) =>
-    if @needsSubaction(@action)
+  setAction: ({ @actionType }) =>
+    if @needsSubaction(@actionType)
       @getSubaction()
-    else if @needsTarget(@action)
+    else if @needsTarget(@actionType)
       @getTarget()
     else
       @complete()
@@ -76,7 +76,7 @@ module.exports = class BattleMenu extends Action
     @destroy()
     GameEvent.trigger 'finishedAction'
     GameEvent.trigger 'enqueue', action:
-      type: @action
+      type: @actionType
       subaction: @subaction
       source: @source
       target: @target
