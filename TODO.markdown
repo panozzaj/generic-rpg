@@ -12,6 +12,15 @@ Things that we can work on:
   - You win!
 
 
+ - Animation system
+  - sprite animation
+   - specification of show this image for 30 frames
+  - damage animation
+  - cut scene
+   - lower: panning camera
+   - lower: walking to tile
+    - lower than that: move character one tile
+
 
  - map mode
 
@@ -32,10 +41,6 @@ Things that we can work on:
    - cutscene
   - party switch mechanism
   - deploy somewhere and see what things break
-
-
- - generic animation handler
-  - sprite animation, etc.
 
 
  - battle mode
