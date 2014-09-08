@@ -9,3 +9,8 @@ module.exports = class Actor
       when 'down'  then y += 1
     { x, y }
 
+  isMoving: ->
+    @velocity.x != 0 || @velocity.y != 0
+
+  setDirection: (direction) ->
+    @direction = direction

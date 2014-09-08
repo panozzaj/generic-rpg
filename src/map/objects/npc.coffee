@@ -14,6 +14,7 @@ module.exports = class NPC extends Actor
     @sprite = new Image
     @sprite.src = "assets/images/king.png"
     @direction = 'down'
+    @velocity = { x: 0, y: 0 }
 
   update: ->
     # no-op by default

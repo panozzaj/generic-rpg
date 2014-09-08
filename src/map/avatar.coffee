@@ -61,12 +61,6 @@ module.exports = class Avatar extends Actor
       else if direction == 'down'
         @velocity.y = @speed
 
-  setDirection: (direction) ->
-    @direction = direction
-
-  isMoving: ->
-    @velocity.x != 0 || @velocity.y != 0
-
   stopMoving: ->
     @velocity = { x: 0, y: 0 }
     if trigger = @screen.map.triggerAt @tilePosition
