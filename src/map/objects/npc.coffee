@@ -1,7 +1,8 @@
 GameEvent = require 'src/game_event'
 GameState = require 'src/data/game_state'
+Actor = require '../actor'
 
-module.exports = class NPC
+module.exports = class NPC extends Actor
 
   constructor: (map, { data, @behavior }) ->
     { @name, tileX, tileY } = data
@@ -12,6 +13,7 @@ module.exports = class NPC
 
     @sprite = new Image
     @sprite.src = "assets/images/king.png"
+    @direction = 'down'
 
   update: ->
     # no-op by default

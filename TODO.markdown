@@ -3,6 +3,8 @@ Things that we can work on:
 
  - "The Quest"
   - Cut scene when you talk to the king or when the game first loads that describes the scene
+   - Extract out the animation concerns from Avatar
+   - Pull out any common movement or other concerns into an animatable
   - Random battles with random monsters on the overworld
   - Dungeon that you walk to
   - A couple of items on the way that you can equip?

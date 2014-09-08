@@ -1,6 +1,7 @@
 GameEvent = require 'src/game_event'
+Actor = require './actor'
 
-module.exports = class Avatar
+module.exports = class Avatar extends Actor
 
   constructor: (@screen) ->
     @tileSize = @screen.tileSize
@@ -86,15 +87,6 @@ module.exports = class Avatar
         GameEvent.trigger 'talk', facing: @facing()
       when 66 # b
         GameEvent.trigger 'battle'
-
-  facing: ->
-    { x, y } = @tilePosition
-    switch @direction
-      when 'left'  then x -= 1
-      when 'right' then x += 1
-      when 'up'    then y -= 1
-      when 'down'  then y += 1
-    { x, y }
 
   # TODO: extract to generic animation handler
   animate: ->
