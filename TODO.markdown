@@ -11,6 +11,29 @@ Things that we can work on:
   - Gives you an item / sets a flag and then when you go back (or are teleported back for minimum boringness)
   - You win!
 
+  - Talk to King
+
+  - If first time, show cut scene (this could be an object)
+
+  - Minimum cut scene
+   - talk to king
+   - he says one dialog and then moves away somewhere
+    - give NPC a more generic interface
+   - main character follows
+   - dialog continues
+
+  - Run through the cut scene
+   - fade out
+   - change map
+   - fade in
+   - text dialogs
+   - fade out
+   - change map
+   - fade in
+
+  - When done, return control to the player
+
+
 
  - Animation system
   - sprite animation
@@ -103,3 +126,4 @@ Things that we can work on:
 
  Consider:
   - context.scale(4,4) instead of passing MapScreen#tileSize around?
+
