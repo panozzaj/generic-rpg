@@ -16,7 +16,13 @@ module.exports = class NPC extends Actor
     @direction = 'down'
     @velocity = { x: 0, y: 0 }
     setInterval =>
-      @moveInDirection(_.sample(['up', 'down', 'right', 'left']))
+      @velocity = _.sample [
+        { x:  0, y:  1 }
+        { x:  0, y: -1 }
+        { x:  1, y:  0 }
+        { x: -1, y:  0 }
+      ]
+      new MoveAction @
     , 1000
 
 
