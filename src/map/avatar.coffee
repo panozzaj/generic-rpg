@@ -70,13 +70,13 @@ module.exports = class Avatar extends Actor
     return if @isMoving()
     switch event.which
       when 37 # left
-        @moveInDirection('left')
+        @moveInDirection 'left'
       when 38 # up
-        @moveInDirection('up')
+        @moveInDirection 'up'
       when 39 # right
-        @moveInDirection('right')
+        @moveInDirection 'right'
       when 40 # down
-        @moveInDirection('down')
+        @moveInDirection 'down'
       when 90 # z
         GameEvent.trigger 'talk', facing: @facing()
       when 66 # b
