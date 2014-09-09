@@ -1,6 +1,19 @@
 GameEvent = require 'src/game_event'
 Actor = require './actor'
 
+class MoveAction
+  constructor: (@actor) ->
+    # something
+
+  update: ->
+    @actor.screenPosition.x += @actor.velocity.x
+    @actor.screenPosition.y += @actor.velocity.y
+
+    if @actor.screenPosition.x % @actor.tileSize is 0 and
+       @actor.screenPosition.y % @actor.tileSize is 0
+      @actor.stopMoving()
+
+
 module.exports = class Avatar extends Actor
 
   constructor: (@screen) ->
@@ -16,33 +29,17 @@ module.exports = class Avatar extends Actor
       'left':  1
       'right': 2
       'up':    3
-    @frameCounter = 0
-    @frame = 1
 
   # TODO: extract to generic animation handler
   update: ->
-    if @velocity.x != 0
-      @screenPosition.x += @velocity.x
-      @stopMoving() if @screenPosition.x % @tileSize == 0
+    @theMoveAction?.update()
 
-    if @velocity.y != 0
-      @screenPosition.y += @velocity.y
-      @stopMoving() if @screenPosition.y % @tileSize == 0
-
-    # animation frame counter
-    if @frameCounter > 8
-      @frameCounter = 0
-    if @frameCounter > 4
-      @frame = 0
-    else
-      @frame = 1
-    @frameCounter += 1
 
   draw: (context) ->
     context.drawImage(@spriteSheet, @spriteOffset(), 0, 32, 32, @screenPosition.x, @screenPosition.y, @tileSize, @tileSize)
 
   spriteOffset: ->
-    @directionMappings[@direction] * 64 + @frame * 32
+    @directionMappings[@direction] * 64
 
   setTilePosition: (x, y) ->
     @tilePosition = { x: x, y: y }
@@ -60,9 +57,12 @@ module.exports = class Avatar extends Actor
         @velocity.y = -@speed
       else if direction == 'down'
         @velocity.y = @speed
+      @theMoveAction = new MoveAction @
 
   stopMoving: ->
     @velocity = { x: 0, y: 0 }
+    @theMoveAction = null
+
     if trigger = @screen.map.triggerAt @tilePosition
       GameEvent.trigger 'mapChange', { trigger }
 
