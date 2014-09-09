@@ -7,6 +7,7 @@ Things that we can work on:
     - just deleted this for now
    - Extract out the movement concerns from Avatar
     - Make the NPC use the movement concerns
+     - Our avatar does not collide with NPC
    - Pull out any common movement or other concerns into an animatable
   - Random battles with random monsters on the overworld
   - Dungeon that you walk to

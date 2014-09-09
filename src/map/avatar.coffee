@@ -3,8 +3,8 @@ GameEvent = require 'src/game_event'
 
 module.exports = class Avatar extends Actor
 
-  constructor: (@screen) ->
-    @tileSize = @screen.tileSize
+  constructor: (@map) ->
+    @tileSize = @map.tileSize
     @setTilePosition 20, 9
     @velocity = { x: 0, y: 0 }
     @speed = 8
@@ -32,7 +32,7 @@ module.exports = class Avatar extends Actor
     @velocity = { x: 0, y: 0 }
     @theMoveAction = null
 
-    if trigger = @screen.map.triggerAt @tilePosition
+    if trigger = @map.triggerAt @tilePosition
       GameEvent.trigger 'mapChange', { trigger }
 
   onkeydown: (event) =>

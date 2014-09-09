@@ -26,17 +26,19 @@ module.exports = class MapScreen
     @tilesTall = @height / @tileSize
 
     @map = new Map 'town'
+    @map.tileSize = @tileSize
     @camera = new Camera @
 
     @objects = @map.loadObjects()
 
-    @avatar = new Avatar @
+    @avatar = new Avatar @map
 
     @camera.follow @avatar
 
   handleChangeMap: (e) =>
     { mapName, xPosition, yPosition } = e.attributes.trigger.properties
     @map = new Map mapName
+    @map.tileSize = @tileSize
     @avatar.setTilePosition parseInt(xPosition), parseInt(yPosition)
     @objects = @map.loadObjects()
 

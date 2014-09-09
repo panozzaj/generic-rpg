@@ -6,8 +6,8 @@ class MoveAction
     @actor.screenPosition.x += @actor.velocity.x
     @actor.screenPosition.y += @actor.velocity.y
 
-    if @actor.screenPosition.x % @actor.tileSize is 0 and
-       @actor.screenPosition.y % @actor.tileSize is 0
+    if @actor.screenPosition.x % @actor.map.tileSize is 0 and
+       @actor.screenPosition.y % @actor.map.tileSize is 0
       @actor.stopMoving()
 
 
@@ -30,21 +30,21 @@ class Actor
 
   moveInDirection: (direction) ->
     @setDirection(direction)
-    #if @screen.map.isWalkable @facing()
-    @tilePosition = @facing()
-    if direction == 'left'
-      @velocity.x = -@speed
-    else if direction == 'right'
-      @velocity.x = @speed
-    else if direction == 'up'
-      @velocity.y = -@speed
-    else if direction == 'down'
-      @velocity.y = @speed
-    @theMoveAction = new MoveAction @
+    if @map.isWalkable @facing()
+      @tilePosition = @facing()
+      if direction == 'left'
+        @velocity.x = -@speed
+      else if direction == 'right'
+        @velocity.x = @speed
+      else if direction == 'up'
+        @velocity.y = -@speed
+      else if direction == 'down'
+        @velocity.y = @speed
+      @theMoveAction = new MoveAction @
 
   setTilePosition: (x, y) ->
     @tilePosition = { x: x, y: y }
-    @screenPosition = { x: x * @tileSize, y: y * @tileSize }
+    @screenPosition = { x: x * @map.tileSize, y: y * @map.tileSize }
 
 
 module.exports = { MoveAction, Actor }

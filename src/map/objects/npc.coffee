@@ -4,9 +4,8 @@ GameState = require 'src/data/game_state'
 
 module.exports = class NPC extends Actor
 
-  constructor: (map, { data, @behavior }) ->
+  constructor: (@map, { data, @behavior }) ->
     { @name, tileX, tileY } = data
-    @tileSize = 64 # TODO
     @setTilePosition tileX, tileY
 
     @name = "#{map.name}:#{@name}"
