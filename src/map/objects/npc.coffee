@@ -6,8 +6,8 @@ module.exports = class NPC extends Actor
 
   constructor: (map, { data, @behavior }) ->
     { @name, tileX, tileY } = data
-    @tileSize = map.tileSize
-    @tilePosition = { x: tileX, y: tileY }
+    @tileSize = 64 # TODO
+    @setTilePosition tileX, tileY
 
     @name = "#{map.name}:#{@name}"
 
@@ -15,19 +15,14 @@ module.exports = class NPC extends Actor
     @sprite.src = "assets/images/king.png"
     @direction = 'down'
     @velocity = { x: 0, y: 0 }
+    @speed = 8
     setInterval =>
-      @velocity = _.sample [
-        { x:  0, y:  1 }
-        { x:  0, y: -1 }
-        { x:  1, y:  0 }
-        { x: -1, y:  0 }
-      ]
-      new MoveAction @
+      @moveInDirection(_.sample(['up', 'down', 'right', 'left']))
+      @theMoveAction = new MoveAction @
     , 1000
 
-
   update: ->
-    # no-op by default
+    @theMoveAction?.update()
 
   drawingData: ->
     image: @sprite
@@ -35,10 +30,13 @@ module.exports = class NPC extends Actor
     sy: 0
     sw: 16
     sh: 16
-    tilePosition: @tilePosition
+    screenPosition: @screenPosition
 
   talk: =>
     relevantState = _.find @behavior.states, (state) ->
       state.condition GameState.instance()
 
     relevantState.action? GameState.instance()
+
+  stopMoving: ->
+    @velocity = { x: 0, y: 0 }

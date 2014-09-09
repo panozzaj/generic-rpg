@@ -42,4 +42,9 @@ class Actor
       @velocity.y = @speed
     @theMoveAction = new MoveAction @
 
+  setTilePosition: (x, y) ->
+    @tilePosition = { x: x, y: y }
+    @screenPosition = { x: x * @tileSize, y: y * @tileSize }
+
+
 module.exports = { MoveAction, Actor }

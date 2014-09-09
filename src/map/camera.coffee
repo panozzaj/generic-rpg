@@ -25,10 +25,15 @@ module.exports = class Camera
     _(objects).filter (object) ->
       object.tilePosition.x in xRange && object.tilePosition.y in yRange
     .each (object) =>
-      { image, sx, sy, sw, sh, tilePosition } = object.drawingData()
-      { x, y } = tilePosition
-      context.drawImage image, sx, sy, sw, sh,
-        x * @tileSize, y * @tileSize, @tileSize, @tileSize
+      { image, sx, sy, sw, sh, tilePosition, screenPosition } = object.drawingData()
+      if tilePosition
+        { x, y } = tilePosition
+        context.drawImage image, sx, sy, sw, sh,
+          x * @tileSize, y * @tileSize, @tileSize, @tileSize
+      else
+        { x, y } = screenPosition
+        context.drawImage image, sx, sy, sw, sh,
+          x, y, @tileSize, @tileSize
 
   drawTop: (context, map) =>
     @drawTiles context, map: map, layerNames: ['top']

@@ -5,12 +5,12 @@ module.exports = class Avatar extends Actor
 
   constructor: (@screen) ->
     @tileSize = @screen.tileSize
-    @setTilePosition(20, 9)
+    @setTilePosition 20, 9
     @velocity = { x: 0, y: 0 }
     @speed = 8
     @spriteSheet = new Image()
     @spriteSheet.src = "assets/images/cecil-sheet.png"
-    @setDirection('down')
+    @setDirection 'down'
     @directionMappings =
       'down':  0
       'left':  1
@@ -27,10 +27,6 @@ module.exports = class Avatar extends Actor
 
   spriteOffset: ->
     @directionMappings[@direction] * 64
-
-  setTilePosition: (x, y) ->
-    @tilePosition = { x: x, y: y }
-    @screenPosition = { x: x * @tileSize, y: y * @tileSize }
 
   stopMoving: ->
     @velocity = { x: 0, y: 0 }
