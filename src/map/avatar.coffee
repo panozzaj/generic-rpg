@@ -81,14 +81,3 @@ module.exports = class Avatar extends Actor
         GameEvent.trigger 'talk', facing: @facing()
       when 66 # b
         GameEvent.trigger 'battle'
-
-  # TODO: extract to generic animation handler
-  animate: ->
-    milliseconds = new Date().getMilliseconds()
-    @millisecondsWas ||= milliseconds
-
-    if @millisecondsWas < 500 && milliseconds >= 500
-    else if @millisecondsWas >= 500 && milliseconds < 0
-      @sprite1.src = "assets/images/cecil-#{@direction}.png"
-
-    @millisecondsWas = milliseconds
