@@ -1,6 +1,6 @@
 GameEvent = require 'src/game_event'
 GameState = require 'src/data/game_state'
-Actor = require '../actor'
+{ MoveAction, Actor } = require '../actor'
 
 module.exports = class NPC extends Actor
 

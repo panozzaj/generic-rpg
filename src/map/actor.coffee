@@ -1,4 +1,17 @@
-module.exports = class Actor
+class MoveAction
+  constructor: (@actor) ->
+    # something
+
+  update: ->
+    @actor.screenPosition.x += @actor.velocity.x
+    @actor.screenPosition.y += @actor.velocity.y
+
+    if @actor.screenPosition.x % @actor.tileSize is 0 and
+       @actor.screenPosition.y % @actor.tileSize is 0
+      @actor.stopMoving()
+
+
+class Actor
   # returns the tile that the Actor is facing
   facing: ->
     { x, y } = @tilePosition
@@ -29,3 +42,4 @@ module.exports = class Actor
       @velocity.y = @speed
     @theMoveAction = new MoveAction @
 
+module.exports = { MoveAction, Actor }

@@ -1,18 +1,5 @@
 GameEvent = require 'src/game_event'
-Actor = require './actor'
-
-class MoveAction
-  constructor: (@actor) ->
-    # something
-
-  update: ->
-    @actor.screenPosition.x += @actor.velocity.x
-    @actor.screenPosition.y += @actor.velocity.y
-
-    if @actor.screenPosition.x % @actor.tileSize is 0 and
-       @actor.screenPosition.y % @actor.tileSize is 0
-      @actor.stopMoving()
-
+{ MoveAction, Actor } = require './actor'
 
 module.exports = class Avatar extends Actor
 
