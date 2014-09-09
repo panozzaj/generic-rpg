@@ -14,3 +14,18 @@ module.exports = class Actor
 
   setDirection: (direction) ->
     @direction = direction
+
+  moveInDirection: (direction) ->
+    @setDirection(direction)
+    #if @screen.map.isWalkable @facing()
+    @tilePosition = @facing()
+    if direction == 'left'
+      @velocity.x = -@speed
+    else if direction == 'right'
+      @velocity.x = @speed
+    else if direction == 'up'
+      @velocity.y = -@speed
+    else if direction == 'down'
+      @velocity.y = @speed
+    @theMoveAction = new MoveAction @
+

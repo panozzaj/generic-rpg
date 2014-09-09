@@ -4,6 +4,9 @@ Things that we can work on:
  - "The Quest"
   - Cut scene when you talk to the king or when the game first loads that describes the scene
    - Extract out the animation concerns from Avatar
+    - just deleted this for now
+   - Extract out the movement concerns from Avatar
+    - Make the NPC use the movement concerns
    - Pull out any common movement or other concerns into an animatable
   - Random battles with random monsters on the overworld
   - Dungeon that you walk to

@@ -15,6 +15,10 @@ module.exports = class NPC extends Actor
     @sprite.src = "assets/images/king.png"
     @direction = 'down'
     @velocity = { x: 0, y: 0 }
+    setInterval =>
+      @moveInDirection(_.sample(['up', 'down', 'right', 'left']))
+    , 1000
+
 
   update: ->
     # no-op by default
