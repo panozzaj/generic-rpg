@@ -4,6 +4,25 @@ Camera = require './camera'
 Avatar = require './avatar'
 Dialog = require './dialog'
 
+class CollisionManager
+
+  events: ->
+    move: @move
+
+  constructor: (@map, @objects) ->
+
+    _.each @events(), (handler, eventName) ->
+      GameEvent.on eventName, handler
+
+  move: (e) =>
+
+    { newPosition, movePromise } = e.attributes
+
+    if @map.isWalkable(newPosition) #and not _.any(@objects, (obj) -> obj.tilePosition is newPosition)
+      movePromise.resolve()
+    else
+      movePromise.reject()
+
 module.exports = class MapScreen
   music: 'sad_town.mp3'
 
@@ -34,6 +53,8 @@ module.exports = class MapScreen
     @avatar = new Avatar @map
 
     @camera.follow @avatar
+
+    @collisionManager = new CollisionManager(@map, @objects)
 
   handleChangeMap: (e) =>
     { mapName, xPosition, yPosition } = e.attributes.trigger.properties

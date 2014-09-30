@@ -1,3 +1,5 @@
+GameEvent = require 'src/game_event'
+
 class MoveAction
   constructor: (@actor) ->
     # something
@@ -29,8 +31,16 @@ class Actor
     @direction = direction
 
   moveInDirection: (direction) ->
-    @setDirection(direction)
-    if @map.isWalkable @facing()
+    @setDirection direction
+
+    movePromise = Q.defer()
+
+    GameEvent.trigger 'move',
+      newPosition: @facing()
+      movePromise: movePromise
+
+    movePromise.promise
+    .then =>
       @tilePosition = @facing()
       if direction == 'left'
         @velocity.x = -@speed
@@ -41,6 +51,8 @@ class Actor
       else if direction == 'down'
         @velocity.y = @speed
       @theMoveAction = new MoveAction @
+    .fail ->
+      console.warn 'failure'
 
   setTilePosition: (x, y) ->
     @tilePosition = { x: x, y: y }
